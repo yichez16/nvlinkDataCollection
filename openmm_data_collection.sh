@@ -14,8 +14,9 @@ do
     # Run the second command in the foreground (concurrently with the first command)
     python benchmark.py --platform CUDA --test rf --device 0,1 
     # Sleep for 5 seconds
-    sleep 5
     wait
+    sleep 5
+
 done
 
 # Find and kill program A
