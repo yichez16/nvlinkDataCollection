@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Collect nvlink side-channel leakage of 8 openmm benchmarks:
-# 'rf', 'pme', 'apoa1rf', 'apoa1pme', 'apoa1ljpme', 'amber20-dhfr', 'amber20-cellulose', 'amber20-stmv
+# rf,pme,apoa1rf,apoa1pme,apoa1ljpme,amber20-dhfr,amber20-cellulose
 
 # Start program A in the background
 ./CUPTI_receiver 0 1 0 > rf.csv &
