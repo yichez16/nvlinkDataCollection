@@ -11,8 +11,7 @@ sleep 5
 
 for i in {1..3}
 do
-    python benchmark.py --platform CUDA --test rf --device 0,1   
-    &
+    python benchmark.py --platform CUDA --test rf --device 0,1  &
     sleep 2
 done
 
