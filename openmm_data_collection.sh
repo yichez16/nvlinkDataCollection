@@ -5,27 +5,25 @@
 
 # Start program A in the background
 sudo ./CUPTI_receiver 0 1 0 > rf.csv &
-pidA=$!
 
-# Wait for 5 seconds
-# sleep 5
+# Wait for 2 seconds
+sleep 2
 
-# # Launch program B ten times with a 5-second gap in between
-# for i in {1..5}
-# do
-#     # python benchmark.py --platform CUDA --test rf --device 0,1 &
-#     sleep 1
-# done
+# Launch program B ten times with a 5-second gap in between
+for i in {1..5}
+do
+    # python benchmark.py --platform CUDA --test rf --device 0,1 &
+    sleep 2
+done
 
-# # Wait for all instances of program B to finish
-# wait
+# Wait for all instances of program B to finish
+wait
 
 # Find and kill program A
-kill $pidA
+pkill -f "sudo ./CUPTI_receiver 0 1 0 > rf.csv"
 
-
-# Wait for 5 seconds
-sleep 5
+# Wait for 2 seconds
+sleep 2
 
 ##########################################################
 
