@@ -17,7 +17,7 @@ sleep 2
 # done
 
 # Find and kill program A
-pkill -f "./CUPTI_receiver"
+sudo pkill -f "./CUPTI_receiver"
 
 # Wait for 2 seconds
 sleep 2
