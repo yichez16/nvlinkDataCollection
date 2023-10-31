@@ -15,6 +15,7 @@ do
     python benchmark.py --platform CUDA --test rf --device 0,1 
     # Sleep for 5 seconds
     sleep 5
+    wait
 done
 
 # Find and kill program A
