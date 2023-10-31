@@ -9,10 +9,11 @@ sudo ./CUPTI_receiver 0 1 0 > rf.csv &
 # Wait for 2 seconds
 sleep 2
 
-# Launch program B ten times with a 5-second gap in between
-for i in {1..1}
+for i in $(seq 1 2);
 do
-    python benchmark.py --platform CUDA --test rf --device 0,1 &
+    # Run the second command in the foreground (concurrently with the first command)
+    python benchmark.py --platform CUDA --test rf --device 0,1 
+    # Sleep for 2 seconds
     sleep 2
 done
 
@@ -23,6 +24,8 @@ sudo pkill -f "./CUPTI_receiver"
 sleep 2
 
 ##########################################################
+
+
 
 
 
