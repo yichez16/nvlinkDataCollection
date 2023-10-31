@@ -6,7 +6,8 @@ CXXARGS = -std=c++14 -g -arch=sm_60
 CXXARGS += -Xcompiler -DNDEBUG
 
 # CXXARGSPLUS = --default-stream per-thread 
-LIBS = -lcuda -L$(CUPTI_PATH)/lib64 -lcupti -lcudart -lcusparse -lnccl 
+LIBS = -lcuda -L$(CUPTI_PATH)/lib64 
+# -lcupti -lcudart -lcusparse  -lnccl 
 
 
 # CXXARGS += -Xptxas="-flcm=cg"  # --def-load-cache  "cg" -> Cache at global level (cache in L2 and below, not L1).
