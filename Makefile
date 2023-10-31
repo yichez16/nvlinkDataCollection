@@ -1,7 +1,7 @@
 all:  CUPTI_receiver CUPTI_sender 
 
 CUPTI_PATH=/usr/local/cuda-9.1/extras/CUPTI
-INCLUDES = -I ./ -I /usr/local/cuda-9.1/extras/CUPTI/include -I /raid/yzhan846/nccl/build/include
+INCLUDES = -I ./ -I /usr/local/cuda-9.1/extras/CUPTI/include 
 CXXARGS = -std=c++14 -g -arch=sm_60
 CXXARGS += -Xcompiler -DNDEBUG
 
