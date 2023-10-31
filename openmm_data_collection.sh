@@ -9,7 +9,7 @@ sudo ./CUPTI_receiver 0 1 0 > rf.csv &
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 2);
+for i in $(seq 1 5);
 do
     # Run the second command in the foreground (concurrently with the first command)
     python benchmark.py --platform CUDA --test rf --device 0,1 
