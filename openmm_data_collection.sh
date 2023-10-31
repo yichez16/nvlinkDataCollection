@@ -11,7 +11,8 @@ sleep 5
 
 for i in {1..5}
 do
-    python benchmark.py --platform CUDA --test rf --device 0,1 
+    echo "Launching benchmark for the $i time"
+    python benchmark.py --platform CUDA --test rf --device 0,1  
     sleep 2
 done
 
