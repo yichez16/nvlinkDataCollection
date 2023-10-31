@@ -170,25 +170,25 @@ sudo pkill -f "./CUPTI_receiver"
 sleep 5
 
 ##########################################################
-# Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 > amber20-stmv.csv &
+# # Start program A in the background
+# sudo ./CUPTI_receiver 0 1 0 > amber20-stmv.csv &
 
-# Wait for 5 seconds
-sleep 5
+# # Wait for 5 seconds
+# sleep 5
 
-for i in $(seq 1 10);
-do
-    echo "Launching benchmark for the $i time"
-    python benchmark.py --platform CUDA --test amber20-stmv --device 0,1  
-    sleep 2
-done
+# for i in $(seq 1 10);
+# do
+#     echo "Launching benchmark for the $i time"
+#     python benchmark.py --platform CUDA --test amber20-stmv --device 0,1  
+#     sleep 2
+# done
 
-# # Wait for all instances of program B to finish
-# wait
+# # # Wait for all instances of program B to finish
+# # wait
 
-# Find and kill program A
-sudo pkill -f "./CUPTI_receiver"
+# # Find and kill program A
+# sudo pkill -f "./CUPTI_receiver"
 
-# Wait for 5 seconds
-sleep 5
-##########################################################
+# # Wait for 5 seconds
+# sleep 5
+# ##########################################################
