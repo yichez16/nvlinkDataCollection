@@ -4,7 +4,7 @@
 # rf,pme,apoa1rf,apoa1pme,apoa1ljpme,amber20-dhfr,amber20-cellulose
 
 # Start program A in the background
-sudo sudo ./CUPTI_receiver 0 1 0 > rf.csv &
+sudo ./CUPTI_receiver 0 1 0 > rf.csv &
 pidA=$!
 
 # Wait for 5 seconds
