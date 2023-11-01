@@ -9,7 +9,7 @@
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test rf --device 0,1  
@@ -34,7 +34,7 @@ sleep 5
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test pme --device 0,1  
@@ -58,7 +58,7 @@ sleep 5
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test apoa1rf --device 0,1  
@@ -82,7 +82,7 @@ sleep 5
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test apoa1pme --device 0,1  
@@ -106,7 +106,7 @@ sleep 5
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test apoa1ljpme --device 0,1  
@@ -130,7 +130,7 @@ sleep 5
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test amber20-dhfr --device 0,1  
@@ -153,7 +153,7 @@ sleep 5
 # Wait for 5 seconds
 sleep 5
 
-for i in $(seq 1 10);
+for i in $(seq 1 30);
 do
     echo "Launching benchmark for the $i time"
     python benchmark.py --platform CUDA --test amber20-cellulose --device 0,1  
