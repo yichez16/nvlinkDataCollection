@@ -12,7 +12,8 @@ sleep 5
 for i in $(seq 1 5);
 do
     # Run the second command in the foreground (concurrently with the first command)
-    ./nccl_test 0 1
+    echo "Launching op for the $i time"
+    ./nccl_test 0 10
 
     # Sleep for 2 seconds
     sleep 2
@@ -35,7 +36,8 @@ sleep 5
 for i in $(seq 1 5);
 do
     # Run the second command in the foreground (concurrently with the first command)
-    ./nccl_test 1 1
+    echo "Launching op for the $i time"
+    ./nccl_test 1 10
 
     # Sleep for 2 seconds
     sleep 2
@@ -58,8 +60,8 @@ sleep 5
 for i in $(seq 1 5);
 do
     # Run the second command in the foreground (concurrently with the first command)
-    ./nccl_test 2 1
-
+    echo "Launching op for the $i time"
+    ./nccl_test 2 10
     # Sleep for 2 seconds
     sleep 2
 done
@@ -81,7 +83,8 @@ sleep 5
 for i in $(seq 1 5);
 do
     # Run the second command in the foreground (concurrently with the first command)
-    ./nccl_test 3 1
+    echo "Launching op for the $i time"
+    ./nccl_test 3 10
 
     # Sleep for 2 seconds
     sleep 2
@@ -104,7 +107,8 @@ sleep 5
 for i in $(seq 1 5);
 do
     # Run the second command in the foreground (concurrently with the first command)
-    ./nccl_test 4 1
+    echo "Launching op for the $i time"
+    ./nccl_test 4 10
 
     # Sleep for 2 seconds
     sleep 2
