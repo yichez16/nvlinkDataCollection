@@ -6,7 +6,7 @@ CXXARGS = -std=c++14 -g -arch=sm_60
 CXXARGS += -Xcompiler -DNDEBUG
 
 # CXXARGSPLUS = --default-stream per-thread 
-LIBS = -lcuda -L$(CUPTI_PATH)/lib64  -lcupti 
+LIBS = -lcuda -L$(CUPTI_PATH)/lib64  -lcupti -lnccl
 # -lcudart -lcusparse  -lnccl 
 
 
