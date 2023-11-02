@@ -1,4 +1,4 @@
-all:  CUPTI_receiver CUPTI_sender 
+all:  CUPTI_receiver CUPTI_sender nccl_test
 
 CUPTI_PATH=/usr/local/cuda-9.1/extras/CUPTI
 INCLUDES = -I ./ -I /usr/local/cuda-9.1/extras/CUPTI/include 
@@ -22,7 +22,8 @@ CUPTI_receiver : CUPTI_receiver.cu
 CUPTI_sender : CUPTI_sender.cu
 	nvcc $(CXXARGS) $(INCLUDES) $(LIBS) CUPTI_sender.cu -o CUPTI_sender
 
-
+nccl_test : nccl_test.cu
+	nvcc $(CXXARGS) $(INCLUDES) $(LIBS) nccl_test.cu -o nccl_test
 
 clean:  
-	rm -f *.o  CUPTI_receiver CUPTI_sender
+	rm -f *.o  CUPTI_receiver CUPTI_sender nccl_test

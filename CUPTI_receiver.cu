@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
 	// "nvlink_total_ratom_data_transmitted" ,
 	//  "nvlink_total_response_data_received" ,// works
 	// "nvlink_total_write_data_transmitted",
-	"nvlink_transmit_throughput", //works
+	// "nvlink_transmit_throughput", //works
 	// "nvlink_user_data_received",
 	// "nvlink_user_data_transmitted",
 	// "nvlink_user_nratom_data_transmitted" ,
