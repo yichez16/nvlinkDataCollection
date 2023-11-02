@@ -21,7 +21,7 @@ done
 
 
 # Find and kill the first command 
-pkill -f "./CUPTI_receiver"
+sudo pkill -f "./CUPTI_receiver"
 
 sleep 5
 
@@ -45,7 +45,7 @@ done
 
 
 # Find and kill the first command 
-pkill -f "./CUPTI_receiver"
+sudo pkill -f "./CUPTI_receiver"
 
 sleep 5
 
@@ -68,7 +68,7 @@ done
 
 
 # Find and kill the first command 
-pkill -f "./CUPTI_receiver"
+sudo pkill -f "./CUPTI_receiver"
 
 sleep 5
 
@@ -92,7 +92,7 @@ done
 
 
 # Find and kill the first command 
-pkill -f "./CUPTI_receiver"
+sudo pkill -f "./CUPTI_receiver"
 
 sleep 5
 
@@ -116,7 +116,7 @@ done
 
 
 # Find and kill the first command 
-pkill -f "./CUPTI_receiver"
+sudo pkill -f "./CUPTI_receiver"
 
 sleep 5
 
