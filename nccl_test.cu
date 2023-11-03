@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 {
     //managing nDev devices
     int nDev = 2;
-    int size = 1000*1000;
+    int size = 1000*1000*1000;
     int recvcount, sendcount;
     int devs[nDev] = { 0, 1}; 
     ncclComm_t comms[nDev];
