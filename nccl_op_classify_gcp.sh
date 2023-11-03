@@ -4,7 +4,7 @@
 # allreduce broadcast reduce allGather reduceScatter
 
 # Run the first command in the background
-sudo ./CUPTI_receiver 0 1 0 >> allreduce.csv &
+sudo ./CUPTI_receiver 0 1 0 > allreduce.csv &
 
 # Sleep for 5 seconds
 sleep 5
@@ -28,7 +28,7 @@ sleep 5
 ##########################################################
 
 # Run the first command in the background
-sudo ./CUPTI_receiver 0 1 0 >> broadcast.csv &
+sudo ./CUPTI_receiver 0 1 0 > broadcast.csv &
 
 # Sleep for 5 seconds
 sleep 5
@@ -52,7 +52,7 @@ sleep 5
 ##########################################################
 
 # Run the first command in the background
-sudo ./CUPTI_receiver 0 1 0 >> reduce.csv &
+sudo ./CUPTI_receiver 0 1 0 > reduce.csv &
 
 # Sleep for 5 seconds
 sleep 5
@@ -75,7 +75,7 @@ sleep 5
 ##########################################################
 
 # Run the first command in the background
-sudo ./CUPTI_receiver 0 1 0 >> allGather.csv &
+sudo ./CUPTI_receiver 0 1 0 > allGather.csv &
 
 # Sleep for 5 seconds
 sleep 5
@@ -99,7 +99,7 @@ sleep 5
 ##########################################################
 
 # Run the first command in the background
-sudo ./CUPTI_receiver 0 1 0 >> reduceScatter.csv &
+sudo ./CUPTI_receiver 0 1 0 > reduceScatter.csv &
 
 # Sleep for 5 seconds
 sleep 5
