@@ -71,12 +71,12 @@ for epoch in range(5):
     running_loss = 0.0
     for i, data in enumerate(train_loader, 0):
         inputs, labels = data
-        inputs, labels = inputs.to("cuda:0"), labels
+        # inputs, labels = inputs.to("cuda:0"), labels
 
         optimizer.zero_grad()
 
-        outputs = model(inputs).to("cuda:3")
-        loss = criterion(outputs, labels).to("cuda:3")
+        outputs = model(inputs.to("cuda:0"))
+        loss = criterion(outputs, labels)
         loss.backward()
 
         optimizer.step()
