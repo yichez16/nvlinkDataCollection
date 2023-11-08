@@ -6,22 +6,26 @@ import torchvision.transforms as transforms
 # Check if GPUs are available
 assert torch.cuda.device_count() >= 4, "This example requires four GPUs"
 
-# Define the CNN Model with model parallelism
 class ModelParallelCNN(nn.Module):
     def __init__(self):
         super(ModelParallelCNN, self).__init__()
         self.layer1 = nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2).to('cuda:0')
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        # After layer1 and pooling, size will be [16, 14, 14]
         self.layer2 = nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2).to('cuda:1')
+        # After layer2 and pooling, size will be [32, 7, 7]
         self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to('cuda:2')
-        self.fc = nn.Linear(7*7*64, 10).to('cuda:3')
+        # Assume that pooling is applied after layer3, so size will be [64, 3, 3] if the MNIST image size is [1, 28, 28]
+        # This needs to be adjusted based on the actual output size of your convolutional layers
+        self.fc = nn.Linear(3*3*64, 10).to('cuda:3') # Adjust the input size accordingly
     
     def forward(self, x):
         x = x.to('cuda:0')
-        x = self.layer1(x)
+        x = self.pool(F.relu(self.layer1(x)))
         x = x.to('cuda:1')
-        x = self.layer2(x)
+        x = self.pool(F.relu(self.layer2(x)))
         x = x.to('cuda:2')
-        x = self.layer3(x)
+        x = self.pool(F.relu(self.layer3(x)))
         x = x.view(x.size(0), -1) # Flatten the output
         x = x.to('cuda:3')
         x = self.fc(x)
