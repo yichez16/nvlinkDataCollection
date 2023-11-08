@@ -1,55 +1,57 @@
 import torch
 import torch.nn as nn
-import torch.optim as optim
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
+import torchvision
+import torchvision.transforms as transforms
 
-# 1. Define the CNN Model with model parallelism
-class ParallelCNN(nn.Module):
+# Check if GPUs are available
+assert torch.cuda.device_count() >= 4, "This example requires four GPUs"
+
+# Define the CNN Model with model parallelism
+class ModelParallelCNN(nn.Module):
     def __init__(self):
-        super(ParallelCNN, self).__init__()
-        # Define layer 1 and place it on GPU 0
-        self.layer1 = nn.Conv2d(1, 20, kernel_size=5).to('cuda:0')
-        # Define layer 2 and place it on GPU 1
-        self.layer2 = nn.Conv2d(20, 50, kernel_size=5).to('cuda:1')
-        # Define layer 3 and place it on GPU 2
-        self.fc = nn.Linear(800, 10).to('cuda:2')
-        
+        super(ModelParallelCNN, self).__init__()
+        self.layer1 = nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2).to('cuda:0')
+        self.layer2 = nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2).to('cuda:1')
+        self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to('cuda:2')
+        self.fc = nn.Linear(7*7*64, 10).to('cuda:3')
+    
     def forward(self, x):
-        # Move input to GPU 0
         x = x.to('cuda:0')
         x = self.layer1(x)
-        # Move tensor to next GPU
         x = x.to('cuda:1')
         x = self.layer2(x)
-        x = x.view(-1, 800)
-        # Move tensor to next GPU
         x = x.to('cuda:2')
+        x = self.layer3(x)
+        x = x.view(x.size(0), -1) # Flatten the output
+        x = x.to('cuda:3')
         x = self.fc(x)
         return x
 
-# 2. Load the MNIST Dataset
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transforms.ToTensor())
-train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
+# Initialize the model
+model = ModelParallelCNN()
 
-# 3. Initialize the model and optimizer
-model = ParallelCNN()
-optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
+# MNIST Dataset and DataLoader setup
+transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
+train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
-# 4. Define the training loop
-def train(model, device, train_loader, optimizer, epoch):
+# Loss function and optimizer
+criterion = nn.CrossEntropyLoss().to('cuda:3') # The loss function needs to be on the same GPU as the last layer
+optimizer = torch.optim.Adam(model.parameters())
+
+# Training loop
+def train(model, train_loader, criterion, optimizer, num_epochs):
     model.train()
-    for batch_idx, (data, target) in enumerate(train_loader):
-        # Assume the target is on the CPU, move it to GPU 2 where the last layer is
-        target = target.to('cuda:2')
-        optimizer.zero_grad()
-        output = model(data)
-        loss = nn.functional.cross_entropy(output, target)
-        loss.backward()
-        optimizer.step()
-        if batch_idx % 10 == 0:
-            print(f'Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}')
+    for epoch in range(num_epochs):
+        for batch_idx, (data, target) in enumerate(train_loader):
+            optimizer.zero_grad()
+            output = model(data)
+            loss = criterion(output, target.to('cuda:3'))
+            loss.backward()
+            optimizer.step()
             
-# 5. Run the training process
-for epoch in range(1, 11):
-    train(model, 'cuda', train_loader, optimizer, epoch)
+            if batch_idx % 100 == 0:
+                print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
+
+# Start training
+train(model, train_loader, criterion, optimizer, num_epochs=5)
