@@ -46,8 +46,8 @@ for epoch in range(5):
 
         optimizer.zero_grad()
 
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
+        outputs = model(inputs.to("cuda:0"))
+        loss = criterion(outputs.to("cuda:3"), labels.to("cuda:3"))
         loss.backward()
 
         optimizer.step()
