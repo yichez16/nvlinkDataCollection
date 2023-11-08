@@ -37,7 +37,7 @@ model = ModelParallelCNN()
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=256, shuffle=True)
 
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss().to('cuda:3') # The loss function needs to be on the same GPU as the last layer
