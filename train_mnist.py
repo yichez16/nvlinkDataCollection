@@ -21,11 +21,11 @@ class ModelParallelCNN(nn.Module):
     
     def forward(self, x):
         x = x.to('cuda:0')
-        x = self.pool(F.relu(self.layer1(x)))
+        x = self.pool(x.relu(self.layer1(x)))
         x = x.to('cuda:1')
-        x = self.pool(F.relu(self.layer2(x)))
+        x = self.pool(x.relu(self.layer2(x)))
         x = x.to('cuda:2')
-        x = self.pool(F.relu(self.layer3(x)))
+        x = self.pool(x.relu(self.layer3(x)))
         x = x.view(x.size(0), -1) # Flatten the output
         x = x.to('cuda:3')
         x = self.fc(x)
