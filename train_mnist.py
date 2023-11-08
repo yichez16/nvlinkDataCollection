@@ -44,23 +44,30 @@ criterion = nn.CrossEntropyLoss().to('cuda:3') # The loss function needs to be o
 optimizer = torch.optim.Adam(model.parameters())
 
 # Training loop
-def train(model, train_loader, criterion, optimizer, num_epochs):
+def train(model, train_loader, criterion, optimizer, num_iterations):
     model.train()
-    for epoch in range(num_epochs):
+    current_iteration = 0
+    for epoch in range(1):  # num_epochs would be defined in your main code
         for batch_idx, (data, target) in enumerate(train_loader):
+            # Stop after 20 iterations
+            if current_iteration >= num_iterations:
+                print("Reached 20 iterations. Stopping training.")
+                return
+            
             optimizer.zero_grad()
-            output = model(data)
+            output = model(data.to('cuda:1'))
             loss = criterion(output, target.to('cuda:3'))
             loss.backward()
             optimizer.step()
+            current_iteration += 1
             
-            # Print the current iteration number
-            print(f"Iteration {batch_idx + 1}")
-            # if batch_idx % 100 == 0:
-            #     print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
+            print(f"Iteration {current_iteration}: Loss: {loss.item():.6f}")
+            
+            # Optionally, break here if you want to ensure only 20 iterations irrespective of epochs
+            if current_iteration >= num_iterations:
+                print("Reached 20 iterations. Stopping training.")
+                return
 
+# Start training for 20 iterations
+train(model, train_loader, criterion, optimizer, num_iterations=20)
 
-            # time.sleep(1)  # Sleep for 1 second after processing each batch
-
-# Start training
-train(model, train_loader, criterion, optimizer, num_epochs=1)
