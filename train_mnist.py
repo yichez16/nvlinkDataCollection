@@ -57,4 +57,4 @@ def train(model, train_loader, criterion, optimizer, num_epochs):
                 print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
 
 # Start training
-train(model, train_loader, criterion, optimizer, num_epochs=5)
+train(model, train_loader, criterion, optimizer, num_epochs=1)
