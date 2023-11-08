@@ -38,7 +38,7 @@ class Net_original(nn.Module):
 # Define the CNN model with model parallelism
 class Net(nn.Module):
     def __init__(self):
-        super(Model, self).__init__()
+        super(Net, self).__init__()
         self.layer1 = nn.Sequential(nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2), nn.ReLU())
         self.layer2 = nn.Sequential(nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2), nn.ReLU())
         self.layer3 = nn.Sequential(nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2), nn.ReLU())
