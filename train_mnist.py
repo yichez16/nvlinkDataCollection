@@ -20,11 +20,11 @@ class Model(nn.Module):
         self.layer4 = self.layer4.to("cuda:3")
 
     def forward(self, x):
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = x.view(x.size(0), -1)  # Flatten
-        x = self.layer4(x)
+        x = self.layer1(x).to("cuda:0")
+        x = self.layer2(x).to("cuda:1")
+        x = self.layer3(x).to("cuda:2")
+        x = x.view(x.size(0), -1).to("cuda:3")  # Flatten 
+        x = self.layer4(x).to("cuda:3")
         return x
 
 # Define data transformations and load MNIST dataset
@@ -46,8 +46,8 @@ for epoch in range(5):
 
         optimizer.zero_grad()
 
-        outputs = model(inputs.to("cuda:0"))
-        loss = criterion(outputs.to("cuda:3"), labels.to("cuda:3"))
+        outputs = model(inputs)
+        loss = criterion(outputs, labels)
         loss.backward()
 
         optimizer.step()
