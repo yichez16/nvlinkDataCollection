@@ -13,25 +13,20 @@ class Model(nn.Module):
         self.layer3 = nn.Sequential(nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2), nn.ReLU())
         self.layer4 = nn.Sequential(nn.Linear(64 * 7 * 7, 10))
 
-        # Initialize layers
-        self.layer1.apply(self.init_weights)
-        self.layer2.apply(self.init_weights)
-        self.layer3.apply(self.init_weights)
-        self.layer4.apply(self.init_weights)
+        # Move layers to respective GPUs
+        self.layer1 = self.layer1.to("cuda:0")
+        self.layer2 = self.layer2.to("cuda:1")
+        self.layer3 = self.layer3.to("cuda:2")
+        self.layer4 = self.layer4.to("cuda:3")
 
     def forward(self, x):
+        x = x.to("cuda:0")
         x = self.layer1(x).to("cuda:0")
-        x = x.to("cuda:1")
-        x = self.layer2(x).to("cuda:2")
-        x = x.to("cuda:3")
-        x = self.layer3(x)
-        x = x.view(x.size(0), -1)  # Flatten
-        x = self.layer4(x)
+        x = self.layer2(x).to("cuda:1")
+        x = self.layer3(x).to("cuda:2")
+        x = x.view(x.size(0), -1).to("cuda:3")  # Flatten
+        x = self.layer4(x).to("cuda:3")
         return x
-
-    def init_weights(self, m):
-        if type(m) == nn.Conv2d or type(m) == nn.Linear:
-            torch.nn.init.xavier_uniform_(m.weight)
 
 # Define data transformations and load MNIST dataset
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
@@ -40,7 +35,6 @@ train_loader = DataLoader(train_dataset, batch_size=100, shuffle=True)
 
 # Initialize the model and optimizer
 model = Model()
-model = model.to("cuda:0")
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.01)
 
@@ -49,12 +43,12 @@ for epoch in range(5):
     running_loss = 0.0
     for i, data in enumerate(train_loader, 0):
         inputs, labels = data
-        inputs, labels = inputs.to("cuda:0"), labels.to("cuda:0")
+        inputs, labels = inputs.to("cuda:0"), labels.to("cuda:3")
 
         optimizer.zero_grad()
 
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
+        outputs = model(inputs).to("cuda:3")
+        loss = criterion(outputs, labels).to("cuda:3")
         loss.backward()
 
         optimizer.step()
