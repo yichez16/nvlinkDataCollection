@@ -58,7 +58,7 @@ def train(model, train_loader, criterion, optimizer, num_epochs):
                 print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
 
 
-            time.sleep(2)  # Sleep for 1 second after processing each batch
+            time.sleep(1)  # Sleep for 1 second after processing each batch
 
 # Start training
 train(model, train_loader, criterion, optimizer, num_epochs=1)
