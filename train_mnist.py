@@ -65,7 +65,7 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
             
             # Optionally, break here if you want to ensure only 20 iterations irrespective of epochs
             if current_iteration >= num_iterations:
-                print("Reached 20 iterations. Stopping training.")
+                print("Reached %d iterations. Stopping training.", num_iterations)
                 return
 
 # Start training for 20 iterations
