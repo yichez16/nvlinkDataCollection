@@ -49,6 +49,7 @@ int main(int argc, char **argv) {
     local = atoi(argv[1]);
     remote = atoi(argv[2]);
     profile = atoi(argv[3]);
+    char *ctr_num = argv[4];
     sizeElement = 64; // Transfer size is 256 bytes = 1 nvlink packet
     // sizeElement = 1048576; // Transfer size is 4 MB
     // printf("%d\n", sizeElement);
@@ -73,15 +74,16 @@ int main(int argc, char **argv) {
                    
 	};
 	vector<string> metric_names {
+    ctr_num
 	// "l2_read_transactions",// works
 	//"nvlink_data_receive_efficiency",
 	// "nvlink_data_transmission_efficiency",
 	//"nvlink_overhead_data_received",
 	//"nvlink_overhead_data_transmitted",
 	//"nvlink_receive_throughput",
-	"nvlink_total_data_received",// works
+	// "nvlink_total_data_received",// works
 	//"pcie_total_data_received",
-	"nvlink_total_data_transmitted",// works
+	// "nvlink_total_data_transmitted",// works
 	//  "nvlink_total_nratom_data_transmitted" , // works
 	// "nvlink_total_ratom_data_transmitted" ,
 	//  "nvlink_total_response_data_received" ,// works
