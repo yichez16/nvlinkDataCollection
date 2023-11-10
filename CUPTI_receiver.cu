@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
 	//"nvlink_receive_throughput",
 	"nvlink_total_data_received",// works
 	//"pcie_total_data_received",
-	//"nvlink_total_data_transmitted",// works
+	"nvlink_total_data_transmitted",// works
 	//  "nvlink_total_nratom_data_transmitted" , // works
 	// "nvlink_total_ratom_data_transmitted" ,
 	//  "nvlink_total_response_data_received" ,// works
