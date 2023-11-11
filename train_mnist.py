@@ -4,6 +4,9 @@ import torchvision
 import torchvision.transforms as transforms
 import torch.nn.functional as F
 import time
+from torch.nn.parallel import DistributedDataParallel as DDP
+
+
 
 # Check if GPUs are available
 assert torch.cuda.device_count() >= 4, "This example requires four GPUs"
@@ -33,6 +36,7 @@ class ModelParallelCNN(nn.Module):
 
 # Initialize the model
 model = ModelParallelCNN()
+model = DDP(model)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
