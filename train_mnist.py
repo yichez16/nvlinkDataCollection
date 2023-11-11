@@ -54,15 +54,7 @@ class ModelParallelCNN(nn.Module):
 # setup(4, 2)
 # dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3 = 0, 1, 3, 2
-
-import os
-os.environ['MASTER_ADDR'] = 'localhost'
-os.environ['MASTER_PORT'] = '12355'
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
-dist.init_process_group(backend='nccl', init_method='env://', rank = torch.cuda.device_count(), world_size = 1)
-
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
-model = DDP(model)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
