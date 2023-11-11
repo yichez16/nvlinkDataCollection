@@ -6,6 +6,8 @@ import torch.nn.functional as F
 import time
 from torch.nn.parallel import DistributedDataParallel as DDP
 import torch.distributed as dist
+import torch.multiprocessing as mp
+
 
 
 def setup(rank, world_size):
@@ -46,7 +48,7 @@ class ModelParallelCNN(nn.Module):
 
 
 # Initialize the model
-setup(rank, world_size)
+setup(4, 2)
 dev0, dev1, dev2, dev3 = 0, 1, 3, 2
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 model = DDP(model)
