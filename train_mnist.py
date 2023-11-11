@@ -52,10 +52,10 @@ class ModelParallelCNN(nn.Module):
 
 # Initialize the model
 # setup(4, 2)
-dist.init_process_group("gloo", rank=4, world_size=2)
+# dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3 = 0, 1, 3, 2
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
-model = DDP(model)
+# model = DDP(model)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
