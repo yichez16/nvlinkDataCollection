@@ -5,7 +5,7 @@ import torchvision.transforms as transforms
 import torch.nn.functional as F
 import time
 from torch.nn.parallel import DistributedDataParallel as DDP
-
+import torch.distributed as dist
 
 
 # Check if GPUs are available
@@ -35,6 +35,7 @@ class ModelParallelCNN(nn.Module):
 
 
 # Initialize the model
+dist.init_process_group("nccl")
 model = ModelParallelCNN()
 model = DDP(model)
 
