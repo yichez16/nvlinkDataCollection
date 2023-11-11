@@ -1,108 +1,117 @@
+import os
+import sys
+import tempfile
 import torch
+import torch.distributed as dist
 import torch.nn as nn
 import torch.optim as optim
+import torch.multiprocessing as mp
 
+from torch.nn.parallel import DistributedDataParallel as DDP
 
-from torchvision.models.resnet import ResNet, Bottleneck
+# On Windows platform, the torch.distributed package only
+# supports Gloo backend, FileStore and TcpStore.
+# For FileStore, set init_method parameter in init_process_group
+# to a local file. Example as follow:
+# init_method="file:///f:/libtmp/some_file"
+# dist.init_process_group(
+#    "gloo",
+#    rank=rank,
+#    init_method=init_method,
+#    world_size=world_size)
+# For TcpStore, same way as on Linux.
 
-num_classes = 1000
+def setup(rank, world_size):
+    os.environ['MASTER_ADDR'] = 'localhost'
+    os.environ['MASTER_PORT'] = '12355'
 
+    # initialize the process group
+    dist.init_process_group("gloo", rank=rank, world_size=world_size)
 
-class ModelParallelResNet50(ResNet):
-    def __init__(self, *args, **kwargs):
-        super(ModelParallelResNet50, self).__init__(
-            Bottleneck, [3, 4, 6, 3], num_classes=num_classes, *args, **kwargs)
+def cleanup():
+    dist.destroy_process_group()
 
-        self.seq1 = nn.Sequential(
-            self.conv1,
-            self.bn1,
-            self.relu,
-            self.maxpool,
-
-            self.layer1,
-            self.layer2
-        ).to('cuda:0')
-
-        self.seq2 = nn.Sequential(
-            self.layer3,
-            self.layer4,
-            self.avgpool,
-        ).to('cuda:1')
-
-        self.fc.to('cuda:1')
+class ToyModel(nn.Module):
+    def __init__(self):
+        super(ToyModel, self).__init__()
+        self.net1 = nn.Linear(10, 10)
+        self.relu = nn.ReLU()
+        self.net2 = nn.Linear(10, 5)
 
     def forward(self, x):
-        x = self.seq2(self.seq1(x).to('cuda:1'))
-        return self.fc(x.view(x.size(0), -1))
-    
-import torchvision.models as models
-
-num_batches = 3
-batch_size = 120
-image_w = 128
-image_h = 128
+        return self.net2(self.relu(self.net1(x)))
 
 
-def train(model):
-    model.train(True)
+def demo_basic(rank, world_size):
+    print(f"Running basic DDP example on rank {rank}.")
+    setup(rank, world_size)
+
+    # create model and move it to GPU with id rank
+    model = ToyModel().to(rank)
+    ddp_model = DDP(model, device_ids=[rank])
+
     loss_fn = nn.MSELoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.001)
+    optimizer = optim.SGD(ddp_model.parameters(), lr=0.001)
 
-    one_hot_indices = torch.LongTensor(batch_size) \
-                           .random_(0, num_classes) \
-                           .view(batch_size, 1)
+    optimizer.zero_grad()
+    outputs = ddp_model(torch.randn(20, 10))
+    labels = torch.randn(20, 5).to(rank)
+    loss_fn(outputs, labels).backward()
+    optimizer.step()
 
-    for _ in range(num_batches):
-        # generate random inputs and labels
-        inputs = torch.randn(batch_size, 3, image_w, image_h)
-        labels = torch.zeros(batch_size, num_classes) \
-                      .scatter_(1, one_hot_indices, 1)
-
-        # run forward pass
-        optimizer.zero_grad()
-        outputs = model(inputs.to('cuda:0'))
-
-        # run backward pass
-        labels = labels.to(outputs.device)
-        loss_fn(outputs, labels).backward()
-        optimizer.step()
+    cleanup()
 
 
-import matplotlib.pyplot as plt
-plt.switch_backend('Agg')
-import numpy as np
-import timeit
+def run_demo(demo_fn, world_size):
+    mp.spawn(demo_fn,
+             args=(world_size,),
+             nprocs=world_size,
+             join=True)
+    
+class ToyMpModel(nn.Module):
+    def __init__(self, dev0, dev1):
+        super(ToyMpModel, self).__init__()
+        self.dev0 = dev0
+        self.dev1 = dev1
+        self.net1 = torch.nn.Linear(10, 10).to(dev0)
+        self.relu = torch.nn.ReLU()
+        self.net2 = torch.nn.Linear(10, 5).to(dev1)
 
-num_repeat = 10
+    def forward(self, x):
+        x = x.to(self.dev0)
+        x = self.relu(self.net1(x))
+        x = x.to(self.dev1)
+        return self.net2(x)
+    
 
-stmt = "train(model)"
+def demo_model_parallel(rank, world_size):
+    print(f"Running DDP with model parallel example on rank {rank}.")
+    setup(rank, world_size)
 
-setup = "model = ModelParallelResNet50()"
-mp_run_times = timeit.repeat(
-    stmt, setup, number=1, repeat=num_repeat, globals=globals())
-mp_mean, mp_std = np.mean(mp_run_times), np.std(mp_run_times)
+    # setup mp_model and devices for this process
+    dev0 = rank * 2
+    dev1 = rank * 2 + 1
+    mp_model = ToyMpModel(dev0, dev1)
+    ddp_mp_model = DDP(mp_model)
 
-setup = "import torchvision.models as models;" + \
-        "model = models.resnet50(num_classes=num_classes).to('cuda:0')"
-rn_run_times = timeit.repeat(
-    stmt, setup, number=1, repeat=num_repeat, globals=globals())
-rn_mean, rn_std = np.mean(rn_run_times), np.std(rn_run_times)
+    loss_fn = nn.MSELoss()
+    optimizer = optim.SGD(ddp_mp_model.parameters(), lr=0.001)
 
+    optimizer.zero_grad()
+    # outputs will be on dev1
+    outputs = ddp_mp_model(torch.randn(20, 10))
+    labels = torch.randn(20, 5).to(dev1)
+    loss_fn(outputs, labels).backward()
+    optimizer.step()
 
-def plot(means, stds, labels, fig_name):
-    fig, ax = plt.subplots()
-    ax.bar(np.arange(len(means)), means, yerr=stds,
-           align='center', alpha=0.5, ecolor='red', capsize=10, width=0.6)
-    ax.set_ylabel('ResNet50 Execution Time (Second)')
-    ax.set_xticks(np.arange(len(means)))
-    ax.set_xticklabels(labels)
-    ax.yaxis.grid(True)
-    plt.tight_layout()
-    plt.savefig(fig_name)
-    plt.close(fig)
+    cleanup()
 
 
-plot([mp_mean, rn_mean],
-     [mp_std, rn_std],
-     ['Model Parallel', 'Single GPU'],
-     'mp_vs_rn.png')
+if __name__ == "__main__":
+    n_gpus = torch.cuda.device_count()
+    assert n_gpus >= 2, f"Requires at least 2 GPUs to run, but got {n_gpus}"
+    world_size = n_gpus
+    run_demo(demo_basic, world_size)
+    run_demo(demo_checkpoint, world_size)
+    world_size = n_gpus//2
+    run_demo(demo_model_parallel, world_size)
