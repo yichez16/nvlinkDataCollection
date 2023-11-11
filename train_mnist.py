@@ -36,6 +36,7 @@ class ModelParallelCNN(nn.Module):
 
 # Initialize the model
 dist.init_process_group("nccl")
+rank = dist.get_rank()
 model = ModelParallelCNN()
 model = DDP(model)
 
