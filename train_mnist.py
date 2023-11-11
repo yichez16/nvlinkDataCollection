@@ -51,7 +51,7 @@ class ModelParallelCNN(nn.Module):
 
 
 # Initialize the model
-setup(4, 2)
+# setup(4, 2)
 dev0, dev1, dev2, dev3 = 0, 1, 3, 2
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 model = DDP(model)
