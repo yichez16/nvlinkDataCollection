@@ -158,9 +158,6 @@ int main(int argc, char **argv) {
         p->start();
         gettimeofday(&ts,NULL);
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-        unsigned long long delay_cycles = 2000000000ULL;
-        // Launch the kernel
-        delay_kernel<<<1, 1>>>(delay_cycles);
         p->stop();
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
