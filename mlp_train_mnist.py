@@ -66,7 +66,7 @@ class ModelParallelCNN(nn.Module):
 # setup(4, 2)
 # dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3 = 0,1,3,2 #0, 1, 3, 2
-batch_value = sys.argv[1]
+batch_value = int(sys.argv[1])
 
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 
