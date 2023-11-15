@@ -31,22 +31,34 @@ assert torch.cuda.device_count() >= 4, "This example requires four GPUs"
 class ModelParallelCNN(nn.Module):
     def __init__(self, dev0, dev1,dev2, dev3):
         super(ModelParallelCNN, self).__init__()
-        self.layer1 = nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2).to(dev0)
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.layer2 = nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2).to(dev1)
-        self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to(dev2)
-        # Corrected the input size to the fully connected layer according to pooling and convolution layers
-        self.fc = nn.Linear(64 * 3 * 3, 10).to(dev3) 
+        # self.layer1 = nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2).to(dev0)
+        # self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        # self.layer2 = nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2).to(dev1)
+        # self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to(dev2)
+        # # Corrected the input size to the fully connected layer according to pooling and convolution layers
+        # self.fc_1 = nn.Linear(64 * 3 * 3, 10).to(dev3) 
+        self.layer1 = nn.Linear(784, 128).to(dev0)
+        self.layer2 = nn.Linear(128, 256).to(dev1)
+        self.layer3 = nn.Linear(256, 512).to(dev2)
+        self.layer4 = nn.Linear(512, 10).to(dev3)
+        
     
     def forward(self, x):
-        x = self.layer1(x.to(dev0))
-        x = self.pool(F.relu(x))
-        x = self.layer2(x.to(dev1))
-        x = self.pool(F.relu(x))
-        x = self.layer3(x.to(dev2))
-        x = self.pool(F.relu(x))
-        x = x.view(x.size(0), -1) # Flatten the output
-        x = self.fc(x.to(dev3))
+        # Ensure input is on device 0 and pass through the first layer
+        x = x.to(dev0)
+        x = F.relu(self.layer1(x))
+
+        # Move to device 1 for the second layer
+        x = x.to(dev1)
+        x = F.relu(self.layer2(x))
+
+        # Move to device 2 for the third layer
+        x = x.to(dev2)
+        x = F.relu(self.layer3(x))
+
+        # Move to device 3 for the fourth layer
+        x = x.to(dev3)
+        x = F.relu(self.layer4(x))
         return x
 
 
