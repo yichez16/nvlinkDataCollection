@@ -14,6 +14,9 @@ sleep 2
 # kill profiler
 sudo pkill -f "./CUPTI_receiver"
 
+# Wait for 2 seconds
+sleep 2
+
 ################################################################################################
 
 # Start profiler in the background
@@ -31,6 +34,9 @@ sleep 2
 
 # kill profiler
 sudo pkill -f "./CUPTI_receiver"
+
+# Wait for 2 seconds
+sleep 2
 
 ################################################################################################
 
@@ -51,6 +57,9 @@ sleep 2
 # kill profiler
 sudo pkill -f "./CUPTI_receiver"
 
+# Wait for 2 seconds
+sleep 2
+
 ################################################################################################
 
 # Start profiler in the background
@@ -68,6 +77,9 @@ sleep 2
 
 # kill profiler
 sudo pkill -f "./CUPTI_receiver"
+
+# Wait for 2 seconds
+sleep 2
 
 ################################################################################################
 
@@ -87,5 +99,8 @@ sleep 2
 
 # kill profiler
 sudo pkill -f "./CUPTI_receiver"
+
+# Wait for 2 seconds
+sleep 2
 
 ################################################################################################
