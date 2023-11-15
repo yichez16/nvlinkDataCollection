@@ -66,13 +66,14 @@ class ModelParallelCNN(nn.Module):
 # setup(4, 2)
 # dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3 = 0,1,3,2 #0, 1, 3, 2
-batch_size = 1024
+batch_value = sys.argv[1]
+
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=True)
 
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss().to(dev3) # The loss function needs to be on the same GPU as the last layer
