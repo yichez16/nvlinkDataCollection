@@ -6,7 +6,8 @@
 #define BLOCK_SIZE 512
 #define BLOCK_NUM_LIMIT 16
 #include <cupti_profiler.h>
-
+#include <device_launch_parameters.h>
+#include <iostream>
 
 __global__ void 
 copyKernel(int* det, int* src, int addressID1, int addressID2)
@@ -192,12 +193,10 @@ matMul(float* A, float* B, float* C, int numARows, int numACols, int numBCols) {
     }
 }
 
-__global__ void 
-delayKernel(){
-    clock_t start = clock64();
-    clock_t stop = start + 10000000; // 10ms delay
-
-    while (clock64() < stop) {}
+__global__ void delay_kernel(unsigned long long delay_cycles)
+{
+    unsigned long long start = clock64();
+    while (clock64() - start < delay_cycles);
 }
 
 
