@@ -29,7 +29,7 @@ assert torch.cuda.device_count() >= 4, "This example requires four GPUs"
 
 
 class ModelParallelCNN(nn.Module):
-    def __init__(self, dev0, dev1,dev2, dev3):
+    def __init__(self, dev0, dev1,dev2, dev3, batch_size):
         super(ModelParallelCNN, self).__init__()
         # self.layer1 = nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2).to(dev0)
         # self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
@@ -37,7 +37,7 @@ class ModelParallelCNN(nn.Module):
         # self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to(dev2)
         # # Corrected the input size to the fully connected layer according to pooling and convolution layers
         # self.fc_1 = nn.Linear(64 * 3 * 3, 10).to(dev3) 
-        self.layer1 = nn.Linear(784, 128).to(dev0)
+        self.layer1 = nn.Linear(28*28*batch_size, 128).to(dev0)
         self.layer2 = nn.Linear(128, 256).to(dev1)
         self.layer3 = nn.Linear(256, 512).to(dev2)
         self.layer4 = nn.Linear(512, 10).to(dev3)
@@ -66,12 +66,13 @@ class ModelParallelCNN(nn.Module):
 # setup(4, 2)
 # dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3 = 0,1,3,2 #0, 1, 3, 2
-model = ModelParallelCNN(dev0, dev1, dev2, dev3)
+batch_size = 1024
+model = ModelParallelCNN(dev0, dev1, dev2, dev3, batch_size)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=1024, shuffle=True)
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss().to(dev3) # The loss function needs to be on the same GPU as the last layer
