@@ -1,4 +1,4 @@
-all:  CUPTI_receiver CUPTI_sender nccl_test
+all:  CUPTI_receiver CUPTI_sender 
 
 CUPTI_PATH=/usr/local/cuda-9.1/extras/CUPTI
 INCLUDES = -I ./ -I /usr/local/cuda-9.1/extras/CUPTI/include 
