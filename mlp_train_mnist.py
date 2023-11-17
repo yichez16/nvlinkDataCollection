@@ -77,9 +77,11 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
                 print("Stopping training.")
                 return
             data = data.view(data.size(0), -1) # Flatten the images
+            data = data.to(dev0)
+            target = target.to(dev3)
             optimizer.zero_grad()
-            output = model(data.to(dev0))
-            loss = criterion(output, target.to(dev3))
+            output = model(data)
+            loss = criterion(output, target)
             loss.backward()
             optimizer.step()
             current_iteration += 1
