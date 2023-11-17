@@ -93,5 +93,5 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
                 return
 
 # Start training for 20 iterations
-train(model, train_loader, criterion, optimizer, num_iterations=20)
+train(model, train_loader, criterion, optimizer, num_iterations=5)
 
