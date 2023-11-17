@@ -13,19 +13,6 @@ import torch.multiprocessing as mp
 
 
 
-def setup(rank, world_size):
-    os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '12355'
-
-    # initialize the process group
-    dist.init_process_group("gloo", rank=rank, world_size=world_size)
-
-def cleanup():
-    dist.destroy_process_group()
-
-
-# Check if GPUs are available
-assert torch.cuda.device_count() >= 4, "This example requires four GPUs"
 
 
 class ModelParallelCNN(nn.Module):
@@ -37,7 +24,7 @@ class ModelParallelCNN(nn.Module):
         # self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to(dev2)
         # # Corrected the input size to the fully connected layer according to pooling and convolution layers
         # self.fc_1 = nn.Linear(64 * 3 * 3, 10).to(dev3) 
-        self.layer1 = nn.Linear(28*28, 128).to(dev0)
+        self.layer1 = nn.Linear(784, 128).to(dev0)
         self.layer2 = nn.Linear(128, 256).to(dev1)
         self.layer3 = nn.Linear(256, 512).to(dev2)
         self.layer4 = nn.Linear(512, 10).to(dev3)
