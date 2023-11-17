@@ -60,7 +60,7 @@ model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=True)
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss().to(dev3) # The loss function needs to be on the same GPU as the last layer
@@ -74,7 +74,7 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
         for batch_idx, (data, target) in enumerate(train_loader):
             # Stop after 20 iterations
             if current_iteration >= num_iterations:
-                print("Reached 20 iterations. Stopping training.")
+                print("Stopping training.")
                 return
             data = data.view(data.size(0), -1) # Flatten the images
             optimizer.zero_grad()
@@ -88,9 +88,10 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
             
             # Optionally, break here if you want to ensure only 20 iterations irrespective of epochs
             if current_iteration >= num_iterations:
-                print("Reached %d iterations. Stopping training.", num_iterations)
+                print("Reached %d iterations. Stopping training." % num_iterations)
+
                 return
 
 # Start training for 20 iterations
-train(model, train_loader, criterion, optimizer, num_iterations=1)
+train(model, train_loader, criterion, optimizer, num_iterations=20)
 
