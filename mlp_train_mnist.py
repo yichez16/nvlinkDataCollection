@@ -70,7 +70,7 @@ optimizer = torch.optim.Adam(model.parameters())
 def train(model, train_loader, criterion, optimizer, num_iterations):
     model.train()
     current_iteration = 0
-    for epoch in range(1):  # num_epochs would be defined in your main code
+    for epoch in range(10):  # num_epochs would be defined in your main code
         for batch_idx, (data, target) in enumerate(train_loader):
             # Stop after 20 iterations
             if current_iteration >= num_iterations:
@@ -92,5 +92,5 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
                 return
 
 # Start training for 20 iterations
-train(model, train_loader, criterion, optimizer, num_iterations=10)
+train(model, train_loader, criterion, optimizer, num_iterations=1)
 
