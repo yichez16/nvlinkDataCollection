@@ -172,9 +172,9 @@ test_nvlink(int *src, int *dst, int numElements){
     if (idx < numElements){
         dst[idx] = src[idx] * 2;
     }
-    unsigned long long delay_cycles = 0ULL;
-    unsigned long long start = clock64();
-    while (clock64() - start < delay_cycles);
+    // unsigned long long delay_cycles = 0ULL;
+    // unsigned long long start = clock64();
+    // while (clock64() - start < delay_cycles);
     
 
 }
