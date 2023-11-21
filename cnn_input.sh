@@ -42,7 +42,7 @@ sleep 2
 
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_512.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > single_iteration_mlp_input_received_512.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -63,7 +63,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_1024.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > single_iteration_mlp_input_received_1024.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -84,7 +84,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_2048.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > single_iteration_mlp_input_received_2048.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -108,7 +108,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_2048.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > single_iteration_mlp_input_received_2048.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -130,7 +130,7 @@ sleep 2
 ################################################################################################################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_4096.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > single_iteration_mlp_input_received_4096.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -154,7 +154,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_8192.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > single_iteration_mlp_input_received_8192.csv &
 
 # Wait for 2 seconds
 sleep 2
