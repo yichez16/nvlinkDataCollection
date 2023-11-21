@@ -157,6 +157,36 @@ int main(int argc, char **argv) {
         cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
         p->start();
         gettimeofday(&ts,NULL);
+//////////////////////////////////////////////////////////
+        h_local = (int*)malloc(size);
+        h_remote = (int*)malloc(size);
+    
+        // Initialize input vectors, local sets to be 1, remote set to be 100
+        initVec(h_local, sizeElement, 1);
+        initVec(h_remote, sizeElement, 100);
+    
+        // local GPU contains d_local
+        cudaSetDevice(local);
+        cudaMalloc((void**)&d_local, size);  
+    
+        // remote GPU contains d_remote 
+        cudaSetDevice(remote);
+        cudaMalloc((void**)&d_remote, size);
+    
+        // make sure nvlink connection exists between src and det device.
+        cudaSetDevice(local); // Set local device to be used for GPU executions.
+        cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
+    
+        // Copy vector local from host memory to device memory
+        cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
+        cudaDeviceSynchronize();
+    
+        // Copy vector remote from host memory to device memory
+        cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
+        cudaDeviceSynchronize();
+//////////////////////////////////////////////////////////
+
+        
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
         p->stop();
         gettimeofday(&te,NULL);
