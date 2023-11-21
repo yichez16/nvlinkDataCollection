@@ -28,25 +28,27 @@ class ModelParallelCNN(nn.Module):
         self.layer6 = nn.Linear(128 * 3 * 3, 128).to(dev5) # input 3*3*128,  output 128
         self.layer7 = nn.Linear(128, 64).to(dev6) # 128,  output 64
         self.layer8 = nn.Linear(64, 10).to(dev7)# input 64,  output 10
+        self.relu = nn.ReLU()  # ReLU activation
 
-    def forward(self, x, dev0, dev1,dev2, dev3, dev4, dev5, dev6, dev7):
-        x = self.layer1(x.to(dev0))
+    def forward(self, x):
+        x = self.relu(self.layer1(x.to(dev0)))
         x = self.layer2(x.to(dev1))
-        x = self.layer3(x.to(dev2))
+        x = self.relu(self.layer3(x.to(dev2)))
         x = self.layer4(x.to(dev3))
-        x = self.layer5(x.to(dev4))
+        x = self.relu(self.layer5(x.to(dev4)))
         x = x.view(-1, 128 * 3 * 3)
-        x = self.layer6(x.to(dev5))
-        x = self.layer7(x.to(dev6))
+        x = self.relu(self.layer6(x.to(dev5)))
+        x = self.relu(self.layer7(x.to(dev6)))
         x = self.layer8(x.to(dev7))
         return x
-# Initialize the model
+
+
 # setup(4, 2)
 # dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7 = 0,1,3,2,7,6,4,5
 batch_value = int(sys.argv[1])
 
-model = ModelParallelCNN(dev0, dev1, dev2, dev3)
+model = ModelParallelCNN(dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
