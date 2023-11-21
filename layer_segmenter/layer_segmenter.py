@@ -37,12 +37,12 @@ data6 = df6.iloc[2600:, 2]
 data7 = df7.iloc[2600:, 2]
 
 
-data1 = data1.append(data2, ignore_index=True)
-data1 = data1.append(data3, ignore_index=True)
-data1 = data1.append(data4, ignore_index=True)
-data1 = data1.append(data5, ignore_index=True)
-data1 = data1.append(data6, ignore_index=True)
-all_data = data1.append(data7, ignore_index=True)
+data1 = data1._append(data2, ignore_index=True)
+data1 = data1._append(data3, ignore_index=True)
+data1 = data1._append(data4, ignore_index=True)
+data1 = data1._append(data5, ignore_index=True)
+data1 = data1._append(data6, ignore_index=True)
+all_data = data1._append(data7, ignore_index=True)
 
 # Plotting all time series data together
 plt.figure(figsize=(12, 12))
