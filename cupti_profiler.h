@@ -263,9 +263,9 @@ namespace detail {
             printf("Event_%d,", j);
             if (numInstances > 1) {
               for (int k = 0; k < numInstances; k++) {
-                // if (k != 0)
-                //   printf(",");
-                // printf("%llu", (unsigned long long)values[k]);
+                if (k != 0)
+                  printf(",");
+                printf("%llu", (unsigned long long)values[k]);
               }
             }
             printf(",");
