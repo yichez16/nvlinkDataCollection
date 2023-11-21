@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[154]:
+# In[1]:
 
 
 import pandas as pd
@@ -10,7 +10,7 @@ import numpy as np
 from scipy import stats
 
 
-# In[155]:
+# In[2]:
 
 
 # 读取CSV文件
@@ -24,25 +24,25 @@ df7 = pd.read_csv('mlp_input_received_8192.csv')
 
 
 
-# In[156]:
+# In[3]:
 
 
 # 提取数据
-data1 = df1.iloc[2300:, 2]
-data2 = df2.iloc[2600:, 2]
-data3 = df3.iloc[2600:, 2]
-data4 = df4.iloc[2600:, 2]
-data5 = df5.iloc[2600:, 2]
-data6 = df6.iloc[2600:, 2]
-data7 = df7.iloc[2600:, 2]
+data1 = df1.iloc[:, 2]
+data2 = df2.iloc[:, 2]
+data3 = df3.iloc[:, 2]
+data4 = df4.iloc[:, 2]
+data5 = df5.iloc[:, 2]
+data6 = df6.iloc[:, 2]
+data7 = df7.iloc[:, 2]
 
 
-data1 = data1._append(data2, ignore_index=True)
-data1 = data1._append(data3, ignore_index=True)
-data1 = data1._append(data4, ignore_index=True)
-data1 = data1._append(data5, ignore_index=True)
-data1 = data1._append(data6, ignore_index=True)
-all_data = data1._append(data7, ignore_index=True)
+data1 = data1.append(data2, ignore_index=True)
+data1 = data1.append(data3, ignore_index=True)
+data1 = data1.append(data4, ignore_index=True)
+data1 = data1.append(data5, ignore_index=True)
+data1 = data1.append(data6, ignore_index=True)
+all_data = data1.append(data7, ignore_index=True)
 
 # Plotting all time series data together
 plt.figure(figsize=(12, 12))
@@ -56,11 +56,11 @@ plt.legend()
 plt.show()
 
 
-# In[157]:
+# In[ ]:
 
 
 # Parameters
-window_size = 20  # size of the window
+window_size = 100  # size of the window
 threshold = 300000  # Threshold for labeling
 
 # Initialize labels with zeros
@@ -75,31 +75,31 @@ for i in range(2300, len(all_data) - window_size):
 X = np.array([all_data[i:i+window_size] for i in range(len(all_data)-window_size)])
 
 
-# In[158]:
+# In[ ]:
 
 
 X
 
 
-# In[159]:
+# In[ ]:
 
 
 boundary_labels
 
 
-# In[160]:
+# In[ ]:
 
 
 np.savetxt('X.csv', X, delimiter=',')
 
 
-# In[161]:
+# In[ ]:
 
 
 np.savetxt('boundary_labels.csv', boundary_labels, delimiter=',')
 
 
-# In[162]:
+# In[ ]:
 
 
 import numpy as np
@@ -145,13 +145,19 @@ lgbm_predictions = lgbm_model.predict(X_test)
 
 # Evaluation
 print("KNN Classification Report:")
-print(classification_report(y_test, knn_predictions))
+print(classification_report(y_test, knn_predictions, digits= 6))
 
 print("XGBoost Classification Report:")
-print(classification_report(y_test, xgb_predictions))
+print(classification_report(y_test, xgb_predictions, digits= 6))
 
 print("LightGBM Classification Report:")
-print(classification_report(y_test, lgbm_predictions))
+print(classification_report(y_test, lgbm_predictions, digits= 6))
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -203,7 +209,7 @@ plt.show()
 for model, name in zip([knn_model, xgb_model, lgbm_model], ["KNN", "XGBoost", "LightGBM"]):
     predictions = model.predict(X_test)
     print(f"{name} Classification Report:")
-    print(classification_report(y_test, predictions))
+    print(classification_report(y_test, predictions, digits= 6))
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, predictions))
     print("Accuracy Score:", accuracy_score(y_test, predictions))
