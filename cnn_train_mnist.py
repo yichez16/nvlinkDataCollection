@@ -10,6 +10,7 @@ import time
 from torch.nn.parallel import DistributedDataParallel as DDP
 import torch.distributed as dist
 import torch.multiprocessing as mp
+import torch.optim as optim
 
 
 
@@ -51,13 +52,16 @@ batch_value = int(sys.argv[1])
 model = ModelParallelCNN(dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7)
 
 # MNIST Dataset and DataLoader setup
-transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))
+])
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 
 # Loss function and optimizer
-criterion = nn.CrossEntropyLoss() # The loss function needs to be on the same GPU as the last layer
-optimizer = torch.optim.Adam(model.parameters())
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
 # Training loop
 def train(model, train_loader, criterion, optimizer, num_iterations):
@@ -69,7 +73,7 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
             if current_iteration >= num_iterations:
                 print("Stopping training.")
                 return
-            data = data.view(data.size(0), -1) # Flatten the images
+            # data = data.view(data.size(0), -1) # Flatten the images required for mlp
             optimizer.zero_grad()
             output = model(data.to(dev0))
             loss = criterion(output, target.to(dev7))
