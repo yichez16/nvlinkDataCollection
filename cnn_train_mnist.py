@@ -56,7 +56,7 @@ train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=T
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 
 # Loss function and optimizer
-criterion = nn.CrossEntropyLoss().to(dev3) # The loss function needs to be on the same GPU as the last layer
+criterion = nn.CrossEntropyLoss() # The loss function needs to be on the same GPU as the last layer
 optimizer = torch.optim.Adam(model.parameters())
 
 # Training loop
@@ -86,5 +86,5 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
                 return
 
 # Start training for 20 iterations
-train(model, train_loader, criterion, optimizer, num_iterations=100)
+train(model, train_loader, criterion, optimizer, num_iterations=1)
 
