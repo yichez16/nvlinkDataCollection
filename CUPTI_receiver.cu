@@ -71,10 +71,10 @@ int main(int argc, char **argv) {
 	const auto metric_names = cupti_profiler::available_metrics(device);
 	#else
 	vector<string> event_names {        
-        ctr_num       
+               
 	};
 	vector<string> metric_names {
-    
+    ctr_num
 	// "l2_read_transactions",// works
 	//"nvlink_data_receive_efficiency",
 	// "nvlink_data_transmission_efficiency",
