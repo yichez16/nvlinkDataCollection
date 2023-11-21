@@ -72,7 +72,7 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
             data = data.view(data.size(0), -1) # Flatten the images
             optimizer.zero_grad()
             output = model(data.to(dev0))
-            loss = criterion(output, target.to(dev3))
+            loss = criterion(output, target.to(dev7))
             loss.backward()
             optimizer.step()
             current_iteration += 1
