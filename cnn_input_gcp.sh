@@ -6,7 +6,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 128
+python cnn_train_mnist.py 128
 
 # Wait for 2 seconds
 sleep 2
@@ -27,7 +27,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 256
+python cnn_train_mnist.py 256
 
 # Wait for 2 seconds
 sleep 2
@@ -49,7 +49,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 512
+python cnn_train_mnist.py 512
 
 # Wait for 2 seconds
 sleep 2
@@ -70,7 +70,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 1024
+python cnn_train_mnist.py 1024
 
 # Wait for 2 seconds
 sleep 2
@@ -91,7 +91,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 2048
+python cnn_train_mnist.py 2048
 
 
 # Wait for 2 seconds
@@ -115,7 +115,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 2048
+python cnn_train_mnist.py 2048
 
 
 # Wait for 2 seconds
@@ -137,7 +137,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 4096
+python cnn_train_mnist.py 4096
 
 
 # Wait for 2 seconds
@@ -161,7 +161,7 @@ sleep 2
 
 # Start mlp training
 echo "Launching mlp."
-python mlp_train_mnist.py 8192
+python cnn_train_mnist.py 8192
 
 
 # Wait for 2 seconds
