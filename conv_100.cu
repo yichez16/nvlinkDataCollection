@@ -128,8 +128,10 @@ free(C);
 int main(int argc, char **argv)  
 {
 // freopen(path_0,"w",stdout);
-profile = atoi(argv[1]);
+
 using namespace std;
+int profile=0;
+profile = atoi(argv[1]);
 // set up profiler
 cudaSetDevice(profile);
 CUdevice device;
