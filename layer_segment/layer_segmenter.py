@@ -10,7 +10,7 @@ import numpy as np
 from scipy import stats
 
 
-# In[2]:
+# In[13]:
 
 
 # 读取CSV文件
@@ -21,10 +21,16 @@ df4 = pd.read_csv('mlp_input_received_1024.csv')
 df5 = pd.read_csv('mlp_input_received_2048.csv')
 df6 = pd.read_csv('mlp_input_received_4096.csv')
 df7 = pd.read_csv('mlp_input_received_8192.csv')
+df8 = pd.read_csv('cnn_input_received_128.csv')
+df9 = pd.read_csv('cnn_input_received_256.csv')
+df10 = pd.read_csv('cnn_input_received_512.csv')
+df11 = pd.read_csv('cnn_input_received_1024.csv')
+df12 = pd.read_csv('cnn_input_received_2048.csv')
+df13 = pd.read_csv('cnn_input_received_4096.csv')
+df14 = pd.read_csv('cnn_input_received_8192.csv')
 
 
-
-# In[3]:
+# In[14]:
 
 
 # 提取数据
@@ -35,14 +41,16 @@ data4 = df4.iloc[:, 2]
 data5 = df5.iloc[:, 2]
 data6 = df6.iloc[:, 2]
 data7 = df7.iloc[:, 2]
+data8 = df1.iloc[:, 2]
+data9 = df2.iloc[:, 2]
+data10 = df3.iloc[:, 2]
+data11 = df4.iloc[:, 2]
+data12 = df5.iloc[:, 2]
+data13 = df6.iloc[:, 2]
+data14 = df7.iloc[:, 2]
 
+all_data = data1._append([data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14], ignore_index=True)
 
-data1 = data1._append(data2, ignore_index=True)
-data1 = data1._append(data3, ignore_index=True)
-data1 = data1._append(data4, ignore_index=True)
-data1 = data1._append(data5, ignore_index=True)
-data1 = data1._append(data6, ignore_index=True)
-all_data = data1._append(data7, ignore_index=True)
 
 # Plotting all time series data together
 plt.figure(figsize=(12, 12))
@@ -56,7 +64,7 @@ plt.legend()
 plt.show()
 
 
-# In[ ]:
+# In[15]:
 
 
 # Parameters
@@ -75,25 +83,25 @@ for i in range(2300, len(all_data) - window_size):
 X = np.array([all_data[i:i+window_size] for i in range(len(all_data)-window_size)])
 
 
-# In[ ]:
+# In[16]:
 
 
 X
 
 
-# In[ ]:
+# In[17]:
 
 
 boundary_labels
 
 
-# In[ ]:
+# In[18]:
 
 
 np.savetxt('X.csv', X, delimiter=',')
 
 
-# In[ ]:
+# In[19]:
 
 
 np.savetxt('boundary_labels.csv', boundary_labels, delimiter=',')
@@ -124,19 +132,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, boundary_labels, test_siz
 
 
 
-
 # KNN Classifier
-knn_model = KNeighborsClassifier(n_neighbors=5)
+knn_model = KNeighborsClassifier(n_neighbors=5, weights='uniform', metric='euclidean')
 knn_model.fit(X_train, y_train)
 knn_predictions = knn_model.predict(X_test)
 
 # XGBoost Classifier
-xgb_model = XGBClassifier()
+xgb_model = XGBClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, subsample=0.8)
 xgb_model.fit(X_train, y_train)
 xgb_predictions = xgb_model.predict(X_test)
 
 # LightGBM Classifier
-lgbm_model = LGBMClassifier()
+lgbm_model = LGBMClassifier(n_estimators=100, learning_rate=0.1, max_depth=-1, num_leaves=31)
 lgbm_model.fit(X_train, y_train)
 lgbm_predictions = lgbm_model.predict(X_test)
 
@@ -145,13 +152,13 @@ lgbm_predictions = lgbm_model.predict(X_test)
 
 # Evaluation
 print("KNN Classification Report:")
-print(classification_report(y_test, knn_predictions, digits= 6))
+print(classification_report(y_test, knn_predictions))
 
 print("XGBoost Classification Report:")
-print(classification_report(y_test, xgb_predictions, digits= 6))
+print(classification_report(y_test, xgb_predictions))
 
 print("LightGBM Classification Report:")
-print(classification_report(y_test, lgbm_predictions, digits= 6))
+print(classification_report(y_test, lgbm_predictions))
 
 
 # In[ ]:
