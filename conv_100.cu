@@ -149,9 +149,9 @@ DRIVER_API_CALL(cuDeviceGet(&device, 0));
     // "inst_executed",
 
 
-    // "fb_subp0_read_sectors",
+    "fb_subp0_read_sectors",
     // "elapsed_cycles_pm",
-    "l2_subp0_write_sector_misses",
+    //"l2_subp0_write_sector_misses",
     //"l2_subp1_read_sector_misses",
     //"branch",
 
