@@ -13,11 +13,11 @@
 #include <stdlib.h>
 
 // const char *path_0 = "conv100.csv";
-#define N 100 //Default matrix size NxN
+#define N 10 //Default matrix size NxN
 #define A(i,j) A[(i)*cols+(j)]  // row-major layout
 #define C(i,j) C[(i)*cols+(j)]  // row-major layout
 #define PROFILE_ALL_EVENTS_METRICS 0
-int counter1 = 200000;
+int counter1 = 2000000000;
 
 __global__ void convolution(int *A, int *C)
 {
@@ -98,7 +98,7 @@ cudaMalloc((void**)&C_d, sizeof(*C_d)*memorySize);
 cudaMemcpy(A_d, A, sizeof(*A_d)*memorySize, cudaMemcpyHostToDevice);
 
 // cudaEventRecord(start);
-convolution << <128, 128 >> >(A_d, C_d);//Block-thread
+convolution <<<128, 128 >>>(A_d, C_d);//Block-thread
 // cudaEventRecord(stop);
 // cudaEventSynchronize(stop);
 
