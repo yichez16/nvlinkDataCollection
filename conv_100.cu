@@ -128,12 +128,16 @@ free(C);
 int main()  
 {
 // freopen(path_0,"w",stdout);
-
+profile = atoi(argv[1]);
 using namespace std;
+// set up profiler
+cudaSetDevice(profile);
 CUdevice device;
 
-DRIVER_API_CALL(cuInit(0));
-DRIVER_API_CALL(cuDeviceGet(&device, 0));
+DRIVER_API_CALL(cuInit(0));  
+// Initialize the CUDA driver API Initializes the driver API and must be called before any other function from the driver API in the current process. Currently, the Flags parameter must be 0. If cuInit() has not been called, any function from the driver API will return CUDA_ERROR_NOT_INITIALIZED.
+DRIVER_API_CALL(cuDeviceGet(&device, profile));
+// Returns a handle to a compute device.
 
 #if PROFILE_ALL_EVENTS_METRICS
   const auto event_names = cupti_profiler::available_events(device);
@@ -200,8 +204,8 @@ DRIVER_API_CALL(cuDeviceGet(&device, 0));
 
   
   #endif
-CUcontext context;
-cuCtxCreate(&context, 0, 0);
+  CUcontext context;
+  cuCtxCreate(&context, 0, profile); // context is created on device # profile
 
 
 for(int j=0;j<counter1;j++)
