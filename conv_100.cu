@@ -125,7 +125,7 @@ free(C);
 
 
 
-int main()  
+int main(int argc, char **argv)  
 {
 // freopen(path_0,"w",stdout);
 profile = atoi(argv[1]);
