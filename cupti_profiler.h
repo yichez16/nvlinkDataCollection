@@ -607,11 +607,12 @@ namespace detail {
               << ") ";
           else
             s << (ull_t)m_kernel_data[k.first].m_event_values[i]
-              << ","
-              << ts.tv_sec*1000000 + ts.tv_usec
-              << "," << te.tv_sec*1000000 + te.tv_usec
-              << ",";
-        }
+              << m_event_names[i] 
+              << "," << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+              // << "," << (te.tv_sec - t0.tv_sec) * 1000000 + (te.tv_usec - t0.tv_usec)
+            //  << "111111111111"
+              << "," ;
+    }
         s << kernel_separator;
       }
       printf("\n");
