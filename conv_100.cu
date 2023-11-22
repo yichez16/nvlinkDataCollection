@@ -12,7 +12,7 @@
 #include "device_launch_parameters.h"
 #include <stdlib.h>
 
-const char *path_0 = "conv100.csv";
+// const char *path_0 = "conv100.csv";
 #define N 100 //Default matrix size NxN
 #define A(i,j) A[(i)*cols+(j)]  // row-major layout
 #define C(i,j) C[(i)*cols+(j)]  // row-major layout
@@ -127,7 +127,7 @@ free(C);
 
 int main()  
 {
-freopen(path_0,"w",stdout);
+// freopen(path_0,"w",stdout);
 
 using namespace std;
 CUdevice device;
@@ -149,9 +149,9 @@ DRIVER_API_CALL(cuDeviceGet(&device, 0));
     // "inst_executed",
 
 
-    "fb_subp0_read_sectors",
+    // "fb_subp0_read_sectors",
     // "elapsed_cycles_pm",
-    //"l2_subp0_write_sector_misses",
+    "l2_subp0_write_sector_misses",
     //"l2_subp1_read_sector_misses",
     //"branch",
 
@@ -224,6 +224,6 @@ for(int j=0;j<counter1;j++)
 
 
   
-fclose(stdout);
+// fclose(stdout);
 return 0;
 }
