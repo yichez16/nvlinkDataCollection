@@ -1,0 +1,205 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Michael Russell, Vicki Fox Productions Inc" />
+    <meta name="description" content="Providing entertainment featuring foxes and web consulting" />
+    <meta name="keywords" content="Vicki Fox, foxes, animation art, embroidery, puppets, web consulting" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    
+    <title>Vicki Fox Productions Inc</title>
+
+    <link rel="SHORTCUT ICON" href="/favicon.ico" type="image/x-icon" />
+    
+    <link rel="stylesheet" type="text/css" href="/zcode/css/font-awesome.css" />    
+    <link rel="stylesheet" type="text/css" href="/zcode/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/zcode/css/mdb.css" />
+    <link rel="stylesheet" type="text/css" href="/zcode/css/style.css" />
+    
+    <script type="text/javascript">
+        // <![CDATA[
+        // Tooltips initialization
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        // ]]>
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark purple accent-4">
+            <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseMenu">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="container m-l-0 p-l-0">
+                <div class="collapse navbar-toggleable-xs" id="collapseMenu">
+                    <a class="navbar-brand" href="http://www.VickiFox.com"><img src="/pics/home/logo/VickiFoxTextLogo.png" alt="Vicki Fox logo" /></a>
+                    <div>
+                        <small class="yellow-text font-italic">Providing entertainment featuring foxes and web consulting</small>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item dropdown btn-group ">
+                                <a class="nav-link dropdown-toggle" id="menuAbout" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">About</a>
+                                <ul class="dropdown-menu" aria-labelledby="menuAbout">
+                                    <li class="dropdown-item"><a href="/about/vicki">Meet Vicki Fox</a></li>
+                                    <li class="dropdown-item"><a href="/about/cast">Cast members</a></li>
+                                    <li class="dropdown-item"><a href="/about/artists">Creative team</a></li>
+                                    <li class="dropdown-divider" role="separator"></li>
+                                    <li class="dropdown-item"><a href="/about/art-gallery">Art gallery</a></li>
+                                    <li class="dropdown-item"><a href="/about/video-gallery">Video gallery</a></li>
+                                    <li class="dropdown-divider" role="separator"></li>
+                                    <li class="dropdown-item"><a href="/about/faq">FAQ</a></li>
+                                    <li class="dropdown-item"><a href="/about/copyright">Copyright &amp; Trademark</a></li>
+                                    <li class="dropdown-item"><a href="/about/licensing">Licensing</a></li>
+                                    <li class="dropdown-item"><a href="/about/dixie-wildlife">Dixie Wildlife&trade;</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown btn-group ">
+                                <a class="nav-link dropdown-toggle" id="menuComic" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">Comic</a>
+                                <ul class="dropdown-menu" aria-labelledby="menuComic">
+                                    <li class="dropdown-item"><a href="/comic/strip">Current comic strip</a></li>
+                                    <li class="dropdown-item"><a href="/comic/archive">Comic strip archive</a></li>
+                                    <li class="dropdown-item"><a href="/comic/minding-gap">Minding the Gap series</a></li>
+                                    <li class="dropdown-item"><a href="/comic/other">Other comic stories</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown btn-group ">
+                                <a class="nav-link dropdown-toggle" id="menuShop" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">Shop</a>
+                                <ul class="dropdown-menu" aria-labelledby="menuShop">
+                                    <li class="dropdown-item"><a href="/shop/cards">Christmas Cards</a></li>
+                                    <li class="dropdown-item"><a href="http://www.cafepress.com/vickifox" target="_blank">Cafe Press store</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown btn-group active">
+                                <a class="nav-link dropdown-toggle" id="menuFoxes" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">Foxes</a>
+                                <ul class="dropdown-menu" aria-labelledby="menuFoxes">
+                                    <li class="dropdown-item"><a href="/foxes/facts">Facts</a></li>
+                                    <li class="dropdown-item"><a href="/foxes/literature">in Literature</a></li>
+                                    <li class="dropdown-item"><a href="/foxes/film">in Film and Animation</a></li>
+                                    <li class="dropdown-item"><a href="/foxes/culture">in Culture</a></li>
+                                    <li class="dropdown-divider" role="separator"></li>
+                                    <li class="dropdown-item"><a href="/foxes/pei">PEI Foxes</a></li>
+                                    <li class="dropdown-item"><a href="/foxes/ok">OK Foxes</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown btn-group ">
+                                <a class="nav-link dropdown-toggle" id="menuRelatedMedia" data-toggle="dropdown" 
+                                            aria-haspopup="true" aria-expanded="false">Related media</a>
+                                <ul class="dropdown-menu" aria-labelledby="menuRelatedMedia">
+                                    <li class="dropdown-item"><a href="/related/good-news">Good News</a></li>
+                                    <li class="dropdown-item"><a href="/related/animation-art">Animation Art collection</a></li>
+                                    <li class="dropdown-item"><a href="/related/embroidery">Embroidery projects</a></li>
+                                    <li class="dropdown-item"><a href="/related/puppets">Puppets</a></li>
+                                    <li class="dropdown-item"><a href="/related/vacation">Vacations</a></li>
+                                    <li class="dropdown-item"><a href="/related/sites">Similar sites</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown btn-group ">
+                                <a class="nav-link dropdown-toggle" id="menuCompany" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">Company info</a>
+                                <ul class="dropdown-menu" aria-labelledby="menuCompany">
+                                    <li class="dropdown-item"><a href="/company/services">Services</a></li>
+                                    <li class="dropdown-item"><a href="/company/publications">Publications</a></li>
+                                    <li class="dropdown-item"><a href="/company/contact">Contact</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container m-t-1">
+    
+            <div class="row">
+    <div class="col-sm-4">
+        <img class="img-fluid" src="/pics/home/header/VFPi_home_moved.jpg" alt="Under Construction"/>
+    </div>
+    <div class="col-sm-8">
+        <h1>Wright's Prince Edward Island (PEI) Foxes</h1>
+        <p class="text-danger">Under Construction</p>
+    </div>
+</div>            
+        </div>
+    </main>
+    
+    <footer class="page-footer purple accent-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="http://www.VickiFox.com"><img src="/pics/home/logo/VickiFoxLogo.gif" alt="Vicki Fox Logo" /></a>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="title yellow-text">Vicki's Social Media</h5>
+                    <p>
+                        <a href="http://www.facebook.com/TheWorldOfVickiFox/" 
+                                data-toggle="tooltip" data-placement="bottom" title="Facebook" target="_blank">
+                            <img src="/pics/home/socialicons/facebook.png" alt="Facebook" />
+                        </a>
+                        <a href="http://twitter.com/vickimfox" 
+                                data-toggle="tooltip" data-placement="bottom" title="Twitter" target="_blank">
+                            <img src="/pics/home/socialicons/twitter.png" alt="Twitter" />
+                        </a>
+                        <a href="http://vickimfox.livejournal.com/" 
+                                data-toggle="tooltip" data-placement="bottom" title="LiveJournal" target="_blank">
+                            <img src="/pics/home/socialicons/livejournal.png" alt="LiveJournal" />
+                        </a>
+                        <a href="http://www.linkedin.com/in/michael-russell-77132639" 
+                                data-toggle="tooltip" data-placement="bottom" title="LinkedIn" target="_blank">
+                            <img src="/pics/home/socialicons/linkedin.png" alt="LinkedIn" />
+                        </a>
+                        <a href="http://vickifox.deviantart.com/" 
+                                data-toggle="tooltip" data-placement="bottom" title="DeviantArt" target="_blank">
+                            <img src="/pics/home/socialicons/deviantart.png" alt="DeviantArt" />
+                        </a>
+                        <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Tumblr">
+                            <img src="/pics/home/socialicons/tumblr.png" alt="Tumblr" />
+                        </a> -->
+                        <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="YouTube">
+                            <img src="/pics/home/socialicons/youtube.png" alt="YouTube" />
+                        </a> -->
+                        <!--<a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram">
+                            <img src="/pics/home/socialicons/instagram.png" alt="Instagram" />
+                        </a>-->
+                        <!--<a href="#" data-toggle="tooltip" data-placement="bottom" title="RSS Feed">
+                            <img src="/pics/home/socialicons/rss.png" alt="RSS Feed" />
+                        </a>-->
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="title yellow-text">Popular pages</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="/comic/strip">Comic strip</a> |</li>
+                        <li class="list-inline-item"><a href="/about/art-gallery">Art gallery</a> |</li>
+                        <li class="list-inline-item"><a href="/about/faq">FAQ</a> |</li>
+                        <li class="list-inline-item"><a href="/related/good-news">Good news</a> |</li>
+                        <li class="list-inline-item"><a href="/company/contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright text-sm-left p-x-0 p-y-1" style="height:auto; line-height:normal; text-height:auto">
+            <div class="container-fluid">
+                <p class="p-y-0 m-y-0">&copy; 1996-2023 <a href="http://www.VickiFox.com">Vicki Fox Productions Inc.</a> All rights reserved.</p>
+                <p class="small p-y-0 m-y-0">Copying, reposting, or redistribution of artwork on this site requires prior permission. 
+                Some artwork on this site is the copyright of another party; used with their permission.</p>
+                <p class="small p-y-0 m-y-0"><a href="/about/copyright">Vicki Fox, characters, and indicia are trademarks of Vicki Fox Productions Inc.</a></p>
+            </div>
+        </div>
+    </footer>
+    
+<!-- SCRIPTS -->
+<script type="text/javascript" src="/zcode/js/jquery-2.2.3.js"></script>
+<script type="text/javascript" src="/zcode/js/tether.js"></script>
+<script type="text/javascript" src="/zcode/js/bootstrap.js"></script>
+<script type="text/javascript" src="/zcode/js/mdb.js"></script>
+</body>
+</html>

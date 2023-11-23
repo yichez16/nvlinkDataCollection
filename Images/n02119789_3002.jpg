@@ -1,0 +1,582 @@
+ <!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="not-ie" lang="en"> <!--<![endif]-->
+<head>
+	<!-- Basic Meta Tags -->
+  <meta charset="utf-8">
+  <title>Martin W. Grosnick +++ Natural Images</title>
+	<meta name="Martin W. Grosnick / Nature Photographer" content="Natural Images">
+	<meta name="keywords" content="Grosnick, Nature Photographer, Wildlife Photographer, Denali, Arctic, Antarctic, Africa">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon" type="image/png">
+  <!-- Bootstrap css -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">  
+  <!-- Flexslider css -->
+  <link href="css/flexslider.css" rel="stylesheet">
+  <!-- Nivo slider css -->
+  <link href="css/nivo-slider.css" rel="stylesheet">
+  <!-- Pretty Photo -->
+  <link href="css/prettyPhoto.css" rel="stylesheet">  
+  <!-- Font Awesome css -->
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <!-- Custom Scrollbar css -->
+  <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" />
+  <!-- Animate css -->    
+  <link href="css/animate.css" rel="stylesheet">
+  <!-- Refine slider -->
+  <link href="css/refineslide.css" rel="stylesheet">  
+  <!-- Theme css -->    
+  <link href="css/style-dark.css" rel="stylesheet" id="bg">     
+  <!-- Default color css -->
+  <link href="css/colors/blue.css" rel="stylesheet" id="color">
+  <!-- Bootstrap override css -->               
+  <link href="css/bootstrap-override.css" rel="stylesheet">
+<link href="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+
+<style type="text/css">
+
+#slider {
+	overflow: hidden;
+	}
+	#slider figure {
+		position: relative;
+		width:  800%;
+
+		margin:0 auto;
+		left: 0;
+		animation:30s slider infinite;
+		}
+	#slider figure img {
+		width: 12.5%;	
+		float: left;
+		}
+		
+		@keyframes slider {	
+			0% {
+				left: 0;
+				}
+			10% {
+				left: 0;
+				}
+			12.5% {
+				left: -100%;
+				}
+			22.5% {
+				left: -100%;
+				}
+			25% {
+				left: -200%;
+				}
+			35% {
+				left: -200%;
+				}
+			37.5% {
+				left: -300%;
+				}
+			47.5% {
+				left: -300%;
+				}
+			50% {
+				left: -400%;
+				}
+			60% {
+				left: -400%;
+				}
+			62.5% {
+				left: -500%;
+				}
+			72.5% {
+				left: -500%;
+				}
+			75% {
+				left: -600%;
+		    	}
+			85% {
+				left: -600%;
+				}
+		    87.5% {
+				left: -700%;
+				}
+			97.5% {
+				left: -700%;
+				}
+			100% {
+				left: -800%;
+				}
+			}
+
+		</style>
+
+  <!-- Google Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;
+  subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+	<!-- Internet Explorer condition - HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->   
+	
+
+
+
+
+</head>       
+
+
+
+
+<!-- Header -->
+<header id="header">
+  <div class="container">
+    <div class="row spacer40"></div>
+    <div class="row">
+      <div class="span12">
+        <div class="logo"> <!-- Logo -->
+          <a href="index.html"><div class="logo-picture"></div></a> <!-- Logo link and logo image -->
+          
+        </div>            
+      </div>
+</div>
+    </div>    
+     
+    <div class="row">
+      <div class="span12">
+      <!-- Main navigation -->
+        <nav class="navbar">
+          <ul class="nav pull-right" id="nav"> 
+            <li><a href="index.html" title="Home">Home</a></li>
+            
+            <li><a href="recent-work.html" title="Recent Work">Recent Work</a></li>
+            
+            <li><a href="Portfolios.html" title="Portfolios">Portfolios</a>
+              <ul><!-- Sub menu -->
+              	<li><a href="Abstracts-1.html" title="Abstract Nature">Abstract Nature</a></li>
+              	<li><a href="Africa-1.html" title="Africa">Africa--Kenya & Tanzania</a></li>
+                <li><a href="Namibia-1.html" title="Namibia">Africa--Namibia</a></li>
+                <li><a href="Kolmanskop-1.html" title="Kolmanskop">Namibia--Kolmanskop</a></li>
+                <li><a href="Alaska-1.html" title="Alaska">Alaska--Denali</a></li>
+                <li><a href="Katmai-1.html" title="Katmai">Alaska--Katmai</a></li>
+                <li><a href="Palouse-1.html" title="The Palouse">Northwest--The Palouse</a></li> 
+                <li><a href="BryceCanyon-1.html" title="Bryce Canyon">Southwest--Bryce Canyon</a></li>
+                <li><a href="SandDunes-1.html" title="Sand Dunes">Southwest--Sand Dunes</a></li>
+                <li><a href="Zion-1.html" title="Zion">Southwest--Zion</a></li>
+                <li><a href="Antarctica-1.html" title="Antarctica">Antarctica</a></li>
+                <li><a href="PolarBears-1.html" title="Polar Bears">Arctic--Polar Bears</a></li>
+                <li><a href="Arctic-1.html" title="Arctic">Arctic--Svalbard</a></li>
+                <li><a href="Iceland-1.html" title="Iceland">Iceland</a></li>
+				<li><a href="NightWork-1.html" title="Night Work">Night Work</a></li>
+              </ul><!-- Sub menu end-->
+            </li>
+            
+            <li><a href="IOM.html" title="Image Of The Month">Image Of The Month</a></li>
+            
+            <li><a href="http://denali-images.com" title="Prints">Prints</a></li>
+            
+            <li><a href="About.html" title="About The Photographer">About</a></li>
+            
+            <li><a href="mailto:mwg@mtaonline.net" title="Contact">Contact</a>            
+            </li>
+            
+          </ul>
+        </nav><!-- Main navigation end-->
+      </div>
+    </div>         
+<div>
+</header
+<body>
+<div id="slider">
+
+        <figure>
+        
+        <img src="img/SandDuneSL.jpg" alt="Sand Dunes"/>
+              
+		<img src="img/BearSplashingSL.jpg" alt="Brown Bear"/>
+		
+		<img src="img/MilkyWaySL.jpg" alt="Milky Way"/>
+		
+		<img src="img/DenaliColorSL.jpg" alt="Denali"/>
+		
+		<img src="img/PolarBearJumpSL.jpg" alt="Polar Bear"/>
+		
+		<img src="img/KolmanskopDoorsSL.jpg" alt="Sand Filled Room"/>
+		
+        <img src="img/VolcanoSL.jpg" alt="Fagradalsfjall Volcano"/>
+              
+        <img src="img/SandDuneSL.jpg" alt="Sand Dunes"/>    
+           
+        </figure>         
+</div>
+ 
+  <div class="row spacer30"></div
+  
+  <div class="blog-full-container">
+      <div class="row">
+        <div class="span12">
+          <div class="blog-info">
+        </div>
+          <div class="blog-content"> 
+            <h2>A MESSAGE FROM THE PHOTOGRAPHER</h2>
+<blockquote>      
+<p>Welcome, and thank you for stopping by! &nbsp; Please feel free to browse the Portfolios for a sampling of the images I've 
+captured over the years, with an emphasis on my latest works from the High Arctic and Antarctica, as well as the American Southwest. 
+&nbsp; And don't forget to check out the <i>Image Of The Month</i>--sometimes there is more to a photo than just the image.</p>                         
+    <p>Rather than trying to impress you with some nebulous <i>"artistic vision"</i> statement, I present to you images that should 
+    speak for themselves--after all, images are visual, not verbal.</p> 
+</blockquote>
+          
+                
+
+    </div>
+</div>
+    
+    <div class="row spacer30"></div>
+
+<div class="container">
+    <div class="row"><div class="span12"><h2>PORTFOLIOS</h2></div></div>
+     <div class="row"> 
+     
+      <div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container"> 
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src=img/AbstractsTh.jpg alt="Natural Abstracts">
+              <a href=img/AbstractsTh.jpg class="zoom" data-rel="prettyPhoto" title="Accidental Abstract--what happens when your camera verrry slowly tilts downward when trying to photograph the Grand Canyon"</i><i class="icon-zoom-in"></i></a>
+               <a href=Abstracts-1.html class="link"><i class="icon-external-link "></i></a>
+            </div>
+            <div class="img-container-text">
+              <h4><a href=Abstracts-1.html class="link">Abstract Nature</a></h4>
+              
+            </div>
+          <div class="border-bottom"></div>
+        </div>        
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src="img/AfricaTh.jpg" alt="Oryx">
+							 <a href="img/AfricaTh.jpg" class="zoom" data-rel="prettyPhoto" 
+							 title="Oryx under the hot Kenyan sun"><i class="icon-zoom-in"></i></a>
+							 <a href="Africa-1.html" class="link"><i class="icon-external-link"></i></a>
+            </div>
+            <div class="img-container-text">
+              <h4><a href="Africa-1.html">Africa--Kenya & Tanzania</a></h4>
+              
+            </div>
+          <div class="border-bottom"></div>
+       </div>        
+		</div>
+      </div>  
+ 
+ 
+	<div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src="img/NamibiaTh.jpg" alt="Namibia Sand Dunes">
+              <a href="img/NamibiaTh.jpg" class="zoom" data-rel="prettyPhoto" 
+              title="Sand Dunes in the Namib-Naukluft Desert"><i class="icon-zoom-in"></i></a>
+               <a href="Namibia-1.html" class="link"><i class="icon-external-link "></i></a>               
+            </div>
+            <div class="img-container-text">
+              <h4><a href="Namibia-1.html">Africa--Namibia</a></h4>
+              
+            </div>
+          <div class="border-bottom"></div>
+        </div>        
+        </div>
+		</div>
+		
+			<div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src="img/KolmanskopTh.jpg" alt="Abandoned Building">
+              <a href="img/KolmanskopTh.jpg" class="zoom" data-rel="prettyPhoto" title="Sand Slowly Filling Abandoned Building, Kolmanskop"><i class="icon-zoom-in"></i></a>
+               <a href="Kolmanskop-1.html" class="link"><i class="icon-external-link "></i></a>
+            </div>
+            <div class="img-container-text">
+              <h4><a href="Kolmanskop-1.html">Africa--Kolmanskop</a></h4>
+              
+            </div>
+          <div class="border-bottom"></div>
+        </div>        
+        </div>
+		</div>
+
+		
+		<div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src="img/AlaskaTh.jpg" alt="Denali">
+              <a href="img/AlaskaTh.jpg" class="zoom" data-rel="prettyPhoto" title="Denali Color, a Limited Edition Print"><i class="icon-zoom-in"></i></a>
+            <a href="Alaska-1.html" class="link"><i class="icon-external-link "></i></a>
+               
+            </div>
+            <div class="img-container-text">
+              <h4><a href="Alaska-1.html">Alaska--Denali</a></h4>
+        </div>
+          <div class="border-bottom"></div>
+        </div>        
+        </div>
+		</div>
+		
+	<div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src="img/KatmaiTh.jpg" alt="Bear at sunrise">
+              <a href="img/KatmaiTh.jpg" class="zoom" data-rel="prettyPhoto" title="Brown Bear At Sunrise"><i class="icon-zoom-in"></i></a>
+            <a href="Katmai-1.html" class="link"><i class="icon-external-link "></i></a>   
+            </div>
+            <div class="img-container-text">
+              <h4><a href="Katmai-1.html">Alaska--Katmai</a></h4></div>
+            <div class="border-bottom"></div>
+        </div>        
+        </div>
+		</div>
+
+      	
+      	<div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+          <div class="border-top"></div>        
+            <div class="img-container-image">
+              <img src=img/PalouseTh.jpg alt="The Palouse">
+				<a href=img/PalouseTh.jpg class="zoom" data-rel="prettyPhoto" title="Sunny May Day In The Palouse"><i class="icon-zoom-in"></i></a>
+			<a href="Palouse-1.html" class="link"><i class="icon-external-link "></i></a>	
+            </div>
+            <div class="img-container-text">
+            <h4><a href=Palouse-1.html>Northwest--The Palouse</a></h4>  
+            </div>
+          <div class="border-bottom"></div>
+      	</div>        
+      	</div>  
+      	</div>	
+      	
+      	
+      	<div class="span3">
+        <div class="project-shortcode">
+        <div class="img-container">
+        <div class="border-top"></div> 
+            <div class="img-container-image">
+            <img src=img/BryceCanyonTh.jpg alt=“Bryce Canyon Hoodoos”>
+            <a href=img/BryceCanyonTh.jpg class="zoom" data-rel="prettyPhoto" title=“Bryce Canyon Hoodoos”><i class="icon-zoom-in"></i></a>
+                <a href=BryceCanyon-1.html class="link"><i class="icon-external-link"></i></a>
+        </div>
+            <div class="img-container-text">
+            <h4><a href=BryceCanyon-1.html>Southwest--Bryce Canyon</a></h4> 
+            </div>
+            <div class="border-bottom"></div>
+            </div> 
+            </div> 
+            </div>
+      	
+      	<div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src=img/DeathValleyTH.jpg alt="Colorful Hills">
+<a href=DeathValleyTH.jpg class="zoom" data-rel="prettyPhoto" title="Erosion Of Heavily Mineralized Sedimentary Rock Reveals A Palate Of Colors"><i class="icon-zoom-in"></i></a>
+<a href=DeathValley-1.html class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=Southwest-1.html>Southwest--Death Valley</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+
+      	<div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src=img/DeathValleyTh.jpg alt="Death Valley Dunes">
+<a href=img/DeathValleyTh.jpg class="zoom" data-rel="prettyPhoto" title="Photographing The Mesquite Dunes"><i class="icon-zoom-in"></i></a>
+<a href=SandDunes-1.html class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=SandDunes-1.html>Southwest--Sand Dunes</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+      	
+      	
+      <div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src=img/ZionTh.jpg alt=“Zion National Park”>
+<a href=img/ZionTh.jpg class="zoom" data-rel="prettyPhoto" title="Fall Canyon"><i class="icon-zoom-in"></i></a>
+<a href=Zion-1.html class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=Zion-1.html>Southwest—Zion</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+
+      	
+      <div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src=img/AntarcticaTh.jpg alt=“Penguins”>
+<a href=img/AntarcticaTh.jpg class="zoom" data-rel="prettyPhoto" title="King Penguin Colony, Gold Harbor"><i class="icon-zoom-in"></i></a>
+<a href=Antarctica-1.html class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=Antarctica-1.html>Antarctica</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+      	
+      	<div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src="img/ArcticTh.jpg" alt=“Polar Bear”>
+<a href="img/ArcticTh.jpg" class="zoom" data-rel="prettyPhoto" title=“Polar Bear“><i class="icon-zoom-in"></i></a>
+<a href=PolarBears-1.html class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=PolarBears-1.html>Arctic--Polar Bears</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+
+<div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src="img/SvalbardTH.jpg" alt=“Walrus”>
+<a href="img/SvalbardTH.jpg" class="zoom" data-rel="prettyPhoto" title=“Walrus Mother Cradling Young“><i class="icon-zoom-in"></i></a>
+<a href=Svalbard-1.html class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=Svalbard-1.html>Arctic--Svalbard</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+      	
+      	<div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src="img/IcelandTh.jpg" alt=“Stykkisholmur Harbor”>
+<a href="img/IcelandTh.jpg" class="zoom" data-rel="prettyPhoto" title="Stykkisholmur Harbor"><i class="icon-zoom-in"></i></a>
+<a href="Iceland-1.html" class="link"><i class="icon-external-link"></i></a>
+</div>
+<div class="img-container-text">
+<h4><a href=Iceland-1.html>Iceland</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+      	
+      	<div class="span3">
+<div class="project-shortcode">
+<div class="img-container">
+<div class="border-top"></div> 
+<div class="img-container-image">
+<img src="img/NightWorkTh.jpg" alt=“Milky Way”>
+<a href="img/NightWorkTh.jpg" class="zoom" data-rel="prettyPhoto" title="Milky Way Over Quiver Tree"><i class="icon-zoom-in"></i></a>
+<a href=NightWork-1.html class="link"><i class="icon-external-link"></i></a>
+
+</div>
+<div class="img-container-text">
+<h4><a href=NightWork-1.html>Night Work</a></h4> 
+</div>
+<div class="border-bottom"></div>
+</div> 
+</div> 
+</div>
+      	
+
+      	
+      	
+</div></div>
+ 	<div class="row spacer40"></div>
+ <!-- container end  -->
+<div class="span12"></div>
+
+  </div> <!-- container end  -->
+</section>
+
+<!-- Footer -->
+<footer id="footer">  
+  <div class="container footer">
+    
+    <div class="row spacer40"></div>
+    <div class="row">
+              
+    </div>
+    <div class="row spacer30"></div>
+    <div class="row">
+      <div class="span12">
+        <div class="entiri-footer-text">
+   Contents and Images Copyright      &copy; 2023 Martin W. Grosnick. All rights reserved. 
+        </div> 
+      </div>
+      <div class="span1">
+        <div class="back-to-top">
+          <a href="#"><i class="icon-angle-up"></i> </a> 
+        </div>   
+      </div>       
+    </div> <!-- row end -->
+  </div> <!-- footer container end --> 
+</footer>
+
+<!-- Javascript -->
+<!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/jquery.js"></script> 
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.js"></script> 
+  <script src="js/jquery.flexslider-min.js"></script>
+  <script src="js/jquery.nivo.slider.pack.js"></script> 
+  <script src="js/jquery.isotope.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+  <script src="js/jquery.prettyPhoto.js"></script>    
+  <script src="js/animate.js"></script>
+  <script src="js/jquery.fitvids.js"></script>
+  <script src="js/retina.js"></script>
+  <script src="js/respond.min.js"></script>  
+  <script src="js/jquery.parallax-1.1.3.js"></script>
+  <script src="js/jquery.refineslide.js"></script>
+    
+  <script src="js/selectnav.js"></script>     
+  <script src="js/functions.js"></script> 
+
+</body>
+</html>
