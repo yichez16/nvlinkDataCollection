@@ -17,7 +17,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 
 class RandomImageNetDataset(Dataset):
-    def __init__(self, num_samples=1000000000, num_classes=1000, image_size=(224, 224, 3)):
+    def __init__(self, num_samples=100000, num_classes=1000, image_size=(224, 224, 3)):
         self.num_samples = num_samples
         self.num_classes = num_classes
         self.image_size = image_size
@@ -103,7 +103,7 @@ optimizer = torch.optim.Adam(model.parameters())
 def train(model, train_loader, criterion, optimizer, num_iterations):
     model.train()
     current_iteration = 0
-    for epoch in range(100):  # num_epochs would be defined in your main code
+    for epoch in range(100000):  # num_epochs would be defined in your main code
         for batch_idx, (data, target) in enumerate(train_loader):
             # Stop after 20 iterations
             if current_iteration >= num_iterations:
