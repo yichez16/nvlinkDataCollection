@@ -24,7 +24,7 @@ class ModelParallelCNN(nn.Module):
         # self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to(dev2)
         # # Corrected the input size to the fully connected layer according to pooling and convolution layers
         # self.fc_1 = nn.Linear(64 * 3 * 3, 10).to(dev3) 
-        self.layer1 = nn.Linear(224*224*3, 1024).to(dev0)
+        self.layer1 = nn.Linear(28*28, 1024).to(dev0)
         self.layer2 = nn.Linear(1024, 2048).to(dev1)
         self.layer3 = nn.Linear(2048, 4096).to(dev2)
         self.layer4 = nn.Linear(4096, 10).to(dev3)
