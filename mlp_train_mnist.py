@@ -17,7 +17,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 
 class RandomImageNetDataset(Dataset):
-    def __init__(self, num_samples=1000000, num_classes=1000, image_size=(224, 224, 3)):
+    def __init__(self, num_samples=1000000000, num_classes=1000, image_size=(224, 224, 3)):
         self.num_samples = num_samples
         self.num_classes = num_classes
         self.image_size = image_size
