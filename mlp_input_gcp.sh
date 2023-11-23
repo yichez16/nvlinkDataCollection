@@ -129,27 +129,27 @@
 
 ################################################################################################
 
-# Start profiler in the background
-sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_896.csv &
+# # Start profiler in the background
+# sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_896.csv &
 
-# Wait for 2 seconds
-sleep 2
+# # Wait for 2 seconds
+# sleep 2
 
-# Start mlp training
-echo "Launching mlp."
-python mlp_train_mnist.py 896
+# # Start mlp training
+# echo "Launching mlp."
+# python mlp_train_mnist.py 896
 
 
-# Wait for 2 seconds
-sleep 2
+# # Wait for 2 seconds
+# sleep 2
 
-# kill profiler
-sudo pkill -f "./CUPTI_receiver"
+# # kill profiler
+# sudo pkill -f "./CUPTI_receiver"
 
-# Wait for 2 seconds
-sleep 2
+# # Wait for 2 seconds
+# sleep 2
 
-################################################################################################
+# ################################################################################################
 
 ################################################################################################
 
