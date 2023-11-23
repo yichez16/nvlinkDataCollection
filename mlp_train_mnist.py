@@ -12,8 +12,33 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
+import numpy as np
+import torch
+from torch.utils.data import Dataset, DataLoader
 
+class RandomImageNetDataset(Dataset):
+    def __init__(self, num_samples=1000, num_classes=1000, image_size=(224, 224, 3)):
+        self.num_samples = num_samples
+        self.num_classes = num_classes
+        self.image_size = image_size
 
+    def __len__(self):
+        return self.num_samples
+
+    def __getitem__(self, idx):
+        # Generate a random image (noise)
+        image = np.random.rand(*self.image_size).astype(np.float32)
+        
+        # Normalize the image
+        image = (image - 0.485) / 0.229
+
+        # Generate a random label
+        label = np.random.randint(0, self.num_classes)
+
+        return torch.tensor(image), torch.tensor(label)
+
+# Create the dummy datasets
+train_dataset = RandomImageNetDataset()
 
 
 class ModelParallelCNN(nn.Module):
@@ -28,7 +53,7 @@ class ModelParallelCNN(nn.Module):
         self.layer1 = nn.Linear(224*224*3, 1024).to(dev0)
         self.layer2 = nn.Linear(1024, 2048).to(dev1)
         self.layer3 = nn.Linear(2048, 4096).to(dev2)
-        self.layer4 = nn.Linear(4096, 10).to(dev3)
+        self.layer4 = nn.Linear(4096, 1000).to(dev3)
         
     
     def forward(self, x):
@@ -67,7 +92,6 @@ transform = transforms.Compose([
 
 # train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 # train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
-train_dataset = datasets.ImageFolder(root='Images', transform=transform)
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=True)
 
 
