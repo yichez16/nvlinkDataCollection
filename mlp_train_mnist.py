@@ -24,10 +24,10 @@ class ModelParallelCNN(nn.Module):
         # self.layer3 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=2).to(dev2)
         # # Corrected the input size to the fully connected layer according to pooling and convolution layers
         # self.fc_1 = nn.Linear(64 * 3 * 3, 10).to(dev3) 
-        self.layer1 = nn.Linear(28*28, 1024).to(dev0)
-        self.layer2 = nn.Linear(1024, 2048).to(dev1)
-        self.layer3 = nn.Linear(2048, 4096).to(dev2)
-        self.layer4 = nn.Linear(4096, 10).to(dev3)
+        self.layer1 = nn.Linear(784, 128).to(dev0)
+        self.layer2 = nn.Linear(128, 256).to(dev1)
+        self.layer3 = nn.Linear(256, 512).to(dev2)
+        self.layer4 = nn.Linear(512, 10).to(dev3)
         
     
     def forward(self, x):
@@ -58,12 +58,7 @@ batch_value = int(sys.argv[1])
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 
 # MNIST Dataset and DataLoader setup
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),  # Resize images to 224x224
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-])
-
+transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 
@@ -98,5 +93,4 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
             return
 
 # Start training for 20 iterations
-train(model, train_loader, criterion, optimizer, num_iterations=5)
-
+train(model, train_loader, criterion, optimizer, num_iterations=500)
