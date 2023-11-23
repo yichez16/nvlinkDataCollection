@@ -21,29 +21,69 @@ from torch.utils.data import Dataset, DataLoader
 
 
 
+import os
+import torch
+from torch.utils.data import Dataset
+from torchvision import transforms
+from PIL import Image
+import random
 
-class RandomImageNetDataset(Dataset):
-    def __init__(self, num_samples=1000, num_classes=1000, image_size=(224, 224, 3)):
-        self.num_samples = num_samples
-        self.num_classes = num_classes
-        self.image_size = image_size
+class RandomLabelDataset(Dataset):
+    def __init__(self, image_dir, transform=None):
+        self.image_dir = image_dir
+        self.image_files = os.listdir(image_dir)
+        self.transform = transform
 
     def __len__(self):
-        return self.num_samples
+        return len(self.image_files)
 
     def __getitem__(self, idx):
-        # Generate a random image (noise)
-        image = np.random.rand(*self.image_size).astype(np.float32)
-        # Normalize the image
-        image = (image - 0.485) / 0.229
-        # Permute the dimensions to match PyTorch's expectation: Channels x Height x Width
-        image = np.transpose(image, (2, 0, 1))
-        # Generate a random label
-        label = np.random.randint(0, self.num_classes)
-        return torch.tensor(image), torch.tensor(label)
+        img_path = os.path.join(self.image_dir, self.image_files[idx])
+        image = Image.open(img_path).convert('RGB')
 
-# Create the dummy datasets
-train_dataset = RandomImageNetDataset()
+        # Apply transformations
+        if self.transform:
+            image = self.transform(image)
+
+        # Generate a random label
+        label = random.randint(0, 999)  # Assuming 1000 classes, labeled 0 to 999
+
+        return image, label
+
+# Define transformations
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
+# Create the dataset
+train_dataset = RandomLabelDataset('data', transform=transform)
+
+
+
+# class RandomImageNetDataset(Dataset):
+#     def __init__(self, num_samples=1000, num_classes=1000, image_size=(224, 224, 3)):
+#         self.num_samples = num_samples
+#         self.num_classes = num_classes
+#         self.image_size = image_size
+
+#     def __len__(self):
+#         return self.num_samples
+
+#     def __getitem__(self, idx):
+#         # Generate a random image (noise)
+#         image = np.random.rand(*self.image_size).astype(np.float32)
+#         # Normalize the image
+#         image = (image - 0.485) / 0.229
+#         # Permute the dimensions to match PyTorch's expectation: Channels x Height x Width
+#         image = np.transpose(image, (2, 0, 1))
+#         # Generate a random label
+#         label = np.random.randint(0, self.num_classes)
+#         return torch.tensor(image), torch.tensor(label)
+
+# # Create the dummy datasets
+# train_dataset = RandomImageNetDataset()
 
 
 
