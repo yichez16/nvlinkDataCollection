@@ -49,7 +49,7 @@ class ModelParallelCNN(nn.Module):
     def __init__(self, dev0, dev1,dev2, dev3, dev4, dev5, dev6, dev7):
         super(ModelParallelCNN, self).__init__()
         # Define layers
-        self.layer1 = nn.Conv2d(3, 32, kernel_size=3, padding=1).to(dev0) # input 224, 224 -3+2 +1 = 224
+        self.layer1 = nn.Conv2d(3, 64, kernel_size=3, padding=1).to(dev0) # input 224, 224 -3+2 +1 = 224
         self.layer2 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev1)  # input 26, f = 2, stride = 2, pd = 0, output (224 -2)/2 + 1 = 112
         self.layer3 = nn.Conv2d(32, 64, kernel_size=3, padding=1).to(dev2) # input 112,  112-3+2+1 = 112
         self.layer4 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev3) # input 112, 56
@@ -65,10 +65,10 @@ class ModelParallelCNN(nn.Module):
         x = self.relu(self.layer3(x.to(dev2)))
         x = self.layer4(x.to(dev3))
         x = self.relu(self.layer5(x.to(dev4)))
-        x = self.layer5(x.to(dev5))
+        x = self.layer6(x.to(dev5))
         x = x.view(x.size(0), -1)  # Flatten
-        x = self.relu(self.layer6(x.to(dev6)))
-        x = self.relu(self.layer7(x.to(dev7)))
+        x = self.relu(self.layer7(x.to(dev6)))
+        x = self.relu(self.layer8(x.to(dev7)))
         return x
 
 
