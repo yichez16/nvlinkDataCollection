@@ -66,7 +66,7 @@ class ModelParallelCNN(nn.Module):
         x = self.layer4(x.to(dev3))
         x = self.relu(self.layer5(x.to(dev4)))
         x = self.layer5(x.to(dev5))
-        x = x.view(-1, 128 * 28 * 28 )
+        x = x.view(x.size(0), -1)  # Flatten
         x = self.relu(self.layer6(x.to(dev6)))
         x = self.relu(self.layer7(x.to(dev7)))
         return x
@@ -79,14 +79,9 @@ batch_value = int(sys.argv[1])
 
 model = ModelParallelCNN(dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7)
 
-# MNIST Dataset and DataLoader setup
-transform = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
-train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
+
+train_loader = DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=True)
+
 
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss()
