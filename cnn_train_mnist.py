@@ -81,9 +81,10 @@ model = ModelParallelCNN(dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([
-    transforms.Resize((224, 224)),  # Resize images to 224x224
+    transforms.Resize(256),
+    transforms.CenterCrop(224),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 
