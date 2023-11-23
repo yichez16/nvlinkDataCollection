@@ -138,6 +138,8 @@ class RandomDataset(Dataset):
         image = np.random.rand(*self.image_size).astype(np.float32)
         # Normalize the image
         image = (image - 0.485) / 0.229
+        # Permute the dimensions to match PyTorch's expectation: Channels x Height x Width
+        image = np.transpose(image, (2, 0, 1))
         # Generate a random label
         label = np.random.randint(0, self.num_classes)
         return torch.tensor(image), torch.tensor(label)
