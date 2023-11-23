@@ -68,7 +68,7 @@ transform = transforms.Compose([
 # train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 # train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 train_dataset = datasets.ImageFolder(root='Images', transform=transform)
-train_loader = DataLoader(dataset=train_dataset, batch_size=32, shuffle=True)
+train_loader = DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=True)
 
 
 # Loss function and optimizer
