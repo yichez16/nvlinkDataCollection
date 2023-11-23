@@ -19,26 +19,26 @@ sleep 2
 
 ################################################################################################
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_128.csv &
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_128.csv &
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # Start mlp training
-# echo "Launching mlp."
-# python mlp_train_mnist.py 128
+# Start mlp training
+echo "Launching mlp."
+python mlp_train_mnist.py 128
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+################################################################################################
 
 
 # Start profiler in the background
@@ -62,26 +62,26 @@ sleep 2
 
 # ################################################################################################
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_256.csv &
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_256.csv &
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # Start mlp training
-# echo "Launching mlp."
-# python mlp_train_mnist.py 256
+# Start mlp training
+echo "Launching mlp."
+python mlp_train_mnist.py 256
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+################################################################################################
 
 # Start profiler in the background
 sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_320.csv &
@@ -105,27 +105,27 @@ sleep 2
 
 ################################################################################################
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_384.csv &
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_384.csv &
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # Start mlp training
-# echo "Launching mlp."
-# python mlp_train_mnist.py 384
+# Start mlp training
+echo "Launching mlp."
+python mlp_train_mnist.py 384
 
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+################################################################################################
 
 ###############################################################################################
 
@@ -154,26 +154,26 @@ sleep 2
 ###############################################################################################
 
 # Start profiler in the background
-# sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_512.csv &
+sudo ./CUPTI_receiver 0 1 0 pcie_total_data_received > mlp_input_received_512.csv &
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # Start mlp training
-# echo "Launching mlp."
-# python mlp_train_mnist.py 512
+# Start mlp training
+echo "Launching mlp."
+python mlp_train_mnist.py 512
 
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+################################################################################################
 
 
 
