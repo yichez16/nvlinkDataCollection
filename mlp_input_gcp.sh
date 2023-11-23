@@ -181,179 +181,179 @@ sleep 2
 
 
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_64.csv &
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_64.csv &
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 64
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 64
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+################################################################################################
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_128.csv &
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_128.csv &
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 128
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 128
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
-
-
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_192.csv &
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 192
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
-
-# # Wait for 2 seconds
-# sleep 2
-
-# ################################################################################################
-
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_256.csv &
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 256
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
-
-# # Wait for 2 seconds
-# sleep 2
-
-# ################################################################################################
-
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_320.csv &
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 320
+################################################################################################
 
 
-# # Wait for 2 seconds
-# sleep 2
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_192.csv &
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# Wait for 2 seconds
+sleep 2
 
-# # Wait for 2 seconds
-# sleep 2
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 192
 
-# ################################################################################################
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_384.csv &
+# Wait for 2 seconds
+sleep 2
 
-# # Wait for 2 seconds
-# sleep 2
+################################################################################################
 
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 384
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_256.csv &
 
+# Wait for 2 seconds
+sleep 2
 
-# # Wait for 2 seconds
-# sleep 2
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 256
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# Wait for 2 seconds
+sleep 2
 
-# # Wait for 2 seconds
-# sleep 2
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# ################################################################################################################################################################################################
+# Wait for 2 seconds
+sleep 2
 
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_448.csv &
+################################################################################################
 
-# # Wait for 2 seconds
-# sleep 2
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_320.csv &
 
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 448
+# Wait for 2 seconds
+sleep 2
 
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
-
-# # Wait for 2 seconds
-# sleep 2
-
-# ################################################################################################
-
-# ################################################################################################
-
-# # Start profiler in the background
-# sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_512.csv &
-
-# # Wait for 2 seconds
-# sleep 2
-
-# # Start mlp training
-# echo "Launching mlp."
-# python cnn_train_mnist.py 512
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 320
 
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# # kill profiler
-# sudo pkill -f "./CUPTI_receiver"
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
 
-# # Wait for 2 seconds
-# sleep 2
+# Wait for 2 seconds
+sleep 2
 
-# ################################################################################################
+################################################################################################
+
+################################################################################################
+
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_384.csv &
+
+# Wait for 2 seconds
+sleep 2
+
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 384
+
+
+# Wait for 2 seconds
+sleep 2
+
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
+
+# Wait for 2 seconds
+sleep 2
+
+################################################################################################################################################################################################
+
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_448.csv &
+
+# Wait for 2 seconds
+sleep 2
+
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 448
+
+
+# Wait for 2 seconds
+sleep 2
+
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
+
+# Wait for 2 seconds
+sleep 2
+
+################################################################################################
+
+################################################################################################
+
+# Start profiler in the background
+sudo ./CUPTI_receiver 0 0 0 pcie_total_data_received > cnn_input_received_512.csv &
+
+# Wait for 2 seconds
+sleep 2
+
+# Start mlp training
+echo "Launching mlp."
+python cnn_train_mnist.py 512
+
+
+# Wait for 2 seconds
+sleep 2
+
+# kill profiler
+sudo pkill -f "./CUPTI_receiver"
+
+# Wait for 2 seconds
+sleep 2
+
+################################################################################################

@@ -10,61 +10,8 @@ import time
 from torch.nn.parallel import DistributedDataParallel as DDP
 import torch.distributed as dist
 import torch.multiprocessing as mp
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
-import numpy as np
-import torch
-from torch.utils.data import Dataset, DataLoader
 
 
-import os
-import torch
-from torch.utils.data import Dataset
-from torchvision import transforms
-from PIL import Image
-import random
-
-# class RandomLabelDataset(Dataset):
-#     def __init__(self, image_dir, transform=None):
-#         self.image_dir = image_dir
-#         self.image_files = os.listdir(image_dir)
-#         self.transform = transform
-
-#     def __len__(self):
-#         return len(self.image_files)
-
-#     def __getitem__(self, idx):
-#         img_path = os.path.join(self.image_dir, self.image_files[idx])
-#         image = Image.open(img_path).convert('RGB')
-
-#         # Apply transformations
-#         if self.transform:
-#             image = self.transform(image)
-
-#         # Generate a random label
-#         label = random.randint(0, 999)  # Assuming 1000 classes, labeled 0 to 999
-
-#         return image, label
-
-# # Define transformations
-# transform = transforms.Compose([
-#     transforms.Resize((224, 224)),
-#     transforms.ToTensor(),
-#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-# ])
-
-# # Create the dataset
-# train_dataset = RandomLabelDataset('data', transform=transform)
-
-
-# Define a transformation to resize the images and convert them to tensor
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.Grayscale(num_output_channels=3),  # Convert to 3-channel grayscale image
-    transforms.ToTensor(),
-    transforms.Normalize((0.5,), (0.5,))
-])
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 
 
 
@@ -80,7 +27,7 @@ class ModelParallelCNN(nn.Module):
         self.layer1 = nn.Linear(224*224*3, 1024).to(dev0)
         self.layer2 = nn.Linear(1024, 2048).to(dev1)
         self.layer3 = nn.Linear(2048, 4096).to(dev2)
-        self.layer4 = nn.Linear(4096, 1000).to(dev3)
+        self.layer4 = nn.Linear(4096, 10).to(dev3)
         
     
     def forward(self, x):
@@ -110,12 +57,15 @@ batch_value = int(sys.argv[1])
 
 model = ModelParallelCNN(dev0, dev1, dev2, dev3)
 
+# MNIST Dataset and DataLoader setup
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),  # Resize images to 224x224
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
 
-
-# train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-# train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
-train_loader = DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=True)
-
+train_dataset = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_value, shuffle=False)
 
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss().to(dev3) # The loss function needs to be on the same GPU as the last layer
@@ -125,7 +75,7 @@ optimizer = torch.optim.Adam(model.parameters())
 def train(model, train_loader, criterion, optimizer, num_iterations):
     model.train()
     current_iteration = 0
-    for epoch in range(100000):  # num_epochs would be defined in your main code
+    for epoch in range(100):  # num_epochs would be defined in your main code
         for batch_idx, (data, target) in enumerate(train_loader):
             # Stop after 20 iterations
             if current_iteration >= num_iterations:
@@ -148,5 +98,5 @@ def train(model, train_loader, criterion, optimizer, num_iterations):
             return
 
 # Start training for 20 iterations
-train(model, train_loader, criterion, optimizer, num_iterations=10)
+train(model, train_loader, criterion, optimizer, num_iterations=5)
 
