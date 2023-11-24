@@ -12,6 +12,7 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 import torch.optim as optim
 
+
 class ModelParallelCNN(nn.Module):
     def __init__(self, dev0, dev1,dev2, dev3, dev4, dev5, dev6, dev7):
         super(ModelParallelCNN, self).__init__()
@@ -24,6 +25,7 @@ class ModelParallelCNN(nn.Module):
         self.fc1 = nn.Linear(256 * 3 * 3, 4096).to(dev5)  # Adjusted for MNIST size
         self.fc2 = nn.Linear(4096, 4096).to(dev6)
         self.fc3 = nn.Linear(4096, 10).to(dev7)  
+        self.relu = nn.ReLU(inplace=True)
 
     def forward(self, x):
         x = self.relu(self.layer1(x.to(dev0)))
