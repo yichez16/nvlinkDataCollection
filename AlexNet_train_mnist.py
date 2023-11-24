@@ -25,18 +25,8 @@ class ModelParallelCNN(nn.Module):
         self.fc1 = nn.Linear(256 * 3 * 3, 4096).to(dev5)  # Adjusted for MNIST size
         self.fc2 = nn.Linear(4096, 4096).to(dev6)
         self.fc3 = nn.Linear(4096, 10).to(dev7)  
-        self.relu = nn.ReLU(inplace=True)
 
     def forward(self, x):
-        x = self.relu(self.layer1(x.to(dev0)))
-        x = self.layer2(x.to(dev1))
-        x = self.relu(self.layer3(x.to(dev2)))
-        x = self.layer4(x.to(dev3))
-        x = x.view(-1, 16 * 5 * 5)
-        x = self.relu(self.layer5(x.to(dev4)))
-        x = self.relu(self.layer6(x.to(dev5)))
-        x = self.layer7(x.to(dev6))
-
         x = F.relu(self.conv1(x.to(dev0)))
         x = F.max_pool2d(x.to(dev0), kernel_size=3, stride=2)
         x = F.relu(self.conv2(x.to(dev1)))
@@ -50,7 +40,6 @@ class ModelParallelCNN(nn.Module):
         x = F.relu(self.fc2(x.to(dev6)))
         x = self.fc3(x.to(dev7))
         return x
-
 
 # class AlexNetMNIST(nn.Module):
 #     def __init__(self):
