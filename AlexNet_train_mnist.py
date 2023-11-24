@@ -22,7 +22,7 @@ class ModelParallelCNN(nn.Module):
         self.conv3 = nn.Conv2d(192, 384, kernel_size=3, padding=1).to(dev2)
         self.conv4 = nn.Conv2d(384, 256, kernel_size=3, padding=1).to(dev3)
         self.conv5 = nn.Conv2d(256, 256, kernel_size=3, padding=1).to(dev4)
-        self.fc1 = nn.Linear(256 * 3 * 3, 4096).to(dev5)  # Adjusted for MNIST size
+        self.fc1 = nn.Linear(256 * 6 * 6, 4096).to(dev5)  # Adjusted for MNIST size
         self.fc2 = nn.Linear(4096, 4096).to(dev6)
         self.fc3 = nn.Linear(4096, 10).to(dev7)  
 
