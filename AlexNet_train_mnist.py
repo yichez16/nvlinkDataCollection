@@ -27,15 +27,15 @@ class ModelParallelCNN(nn.Module):
         self.fc3 = nn.Linear(4096, 10).to(dev7)  
 
     def forward(self, x):
-        x = F.relu(self.conv1(x.to(dev0)))
-        x = F.max_pool2d(x.to(dev0), kernel_size=3, stride=2)
-        x = F.relu(self.conv2(x.to(dev1)))
-        x = F.max_pool2d(x.to(dev1), kernel_size=3, stride=2)
-        x = F.relu(self.conv3(x.to(dev2)))
-        x = F.relu(self.conv4(x.to(dev3)))
-        x = F.relu(self.conv5(x.to(dev4)))
-        x = F.max_pool2d(x.to(dev4), kernel_size=3, stride=2)
-        x = x.view(-1, 256 * 3 * 3)
+        x = F.relu(self.conv1(x.to(dev0)))  # 28 - 11 +2*2 = 21 /4 +1 = 6
+        # x = F.max_pool2d(x.to(dev0), kernel_size=3, stride=2)
+        x = F.relu(self.conv2(x.to(dev1)))  # 6 -5 +2*2 +1 = 6
+        # x = F.max_pool2d(x.to(dev1), kernel_size=3, stride=2)
+        x = F.relu(self.conv3(x.to(dev2)))  # 6 
+        x = F.relu(self.conv4(x.to(dev3)))  # 6
+        x = F.relu(self.conv5(x.to(dev4)))  # 6
+        # x = F.max_pool2d(x.to(dev4), kernel_size=3, stride=2)
+        x = x.view(-1, 256 * 6 * 6)
         x = F.relu(self.fc1(x.to(dev5)))
         x = F.relu(self.fc2(x.to(dev6)))
         x = self.fc3(x.to(dev7))
