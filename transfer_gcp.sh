@@ -128,7 +128,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 1 0 7 nvlink_total_data_received > cnn_nvlink_7.csv &
+sudo ./CUPTI_receiver 1 0 7 nvlink_total_data_received > cnn_nvlink_4.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -149,7 +149,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 1 0 6 nvlink_total_data_received > cnn_nvlink_6.csv &
+sudo ./CUPTI_receiver 1 0 6 nvlink_total_data_received > cnn_nvlink_5.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -170,7 +170,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 1 0 4 nvlink_total_data_received > cnn_nvlink_4.csv &
+sudo ./CUPTI_receiver 1 0 4 nvlink_total_data_received > cnn_nvlink_6.csv &
 
 # Wait for 2 seconds
 sleep 2
@@ -191,7 +191,7 @@ sleep 2
 ################################################################################################
 
 # Start profiler in the background
-sudo ./CUPTI_receiver 1 0 5 nvlink_total_data_received > cnn_nvlink_5.csv &
+sudo ./CUPTI_receiver 1 0 5 nvlink_total_data_received > cnn_nvlink_7.csv &
 
 # Wait for 2 seconds
 sleep 2

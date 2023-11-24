@@ -21,14 +21,14 @@ class ModelParallelCNN(nn.Module):
     def __init__(self, dev0, dev1,dev2, dev3, dev4, dev5, dev6, dev7):
         super(ModelParallelCNN, self).__init__()
         # Define layers
-        self.layer1 = nn.Conv2d(1, 32, kernel_size=3).to(dev0) # input 28, f = 3, stride = 1, pd = 0, output 26, C 32
-        self.layer2 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev1)  # input 26, f = 2, stride = 2, pd = 0, output 12 C32
-        self.layer3 = nn.Conv2d(32, 64, kernel_size=3).to(dev2) # input 12, f = 3, stride = 2, pd = 0, output 12 C64
-        self.layer4 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev3) # input 12, f = 2, stride = 2, pd = 0, output 5 C64
-        self.layer5 = nn.Conv2d(64, 128, kernel_size=3).to(dev4) # input 5, f = 3, stride = 1, pd = 0, output 3 C128
-        self.layer6 = nn.Linear(128 * 3 * 3, 128).to(dev5) # input 3*3*128,  output 128
-        self.layer7 = nn.Linear(128, 64).to(dev6) # 128,  output 64
-        self.layer8 = nn.Linear(64, 10).to(dev7)# input 64,  output 10
+        self.layer1 = nn.Conv2d(1, 32, kernel_size=3).to(dev0) # input 28, f = 3, stride = 1, pd = 0, output 26, C 32,  26*26*32
+        self.layer2 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev1)  # input 26, f = 2, stride = 2, pd = 0, output 12 C32, 12*12*32
+        self.layer3 = nn.Conv2d(32, 64, kernel_size=3).to(dev2) # input 12, f = 3, stride = 2, pd = 0, output 10 C64, 10*10*64
+        self.layer4 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev3) # input 12, f = 2, stride = 2, pd = 0, output 5 C64, 5*5*64
+        self.layer5 = nn.Conv2d(64, 128, kernel_size=3).to(dev4) # input 5, f = 3, stride = 1, pd = 0, output 3 C128, 128*3*3
+        self.layer6 = nn.Linear(128 * 3 * 3, 128).to(dev5) # input 3*3*128,  output 128, 128
+        self.layer7 = nn.Linear(128, 64).to(dev6) # 128,  output 64, 64
+        self.layer8 = nn.Linear(64, 10).to(dev7)# input 64,  output 10, 
         self.relu = nn.ReLU()  # ReLU activation
 
     def forward(self, x):
