@@ -78,6 +78,7 @@ model = ModelParallelCNN(dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7)
 
 # MNIST Dataset and DataLoader setup
 transform = transforms.Compose([
+    transforms.Resize(227),  # Resize images to fit AlexNet
     transforms.ToTensor(),
     transforms.Normalize((0.5,), (0.5,))
 ])
