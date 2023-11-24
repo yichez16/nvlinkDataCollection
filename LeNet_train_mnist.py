@@ -42,6 +42,8 @@ class ModelParallelCNN(nn.Module):
         return x
 
 
+
+
 # setup(4, 2)
 # dist.init_process_group("gloo", rank=4, world_size=2)
 dev0, dev1, dev2, dev3, dev4, dev5, dev6, dev7 = 0,1,3,2,7,6,4,5

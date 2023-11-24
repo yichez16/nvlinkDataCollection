@@ -12,63 +12,18 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 import torch.optim as optim
 
-class AlexNet(nn.Module):
-    def __init__(self, num_classes=10):
-        super(AlexNet, self).__init__()
-        self.features = nn.Sequential(
-            nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=5),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(64, 192, kernel_size=5, padding=2),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(192, 384, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(384, 256, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(256, 256, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-        )
-        self.avgpool = nn.AdaptiveAvgPool2d((6, 6))
-        self.classifier = nn.Sequential(
-            nn.Dropout(),
-            nn.Linear(256 * 6 * 6, 4096),
-            nn.ReLU(inplace=True),
-            nn.Dropout(),
-            nn.Linear(4096, 4096),
-            nn.ReLU(inplace=True),
-            nn.Linear(4096, num_classes),
-        )
-
-    def forward(self, x):
-        x = self.features(x)
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)  # Flatten the output
-        x = self.classifier(x)
-        return x
-
-
-
-
 class ModelParallelCNN(nn.Module):
     def __init__(self, dev0, dev1,dev2, dev3, dev4, dev5, dev6, dev7):
         super(ModelParallelCNN, self).__init__()
         # Define layers
-        self.layer1 = nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=5).to(dev0) # input 28,  output 28-5+2*2+1=28
-        self.layer2 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev1)  # input 28 -> 14
-        self.layer3 = nn.Conv2d(64, 192, kernel_size=5, padding=2).to(dev2) # input 14,  14 - 5 + 0 + 1 = 10 
-        self.layer4 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev3) # input 10, 5
-        self.layer5 = nn.Conv2d(192, 384, kernel_size=3, padding=1).to(dev4) 
-        self.layer6 = nn.Conv2d(384, 256, kernel_size=3, padding=1)
-        self.layer7 = nn.Conv2d(256, 256, kernel_size=3, padding=1)
-        self.layer8 = nn.MaxPool2d(kernel_size=2, stride=2)
-
-
-        # self.layer5 = nn.Linear(16 * 5 * 5, 120).to(dev4) # input 3*3*128,  output 128
-        # self.layer6 = nn.Linear(120, 84).to(dev5) # 128,  output 64
-        # self.layer7 = nn.Linear(84, 10).to(dev6)# input 64,  output 10
-        self.relu = nn.ReLU()  # ReLU activation
+        self.conv1 = nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=2).to(dev0)  # MNIST is 1 channel (grayscale)
+        self.conv2 = nn.Conv2d(64, 192, kernel_size=5, padding=2).to(dev1)
+        self.conv3 = nn.Conv2d(192, 384, kernel_size=3, padding=1).to(dev2)
+        self.conv4 = nn.Conv2d(384, 256, kernel_size=3, padding=1).to(dev3)
+        self.conv5 = nn.Conv2d(256, 256, kernel_size=3, padding=1).to(dev4)
+        self.fc1 = nn.Linear(256 * 3 * 3, 4096).to(dev5)  # Adjusted for MNIST size
+        self.fc2 = nn.Linear(4096, 4096).to(dev6)
+        self.fc3 = nn.Linear(4096, 10).to(dev7)  
 
     def forward(self, x):
         x = self.relu(self.layer1(x.to(dev0)))
@@ -76,10 +31,51 @@ class ModelParallelCNN(nn.Module):
         x = self.relu(self.layer3(x.to(dev2)))
         x = self.layer4(x.to(dev3))
         x = x.view(-1, 16 * 5 * 5)
-        x = self.relu(self.layer5(x.to(dev4)))z
+        x = self.relu(self.layer5(x.to(dev4)))
         x = self.relu(self.layer6(x.to(dev5)))
         x = self.layer7(x.to(dev6))
+
+        x = F.relu(self.conv1(x.to(dev0)))
+        x = F.max_pool2d(x.to(dev0), kernel_size=3, stride=2)
+        x = F.relu(self.conv2(x.to(dev1)))
+        x = F.max_pool2d(x.to(dev1), kernel_size=3, stride=2)
+        x = F.relu(self.conv3(x.to(dev2)))
+        x = F.relu(self.conv4(x.to(dev3)))
+        x = F.relu(self.conv5(x.to(dev4)))
+        x = F.max_pool2d(x.to(dev4), kernel_size=3, stride=2)
+        x = x.view(-1, 256 * 3 * 3)
+        x = F.relu(self.fc1(x.to(dev5)))
+        x = F.relu(self.fc2(x.to(dev6)))
+        x = self.fc3(x.to(dev7))
         return x
+
+
+# class AlexNetMNIST(nn.Module):
+#     def __init__(self):
+#         super(AlexNetMNIST, self).__init__()
+#         self.conv1 = nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=2)  # MNIST is 1 channel (grayscale)
+#         self.conv2 = nn.Conv2d(64, 192, kernel_size=5, padding=2)
+#         self.conv3 = nn.Conv2d(192, 384, kernel_size=3, padding=1)
+#         self.conv4 = nn.Conv2d(384, 256, kernel_size=3, padding=1)
+#         self.conv5 = nn.Conv2d(256, 256, kernel_size=3, padding=1)
+#         self.fc1 = nn.Linear(256 * 3 * 3, 4096)  # Adjusted for MNIST size
+#         self.fc2 = nn.Linear(4096, 4096)
+#         self.fc3 = nn.Linear(4096, 10)  # 10 classes for MNIST
+
+#     def forward(self, x):
+#         x = F.relu(self.conv1(x))
+#         x = F.max_pool2d(x, kernel_size=3, stride=2)
+#         x = F.relu(self.conv2(x))
+#         x = F.max_pool2d(x, kernel_size=3, stride=2)
+#         x = F.relu(self.conv3(x))
+#         x = F.relu(self.conv4(x))
+#         x = F.relu(self.conv5(x))
+#         x = F.max_pool2d(x, kernel_size=3, stride=2)
+#         x = x.view(-1, 256 * 3 * 3)
+#         x = F.relu(self.fc1(x))
+#         x = F.relu(self.fc2(x))
+#         x = self.fc3(x)
+#         return x
 
 
 # setup(4, 2)
