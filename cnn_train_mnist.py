@@ -26,9 +26,9 @@ class ModelParallelCNN(nn.Module):
         self.layer3 = nn.Conv2d(32, 64, kernel_size=3).to(dev2) # input 12, f = 3, stride = 2, pd = 0, output 10 C64, 10*10*64
         self.layer4 = nn.MaxPool2d(kernel_size=2, stride=2).to(dev3) # input 12, f = 2, stride = 2, pd = 0, output 5 C64, 5*5*64
         self.layer5 = nn.Conv2d(64, 128, kernel_size=3).to(dev4) # input 5, f = 3, stride = 1, pd = 0, output 3 C128, 128*3*3
-        self.layer6 = nn.Linear(128 * 3 * 3, 128).to(dev5) # input 3*3*128,  output 128, 128
-        self.layer7 = nn.Linear(128, 64).to(dev6) # 128,  output 64, 64
-        self.layer8 = nn.Linear(64, 10).to(dev7)# input 64,  output 10, 
+        self.layer6 = nn.Linear(128 * 3 * 3, 4096).to(dev5) # input 3*3*128,  output 128, 128
+        self.layer7 = nn.Linear(4096, 2048).to(dev6) # 128,  output 64, 64
+        self.layer8 = nn.Linear(2048, 10).to(dev7)# input 64,  output 10, 
         self.relu = nn.ReLU()  # ReLU activation
 
     def forward(self, x):
