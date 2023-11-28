@@ -4,7 +4,7 @@
 # rf,pme,apoa1rf,apoa1pme,apoa1ljpme,amber20-dhfr,amber20-cellulose
 
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> rf.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> rf.csv &
 
 # Wait for 5 seconds
 sleep 5
@@ -29,7 +29,7 @@ sleep 5
 
 
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> pme.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> pme.csv &
 
 # Wait for 5 seconds
 sleep 5
@@ -53,7 +53,7 @@ sleep 5
 ##########################################################
 
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> apoa1rf.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> apoa1rf.csv &
 
 # Wait for 5 seconds
 sleep 5
@@ -77,7 +77,7 @@ sleep 5
 ##########################################################
 
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> apoa1pme.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> apoa1pme.csv &
 
 # Wait for 5 seconds
 sleep 5
@@ -101,7 +101,7 @@ sleep 5
 ##########################################################
 
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> apoa1ljpme.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> apoa1ljpme.csv &
 
 # Wait for 5 seconds
 sleep 5
@@ -125,7 +125,7 @@ sleep 5
 ##########################################################
 
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> amber20-dhfr.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> amber20-dhfr.csv &
 
 # Wait for 5 seconds
 sleep 5
@@ -148,7 +148,7 @@ sleep 5
 
 ##########################################################
 # Start program A in the background
-sudo ./CUPTI_receiver 0 1 0 >> amber20-cellulose.csv &
+sudo ./CUPTI_receiver 0 1 0 nvlink_total_data_received >> amber20-cellulose.csv &
 
 # Wait for 5 seconds
 sleep 5
