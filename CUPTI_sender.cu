@@ -100,9 +100,9 @@ int main(int argc, char **argv) {
 
         // kernel execution
         // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
-        cudaProfilerStart();
+        // cudaProfilerStart();
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        cudaProfilerStop();
+        // cudaProfilerStop();
         // cudaDeviceSynchronize();
         
         // Stop time record
