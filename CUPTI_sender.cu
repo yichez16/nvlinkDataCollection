@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
     int *h_local, *h_remote;
     int *d_local, *d_remote;
     
-    struct timeval ts,te;
+    struct timeval ts,te, te1;
 
     local = atoi(argv[1]);
     remote = atoi(argv[2]);
@@ -102,15 +102,17 @@ int main(int argc, char **argv) {
         // Stop time record
         gettimeofday(&te,NULL);
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-
+        gettimeofday(&te1,NULL);
         // Print out start and stop time
         std::cout   << size
-        << "," 
-        << ts.tv_sec*1000000 + ts.tv_usec
-        << ","
-        << te.tv_sec*1000000 + te.tv_usec
+        // << "," 
+        // << ts.tv_sec*1000000 + ts.tv_usec
+        // << ","
+        // << te.tv_sec*1000000 + te.tv_usec
         << "," 
         << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        << "," 
+        << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         ;
         printf("\n"); 
     }
