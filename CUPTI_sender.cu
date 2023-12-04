@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 
     size_t size = sizeElement * sizeof(int);
 
-
+    
     // Allocate input vectors in host memory
     h_local = (int*)malloc(size);
     h_remote = (int*)malloc(size);
@@ -64,33 +64,37 @@ int main(int argc, char **argv) {
     initVec(h_local, sizeElement, 1);
     initVec(h_remote, sizeElement, 100);
 
-    // local GPU contains d_local
-    cudaSetDevice(local);
-    cudaMalloc((void**)&d_local, size);  
-
-    // remote GPU contains d_remote 
-    cudaSetDevice(remote);
-    cudaMalloc((void**)&d_remote, size);
-
-    // make sure nvlink connection exists between src and det device.
-    cudaSetDevice(local); // Set local device to be used for GPU executions.
-    cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
-
-    // Copy vector local from host memory to device memory
-    cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
-    cudaDeviceSynchronize();
-
-    // Copy vector remote from host memory to device memory
-    cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
-    cudaDeviceSynchronize();
-
-    
-    int blockSize = 1;
-    int gridSize = (sizeElement + blockSize - 1) / blockSize;
-
-    std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
-    
     for(int i = 0; i < 20; i++){
+
+
+
+        // local GPU contains d_local
+        cudaSetDevice(local);
+        cudaMalloc((void**)&d_local, size);  
+
+        // remote GPU contains d_remote 
+        cudaSetDevice(remote);
+        cudaMalloc((void**)&d_remote, size);
+
+        // make sure nvlink connection exists between src and det device.
+        cudaSetDevice(local); // Set local device to be used for GPU executions.
+        cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
+
+        // Copy vector local from host memory to device memory
+        cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
+        cudaDeviceSynchronize();
+
+        // Copy vector remote from host memory to device memory
+        cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
+        cudaDeviceSynchronize();
+
+        
+        int blockSize = 1;
+        int gridSize = (sizeElement + blockSize - 1) / blockSize;
+
+    // std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
+    
+
         // Start record time
         gettimeofday(&ts, NULL);  
 
@@ -115,6 +119,8 @@ int main(int argc, char **argv) {
         << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         ;
         printf("\n"); 
+        cudaFree(d_local);
+        cudaFree(d_remote);
     }
 
     cudaDeviceSynchronize();
