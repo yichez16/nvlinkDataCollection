@@ -144,7 +144,7 @@ int main(int argc, char **argv) {
     cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
     cudaDeviceSynchronize();
 
-    int blockSize = 2048;
+    int blockSize = 1;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
     
@@ -166,8 +166,8 @@ int main(int argc, char **argv) {
         // free(p);
         
         std::cout   << size
-        << "," 
-        << ts.tv_sec*1000000 + ts.tv_usec
+        // << "," 
+        // << ts.tv_sec*1000000 + ts.tv_usec
         << "," 
         << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
         ;
