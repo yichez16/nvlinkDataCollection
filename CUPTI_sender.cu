@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 
     size_t size = sizeElement * sizeof(int);
 
-    
+
     // Allocate input vectors in host memory
     h_local = (int*)malloc(size);
     h_remote = (int*)malloc(size);
@@ -100,7 +100,9 @@ int main(int argc, char **argv) {
 
         // kernel execution
         // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+        cudaProfilerStart();
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        cudaProfilerStop();
         // cudaDeviceSynchronize();
         
         // Stop time record
