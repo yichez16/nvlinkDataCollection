@@ -85,12 +85,12 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     
-    int blockSize = 1;
+    int blockSize = 128;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
     
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 20; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
