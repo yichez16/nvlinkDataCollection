@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     
-    int blockSize = 128;
+    int blockSize = 1;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
