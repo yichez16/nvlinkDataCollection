@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
         gettimeofday(&ts, NULL);  
 
         // kernel execution
-        cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+        cudaMemcpyPeer(d_local, local, d_remote, remote, size/50); // copy data from remote to local
         // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement/50); 
         // cudaDeviceSynchronize();
         
