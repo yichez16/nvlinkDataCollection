@@ -150,52 +150,51 @@ int main(int argc, char **argv) {
     
     // int threadsPerBlock = 256;
     // int blocksPerGrid = (sizeElement + threadsPerBlock - 1) / threadsPerBlock;
-    cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
-
+    
     // start cupti profiler   
     for(int j = 0; j < 10000000000; j++){
-        gettimeofday(&ts,NULL);  
+          
         // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
-        p->start();
-        // gettimeofday(&ts,NULL);
+        // p->start();
+        gettimeofday(&ts,NULL);
         
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-        p->stop();
+        // p->stop();
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
         // p->print_metric_values(std::cout,ts,te);
         // free(p);
         
-        // std::cout   << size
-        // // << "," 
-        // // << ts.tv_sec*1000000 + ts.tv_usec
+        std::cout   << size
         // << "," 
-        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        // ;
-        // printf("\n");
+        // << ts.tv_sec*1000000 + ts.tv_usec
+        << "," 
+        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        ;
+        printf("\n");
 
-        // cudaFree(d_local);
-        // cudaFree(d_remote);
+        cudaFree(d_local);
+        cudaFree(d_remote);
 
-        //     // local GPU contains d_local
-        // cudaSetDevice(local);
-        // cudaMalloc((void**)&d_local, size);  
+            // local GPU contains d_local
+        cudaSetDevice(local);
+        cudaMalloc((void**)&d_local, size);  
 
-        // // remote GPU contains d_remote 
-        // cudaSetDevice(remote);
-        // cudaMalloc((void**)&d_remote, size);
+        // remote GPU contains d_remote 
+        cudaSetDevice(remote);
+        cudaMalloc((void**)&d_remote, size);
 
-        // // make sure nvlink connection exists between src and det device.
-        // cudaSetDevice(local); // Set local device to be used for GPU executions.
-        // cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
+        // make sure nvlink connection exists between src and det device.
+        cudaSetDevice(local); // Set local device to be used for GPU executions.
+        cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
 
-        // // Copy vector local from host memory to device memory
-        // cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
-        // cudaDeviceSynchronize();
+        // Copy vector local from host memory to device memory
+        cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
+        cudaDeviceSynchronize();
 
-        // // Copy vector remote from host memory to device memory
-        // cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
-        // cudaDeviceSynchronize();
+        // Copy vector remote from host memory to device memory
+        cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
+        cudaDeviceSynchronize();
 
     }
 
