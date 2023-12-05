@@ -164,6 +164,8 @@ int main(int argc, char **argv) {
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
         p->print_metric_values(std::cout,ts,te);
+        cudaDeviceSynchronize();
+
 
     }
     free(p);
