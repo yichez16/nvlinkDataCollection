@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
     remote = atoi(argv[2]);
     profile = atoi(argv[3]);
     char *ctr_num = argv[4];
-    sizeElement = argv[5]; // Transfer size is 256 bytes = 1 nvlink packet
+    sizeElement = atoi(argv[5]); // Transfer size is 256 bytes = 1 nvlink packet
     // sizeElement = 1048576; // Transfer size is 4 MB
     // printf("%d\n", sizeElement);
 
