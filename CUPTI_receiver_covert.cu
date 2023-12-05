@@ -156,7 +156,7 @@ int main(int argc, char **argv) {
 
     for(int j = 0; j < 10000000000; j++){
           
-        p->start();
+        // p->start();
         gettimeofday(&ts,NULL);
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
         p->stop();
