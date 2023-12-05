@@ -173,6 +173,9 @@ int main(int argc, char **argv) {
         ;
         printf("\n");
 
+        cudaFree(d_local);
+        cudaFree(d_remote);
+
     }
 
 
