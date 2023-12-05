@@ -103,19 +103,8 @@ int main(int argc, char **argv) {
         gettimeofday(&te,NULL);
         // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 0); 
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        gettimeofday(&te1,NULL);
-        // Print out start and stop time
-        std::cout   << size
-        // << "," 
-        // << ts.tv_sec*1000000 + ts.tv_usec
-        // << ","
-        // << te.tv_sec*1000000 + te.tv_usec
-        << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        << "," 
-        << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
-        ;
-        printf("\n"); 
+        
+
 
 
         cudaFree(d_local);
@@ -140,6 +129,21 @@ int main(int argc, char **argv) {
         // Copy vector remote from host memory to device memory
         cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
         cudaDeviceSynchronize();
+
+
+        gettimeofday(&te1,NULL);
+        // Print out start and stop time
+        std::cout   << size
+        // << "," 
+        // << ts.tv_sec*1000000 + ts.tv_usec
+        // << ","
+        // << te.tv_sec*1000000 + te.tv_usec
+        << "," 
+        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        << "," 
+        << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
+        ;
+        printf("\n"); 
     }
 
 
