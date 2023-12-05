@@ -97,6 +97,7 @@ int main(int argc, char **argv) {
         // kernel execution
         // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        cudaDeviceSynchronize();
         
         // Stop time record
         gettimeofday(&te,NULL);
@@ -116,8 +117,6 @@ int main(int argc, char **argv) {
         << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         ;
         printf("\n"); 
-        cudaDeviceSynchronize();
-
     }
 
 
