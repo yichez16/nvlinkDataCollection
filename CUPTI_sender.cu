@@ -124,8 +124,7 @@ int main(int argc, char **argv) {
  
         cudaFree(d_local);
         cudaFree(d_remote);
-        free(h_local);
-        free(h_remote);
+
     }
 
 
