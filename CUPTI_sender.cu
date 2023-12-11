@@ -64,15 +64,15 @@ int main(int argc, char **argv) {
     initVec(h_local, sizeElement, 1);
     initVec(h_remote, sizeElement, 100);
 
+    // local GPU contains d_local
+    cudaSetDevice(local);
+    cudaMalloc((void**)&d_local, size);  
+
+    // remote GPU contains d_remote 
+    cudaSetDevice(remote);
+    cudaMalloc((void**)&d_remote, size);
 
     for(int i = 0; i < 50; i++){
-        // local GPU contains d_local
-        cudaSetDevice(local);
-        cudaMalloc((void**)&d_local, size);  
-
-        // remote GPU contains d_remote 
-        cudaSetDevice(remote);
-        cudaMalloc((void**)&d_remote, size);
 
         // make sure nvlink connection exists between src and det device.
         cudaSetDevice(local); // Set local device to be used for GPU executions.
