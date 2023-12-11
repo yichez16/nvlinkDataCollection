@@ -107,28 +107,28 @@ int main(int argc, char **argv) {
 
 
 
-        cudaFree(d_local);
-        cudaFree(d_remote);
+        // cudaFree(d_local);
+        // cudaFree(d_remote);
 
-            // local GPU contains d_local
-        cudaSetDevice(local);
-        cudaMalloc((void**)&d_local, size);  
+        //     // local GPU contains d_local
+        // cudaSetDevice(local);
+        // cudaMalloc((void**)&d_local, size);  
 
-        // remote GPU contains d_remote 
-        cudaSetDevice(remote);
-        cudaMalloc((void**)&d_remote, size);
+        // // remote GPU contains d_remote 
+        // cudaSetDevice(remote);
+        // cudaMalloc((void**)&d_remote, size);
 
-        // make sure nvlink connection exists between src and det device.
-        cudaSetDevice(local); // Set local device to be used for GPU executions.
-        cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
+        // // // make sure nvlink connection exists between src and det device.
+        // cudaSetDevice(local); // Set local device to be used for GPU executions.
+        // cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
 
-        // Copy vector local from host memory to device memory
-        cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
-        cudaDeviceSynchronize();
+        // // Copy vector local from host memory to device memory
+        // cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
+        // // cudaDeviceSynchronize();
 
-        // Copy vector remote from host memory to device memory
-        cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
-        cudaDeviceSynchronize();
+        // // Copy vector remote from host memory to device memory
+        // cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
+        // cudaDeviceSynchronize();
 
 
         gettimeofday(&te1,NULL);
