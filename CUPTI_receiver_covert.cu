@@ -151,22 +151,21 @@ int main(int argc, char **argv) {
     // int threadsPerBlock = 256;
     // int blocksPerGrid = (sizeElement + threadsPerBlock - 1) / threadsPerBlock;
     
+
     // start cupti profiler   
     cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
     for(int j = 0; j < 10000000000; j++){
           
-        // p->start();
+        p->start();
         gettimeofday(&ts,NULL);
+        
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-        cudaDeviceSynchronize();
-
         p->stop();
-
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
         // p->print_metric_values(std::cout,ts,te);
-        // cudaDeviceSynchronize();
+
         std::cout   << size
         // << "," 
         // << ts.tv_sec*1000000 + ts.tv_usec
@@ -179,7 +178,6 @@ int main(int argc, char **argv) {
 
     }
     free(p);
-
 
 
     // Copy back to host memory 
