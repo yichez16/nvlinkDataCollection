@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 
     cudaDeviceSynchronize();
 
-    for(int i = 0; i < 50; i++){
+    for(int i = 0; i < 10; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
 
-        
+
         cudaDeviceSynchronize();
 
         gettimeofday(&te1,NULL);
