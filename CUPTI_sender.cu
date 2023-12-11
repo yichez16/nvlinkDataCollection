@@ -90,21 +90,28 @@ int main(int argc, char **argv) {
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
     
+
+    cudaDeviceSynchronize();
+
     for(int i = 0; i < 50; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
+
         // kernel execution
         // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        
+        cudaDeviceSynchronize();
+
         // Stop time record
         gettimeofday(&te,NULL);
+
+
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+
         
         cudaDeviceSynchronize();
 
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        
         gettimeofday(&te1,NULL);
         // Print out start and stop time
         std::cout   << size
