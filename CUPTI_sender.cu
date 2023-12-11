@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
 
     
     int blockSize = 1;
-    int gridSize = (sizeElement + blockSize - 1) / blockSize;
+    int gridSize = 1;
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
     
