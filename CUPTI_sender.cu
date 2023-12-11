@@ -90,14 +90,24 @@ int main(int argc, char **argv) {
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
     
+
+
     for(int i = 0; i < 10; i++){
+        
+        // start cupti profiler   
+        cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
         // Start record time
+        p->start();
+
         gettimeofday(&ts, NULL);  
 
         // kernel execution
         // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
+
+        p->stop();
+
         
         // Stop time record
         gettimeofday(&te,NULL);
@@ -117,6 +127,9 @@ int main(int argc, char **argv) {
         << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         ;
         printf("\n"); 
+
+        free(p);
+
     }
 
 
