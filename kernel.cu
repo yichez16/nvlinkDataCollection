@@ -179,6 +179,9 @@ test_nvlink(int *src, int *dst, int numElements){
 
 }
 
+
+
+
 __global__ void 
 matMul(float* A, float* B, float* C, int numARows, int numACols, int numBCols) {
     // compute global thread coordinates
