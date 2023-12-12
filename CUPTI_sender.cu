@@ -94,7 +94,7 @@ int main(int argc, char **argv) {
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
     
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 10000; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
