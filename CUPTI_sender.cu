@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     
-    int blockSize = 1024;
+    int blockSize = 1;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
 
