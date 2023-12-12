@@ -171,15 +171,15 @@ int main(int argc, char **argv) {
         // p->print_event_values(std::cout,ts,te);
         p->print_metric_values(std::cout,ts,te);
 
-        std::cout   << size
+        // std::cout   << size
+        // // << "," 
+        // // << ts.tv_sec*1000000 + ts.tv_usec
+        // // << ","
+        // // << te.tv_sec*1000000 + te.tv_usec
         // << "," 
-        // << ts.tv_sec*1000000 + ts.tv_usec
-        // << ","
-        // << te.tv_sec*1000000 + te.tv_usec
-        << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        ;
-        printf("\n"); 
+        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        // ;
+        // printf("\n"); 
         free(p);
 
     }
