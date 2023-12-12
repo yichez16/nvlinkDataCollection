@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
     // << te.tv_sec*1000000 + te.tv_usec
     ;
     printf("\n");
-    for(int i = 0; i < 10000; i++){
+    for(int i = 0; i < 100; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
