@@ -88,8 +88,8 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     
-    int blockSize = 128;
-    int gridSize = (sizeElement + blockSize - 1) / blockSize;
+    int blockSize = 1;
+    int gridSize = 1;
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
     
@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
         gettimeofday(&ts, NULL);  
 
         // kernel execution
-        // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+        cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
         
@@ -121,6 +121,8 @@ int main(int argc, char **argv) {
         << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         ;
         printf("\n"); 
+        cudaDeviceSynchronize();
+
     }
 
 
