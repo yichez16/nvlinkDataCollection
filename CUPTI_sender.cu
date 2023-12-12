@@ -73,8 +73,11 @@ int main(int argc, char **argv) {
     cudaMalloc((void**)&d_remote, size);
 
     // make sure nvlink connection exists between src and det device.
+    cudaSetDevice(remote); // Set local device to be used for GPU executions.
+    cudaDeviceEnablePeerAccess(local, 0);  // Enables direct access to memory allocations on a peer device.
     cudaSetDevice(local); // Set local device to be used for GPU executions.
     cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
+
 
     // Copy vector local from host memory to device memory
     cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
@@ -97,39 +100,13 @@ int main(int argc, char **argv) {
         // kernel execution
         // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        // cudaDeviceSynchronize();
+        cudaDeviceSynchronize();
         
         // Stop time record
         gettimeofday(&te,NULL);
         // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 0); 
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         
-
-
-
-        // cudaFree(d_local);
-        // cudaFree(d_remote);
-
-        //     // local GPU contains d_local
-        // cudaSetDevice(local);
-        // cudaMalloc((void**)&d_local, size);  
-
-        // // remote GPU contains d_remote 
-        // cudaSetDevice(remote);
-        // cudaMalloc((void**)&d_remote, size);
-
-        // // // make sure nvlink connection exists between src and det device.
-        // cudaSetDevice(local); // Set local device to be used for GPU executions.
-        // cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
-
-        // // Copy vector local from host memory to device memory
-        // cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
-        // // cudaDeviceSynchronize();
-
-        // // Copy vector remote from host memory to device memory
-        // cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
-        // cudaDeviceSynchronize();
-
 
         gettimeofday(&te1,NULL);
         // Print out start and stop time
