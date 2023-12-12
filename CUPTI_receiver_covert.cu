@@ -133,6 +133,8 @@ int main(int argc, char **argv) {
     cudaMalloc((void**)&d_remote, size);
 
     // make sure nvlink connection exists between src and det device.
+    cudaSetDevice(remote); // Set local device to be used for GPU executions.
+    cudaDeviceEnablePeerAccess(local, 0);  // Enables direct access to memory allocations on a peer device.
     cudaSetDevice(local); // Set local device to be used for GPU executions.
     cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
 
@@ -162,6 +164,8 @@ int main(int argc, char **argv) {
         
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
         p->stop();
+        cudaDeviceSynchronize();
+
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
         // p->print_metric_values(std::cout,ts,te);
