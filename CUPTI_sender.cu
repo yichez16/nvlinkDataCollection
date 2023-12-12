@@ -93,7 +93,14 @@ int main(int argc, char **argv) {
 
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
-    
+    gettimeofday(&ts, NULL);  
+    std::cout   << "start time"
+    << "," 
+    << ts.tv_sec*1000000 + ts.tv_usec
+    // << ","
+    // << te.tv_sec*1000000 + te.tv_usec
+    ;
+    printf("\n");
     for(int i = 0; i < 10000; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
@@ -125,6 +132,14 @@ int main(int argc, char **argv) {
         printf("\n"); 
 
     }
+    gettimeofday(&te, NULL);  
+    std::cout   << "end time"
+    << "," 
+    << te.tv_sec*1000000 + te.tv_usec
+    // << ","
+    // << te.tv_sec*1000000 + te.tv_usec
+    ;
+    printf("\n"); 
 
 
 
