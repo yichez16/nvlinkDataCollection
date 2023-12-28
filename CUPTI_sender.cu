@@ -222,7 +222,7 @@ int main(int argc, char **argv) {
         cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
 
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 100000); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-        // p->stop();
+        p->stop();
         cudaDeviceSynchronize();
 
         gettimeofday(&te,NULL);
