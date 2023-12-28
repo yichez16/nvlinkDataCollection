@@ -64,10 +64,6 @@ int main(int argc, char **argv) {
 	// Returns a handle to a compute device.
 
     // define ctrs to profile
-	#if PROFILE_ALL_EVENTS_METRICS
-	const auto event_names = cupti_profiler::available_events(device);
-	const auto metric_names = cupti_profiler::available_metrics(device);
-	#else
 	vector<string> event_names {        
                
 	};
