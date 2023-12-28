@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
     // start cupti profiler   
     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
-    for(int j = 0; j < 10000000000; j++){
+    for(int j = 0; j < 100000; j++){
         // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
           
