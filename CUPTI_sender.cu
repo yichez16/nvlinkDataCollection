@@ -135,7 +135,7 @@ int main(int argc, char **argv) {
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
 
-    // std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
+    std::this_thread::sleep_for(std::chrono::seconds(1));   // wait for synchronization
 
     // synchronization: trojan send data through nvlink and let spy know ready to send
 
