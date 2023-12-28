@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
     ;
     // synchronization 1000 consecutive "1"
     printf("\n");
-    for(int i = 0; i < 10000; i++){
+    for(int i = 0; i < 1000; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
