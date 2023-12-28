@@ -6,6 +6,8 @@ do
     # Wait 
     sleep 1
     ./CUPTI_sender 0 1 10000 10 > covert_sender_$i.csv
+    # kill receiver
+    sudo pkill -f "./CUPTI_receiver_covert"
 
 done
 
