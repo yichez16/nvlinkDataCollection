@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
         // Stop time record
         gettimeofday(&te,NULL);
         // test_nvlink <<<gridSize, blockSize>>>(d_local, d_local, sizeElement); 
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        std::this_thread::sleep_for(std::chrono::nanoseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         cudaDeviceSynchronize();
 
 
