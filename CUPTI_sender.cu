@@ -62,10 +62,17 @@ int main(int argc, char **argv) {
 	// Initialize the CUDA driver API Initializes the driver API and must be called before any other function from the driver API in the current process. Currently, the Flags parameter must be 0. If cuInit() has not been called, any function from the driver API will return CUDA_ERROR_NOT_INITIALIZED.
 	DRIVER_API_CALL(cuDeviceGet(&device, local));
 	// Returns a handle to a compute device.
+
     // define ctrs to profile
-	vector<string> event_names {             
+	#if PROFILE_ALL_EVENTS_METRICS
+	const auto event_names = cupti_profiler::available_events(device);
+	const auto metric_names = cupti_profiler::available_metrics(device);
+	#else
+	vector<string> event_names {        
+               
 	};
 	vector<string> metric_names {
+    // ctr_num
 	// "l2_read_transactions",// works
 	//"nvlink_data_receive_efficiency",
 	// "nvlink_data_transmission_efficiency",
