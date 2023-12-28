@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
     // start cupti profiler   
     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
-    for(int j = 0; j < 100000; j++){
+    for(int j = 0; j < 10000000000; j++){
         // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
           
@@ -165,7 +165,7 @@ int main(int argc, char **argv) {
         gettimeofday(&ts,NULL);
         cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
 
-        // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
         // p->stop();
         cudaDeviceSynchronize();
 
