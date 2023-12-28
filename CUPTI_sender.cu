@@ -93,6 +93,8 @@ int main(int argc, char **argv) {
 
 						
 	};
+    CUcontext context;
+	cuCtxCreate(&context, 0, local); // context is created on device # profile
 
     // Allocate input vectors in host memory
     h_local = (int*)malloc(size);
