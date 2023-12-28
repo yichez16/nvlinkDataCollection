@@ -139,7 +139,7 @@ int main(int argc, char **argv) {
 
     // synchronization: trojan send data through nvlink and let spy know ready to send
 
-    for(int j = 0; j < 10; j++){
+    for(int j = 0; j < 5; j++){
         cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
             
@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
     ;
     // synchronization 1000 consecutive "1"
     printf("\n");
-    for(int i = 0; i < 10000; i++){
+    for(int i = 0; i < 1000; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
@@ -213,7 +213,7 @@ int main(int argc, char **argv) {
 
 
     // Emd of communication
-    for(int j = 0; j < 10; j++){
+    for(int j = 0; j < 5; j++){
         cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
             
