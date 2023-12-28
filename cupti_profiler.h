@@ -704,7 +704,7 @@ namespace detail {
               << "," << te.tv_sec*1000000 + te.tv_usec
               << ") ";
           else s  << "," << m_metric_names[i]
-                  // << "," << ts.tv_sec*1000000 + ts.tv_usec
+                  << ts.tv_sec*1000000 + ts.tv_usec
                   // << "," << te.tv_sec*1000000 + te.tv_usec
                   << "," << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
                   // << "," << (te.tv_sec - t0.tv_sec) * 1000000 + (te.tv_usec - t0.tv_usec)

@@ -150,10 +150,9 @@ int main(int argc, char **argv) {
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
     
-    // int threadsPerBlock = 256;
-    // int blocksPerGrid = (sizeElement + threadsPerBlock - 1) / threadsPerBlock;
+    // synchronization: spy sigbal back to trojan by sending same size of data 
+    // and let trojan know it is ready to receive
     
-
     // start cupti profiler   
     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 

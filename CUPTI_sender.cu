@@ -93,6 +93,32 @@ int main(int argc, char **argv) {
 
 
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
+
+    // synchronization: trojan send data through nvlink and let spy know ready to send
+
+    for(int j = 0; j < 100; j++){
+        cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
+
+            
+        p->start();
+        gettimeofday(&ts,NULL);
+        cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 100000); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
+        // p->stop();
+        cudaDeviceSynchronize();
+
+        gettimeofday(&te,NULL);
+        // p->print_event_values(std::cout,ts,te);
+        p->print_metric_values(std::cout,ts,te);
+
+        printf("\n"); 
+        free(p);
+
+    }
+    
+
+    
     gettimeofday(&ts, NULL);  
     std::cout   << "start time"
     << "," 
@@ -143,8 +169,27 @@ int main(int argc, char **argv) {
     printf("\n"); 
 
 
+    // Emd of communication
+    for(int j = 0; j < 100; j++){
+        cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
+            
+        p->start();
+        gettimeofday(&ts,NULL);
+        cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
 
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 100000); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
+        // p->stop();
+        cudaDeviceSynchronize();
+
+        gettimeofday(&te,NULL);
+        // p->print_event_values(std::cout,ts,te);
+        p->print_metric_values(std::cout,ts,te);
+
+        printf("\n"); 
+        free(p);
+
+    }    
 
     // double milliseconds = (1000000.0*(t2.tv_sec-t1.tv_sec) + t2.tv_usec-t1.tv_usec)/1000.0;
 
