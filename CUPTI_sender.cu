@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
     ;
     // synchronization 1000 consecutive "1"
     printf("\n");
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 10; i++){
         // Start record time
         gettimeofday(&ts, NULL);  
 
@@ -213,7 +213,7 @@ int main(int argc, char **argv) {
 
 
     // Emd of communication
-    for(int j = 0; j < 100; j++){
+    for(int j = 0; j < 10; j++){
         cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
             
