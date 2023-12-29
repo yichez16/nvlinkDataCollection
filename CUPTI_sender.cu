@@ -43,6 +43,10 @@ int main(int argc, char **argv) {
     int time2sleep = 1000;
     int *h_local, *h_remote;
     int *d_local, *d_remote;
+    // Create CUDA events
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
     
     struct timeval ts,te, te1, te2, te3 ;
 
@@ -175,53 +179,65 @@ int main(int argc, char **argv) {
 
     for(int i = 0; i < 10000; i++){
 
-        // Start record time
-        gettimeofday(&ts, NULL);  
+        // Record the start event
+        cudaEventRecord(start, 0);
 
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
 
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        cudaDeviceSynchronize();
+        // Record the stop event
+        cudaEventRecord(stop, 0);
+
+        // Wait for the stop event to complete
+        cudaEventSynchronize(stop);
+
+        // Calculate the elapsed time in milliseconds
+        float milliseconds = 0;
+        cudaEventElapsedTime(&milliseconds, start, stop);
+
+        
+
+        // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        // cudaDeviceSynchronize();
 
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
-        // gettimeofday(&te, NULL);  
 
         
         // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
-        // gettimeofday(&te1, NULL);  
+         
         // cudaDeviceSynchronize();
 
 
+        gettimeofday(&ts, NULL);  
 
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-
-        // gettimeofday(&te2, NULL);  
+        gettimeofday(&te, NULL);  
 
         // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
 
-        // gettimeofday(&te3, NULL);  
+        // gettimeofday(&te1, NULL); 
 
 
 
 
 
-        // // Print out start and stop time
-        // std::cout   << size
-        // << "," 
-        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        // << "," 
+
+        // Print out start and stop time
+        std::cout   
+        << milliseconds * 1000 
+        << "," 
+        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        << "," 
         // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         // << "," 
         // << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
         // << "," 
         // << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
-        // ;
-        // printf("\n"); 
+        ;
+        printf("\n"); 
 
         cudaDeviceSynchronize();
 
