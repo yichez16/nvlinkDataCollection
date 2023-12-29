@@ -178,7 +178,7 @@ int main(int argc, char **argv) {
         // Start record time
 
         // kernel execution
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement/2); 
         cudaDeviceSynchronize();
 
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
