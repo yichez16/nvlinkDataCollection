@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
     sizeElement = atoi(argv[3]);
     time2sleep = atoi(argv[4]);
 
-    printf("%d\n", sizeElement);
+    // printf("%d\n", sizeElement);
 
     size_t size = sizeElement * sizeof(int);
 
@@ -163,8 +163,7 @@ int main(int argc, char **argv) {
 
     
     gettimeofday(&ts, NULL);  
-    std::cout   << "start time"
-    << "," 
+    std::cout   
     << ts.tv_sec*1000000 + ts.tv_usec
     // << ","
     // << te.tv_sec*1000000 + te.tv_usec
@@ -225,8 +224,7 @@ int main(int argc, char **argv) {
 
     }
     gettimeofday(&te, NULL);  
-    std::cout   << "end time"
-    << "," 
+    std::cout   
     << te.tv_sec*1000000 + te.tv_usec
     // << ","
     // << te.tv_sec*1000000 + te.tv_usec
@@ -266,9 +264,9 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
    
     double mb = sizeElement * sizeof(int) / (double)1e6;
-    printf("Size of data transfer (MB): %f\n", mb);
-    printf("Vector V_local (original value = 1): %d\n",h_local[sizeElement-1]);
-    printf("Vector V_remote (original value = 100): %d\n",h_remote[sizeElement-1]);
+    // printf("Size of data transfer (MB): %f\n", mb);
+    // printf("Vector V_local (original value = 1): %d\n",h_local[sizeElement-1]);
+    // printf("Vector V_remote (original value = 100): %d\n",h_remote[sizeElement-1]);
 
 
 
