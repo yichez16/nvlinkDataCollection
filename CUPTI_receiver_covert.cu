@@ -157,20 +157,24 @@ int main(int argc, char **argv) {
     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
     for(int j = 0; j < 10000000000; j++){
-        // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
-          
-        // p->start();
         gettimeofday(&ts,NULL);
-        // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+        // Record the start event
+        cudaEventRecord(start, 0);
 
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-        // p->stop();
+        // kernel execution
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
 
-        gettimeofday(&te,NULL);
-        // p->print_event_values(std::cout,ts,te);
-        // p->print_metric_values(std::cout,ts,te);
+        // Record the stop event
+        cudaEventRecord(stop, 0);
+
+        // Wait for the stop event to complete
+        cudaEventSynchronize(stop);
+
+        // Calculate the elapsed time in milliseconds
+        float milliseconds = 0;
+        cudaEventElapsedTime(&milliseconds, start, stop);
 
         std::cout   << size
         << "," 
@@ -178,7 +182,7 @@ int main(int argc, char **argv) {
         // << ","
         // << te.tv_sec*1000000 + te.tv_usec
         << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        << milliseconds * 1000 
         ;
         printf("\n"); 
         
