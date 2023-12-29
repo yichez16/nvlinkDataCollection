@@ -177,7 +177,7 @@ int main(int argc, char **argv) {
         cudaEventSynchronize(stop);
 
         // Calculate the elapsed time in milliseconds
-        float milliseconds = 0;
+        float milliseconds;
         cudaEventElapsedTime(&milliseconds, start, stop);
 
         std::cout   << size
