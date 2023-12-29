@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
     int local = 0; 
     int remote = 1;
     int sizeElement = 64;
-    float time2sleep = 1000;
+    int time2sleep = 1000;
     int *h_local, *h_remote;
     int *d_local, *d_remote;
     
@@ -181,13 +181,11 @@ int main(int argc, char **argv) {
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
 
-        // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        // cudaDeviceSynchronize();
-
-
-        sleepKernel <<<gridSize, blockSize>>>(time2sleep); 
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
+
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
+        // gettimeofday(&te, NULL);  
 
         
         // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
@@ -196,12 +194,10 @@ int main(int argc, char **argv) {
         // cudaDeviceSynchronize();
 
 
-        // gettimeofday(&ts, NULL);  
 
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        // gettimeofday(&te, NULL);  
-
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
 
         // gettimeofday(&te2, NULL);  
 
@@ -226,7 +222,7 @@ int main(int argc, char **argv) {
         // ;
         // printf("\n"); 
 
-        // cudaDeviceSynchronize();
+        cudaDeviceSynchronize();
 
 
     }
