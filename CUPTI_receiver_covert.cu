@@ -43,6 +43,10 @@ int main(int argc, char **argv) {
     int sizeElement;
     int *h_local, *h_remote;
     int *d_local, *d_remote;
+    // Create CUDA events
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
     
     struct timeval ts,te;
 
