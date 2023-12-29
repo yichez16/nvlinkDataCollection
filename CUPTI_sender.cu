@@ -226,18 +226,18 @@ int main(int argc, char **argv) {
 
 
         // Print out start and stop time
-        std::cout   
-        << milliseconds * 1000 
-        << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        << "," 
-        // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
+        // std::cout   
+        // << milliseconds * 1000 
         // << "," 
-        // << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
+        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
         // << "," 
-        // << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
-        ;
-        printf("\n"); 
+        // // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
+        // // << "," 
+        // // << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
+        // // << "," 
+        // // << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
+        // ;
+        // printf("\n"); 
 
         cudaDeviceSynchronize();
 

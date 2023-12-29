@@ -179,7 +179,8 @@ int main(int argc, char **argv) {
         float milliseconds;
         cudaEventElapsedTime(&milliseconds, start, stop);
 
-        std::cout   
+        std::cout   << size
+        << ","
         << ts.tv_sec*1000000 + ts.tv_usec
         // << ","
         // << te.tv_sec*1000000 + te.tv_usec
