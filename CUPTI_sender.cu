@@ -178,12 +178,12 @@ int main(int argc, char **argv) {
         // Start record time
 
         // kernel execution
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        std::this_thread::sleep_for(std::chrono::microseconds(10)); 
+        test_nvlink <<<1, 1>>>(d_remote, d_local, sizeElement); 
+        // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
         cudaDeviceSynchronize();
 
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        std::this_thread::sleep_for(std::chrono::microseconds(10)); 
+        test_nvlink <<<1, 1>>>(d_remote, d_local, sizeElement); 
+        // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
         cudaDeviceSynchronize();
 
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
