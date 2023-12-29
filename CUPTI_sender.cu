@@ -192,6 +192,16 @@ int main(int argc, char **argv) {
         // Wait for the stop event to complete
         cudaEventSynchronize(stop);
 
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        cudaDeviceSynchronize();
+        
+        // Record the stop event
+        cudaEventRecord(stop, 0);
+
+        // Wait for the stop event to complete
+        cudaEventSynchronize(stop);
+
+
         // Calculate the elapsed time in milliseconds
         float milliseconds = 0;
         cudaEventElapsedTime(&milliseconds, start, stop);
@@ -216,9 +226,11 @@ int main(int argc, char **argv) {
         
         gettimeofday(&te, NULL);  
 
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        gettimeofday(&ts, NULL);  
 
-        // gettimeofday(&te1, NULL); 
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        
+        gettimeofday(&te, NULL);  
 
 
 
