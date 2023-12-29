@@ -162,7 +162,6 @@ int main(int argc, char **argv) {
 
     while(1){
 
-        gettimeofday(&ts,NULL);
         // Record the start event
         cudaEventRecord(start, 0);
 
@@ -188,6 +187,10 @@ int main(int argc, char **argv) {
         << milliseconds * 1000 
         ;
         printf("\n"); 
+
+        gettimeofday(&ts, NULL);  
+
+        std::this_thread::sleep_for(std::chrono::microseconds(1));
 
         cudaDeviceSynchronize();
 
