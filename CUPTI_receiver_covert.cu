@@ -166,7 +166,6 @@ int main(int argc, char **argv) {
 
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
         // p->stop();
-        cudaDeviceSynchronize();
 
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
@@ -181,6 +180,9 @@ int main(int argc, char **argv) {
         << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
         ;
         printf("\n"); 
+
+        cudaDeviceSynchronize();
+
         
 
     }

@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
 
     // Copy vector remote from host memory to device memory
     cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_remote,_1 h_remote, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_remote_1, h_remote, size, cudaMemcpyHostToDevice);
     cudaDeviceSynchronize();
 
     
