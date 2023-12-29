@@ -43,6 +43,7 @@ int main(int argc, char **argv) {
     int time2sleep = 1000;
     int *h_local, *h_remote;
     int *d_local, *d_remote;
+    int *d_local_1, *d_remote_1;
     
     struct timeval ts,te, te1, te2, te3 ;
 
@@ -110,10 +111,13 @@ int main(int argc, char **argv) {
     // local GPU contains d_local
     cudaSetDevice(local);
     cudaMalloc((void**)&d_local, size);  
+    cudaMalloc((void**)&d_local_1, size);  
 
     // remote GPU contains d_remote 
     cudaSetDevice(remote);
     cudaMalloc((void**)&d_remote, size);
+    cudaMalloc((void**)&d_remote_1, size);
+
 
     // make sure nvlink connection exists between src and det device.
     cudaSetDevice(remote); // Set local device to be used for GPU executions.
@@ -124,10 +128,12 @@ int main(int argc, char **argv) {
 
     // Copy vector local from host memory to device memory
     cudaMemcpy(d_local, h_local, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_local_1, h_local, size, cudaMemcpyHostToDevice);
     cudaDeviceSynchronize();
 
     // Copy vector remote from host memory to device memory
     cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_remote,_1 h_remote, size, cudaMemcpyHostToDevice);
     cudaDeviceSynchronize();
 
     
@@ -182,7 +188,7 @@ int main(int argc, char **argv) {
         // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
         cudaDeviceSynchronize();
 
-        test_nvlink <<<1, 1>>>(d_remote, d_local, sizeElement); 
+        test_nvlink <<<1, 1>>>(d_remote_1, d_local_1, sizeElement); 
         // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
         cudaDeviceSynchronize();
 
