@@ -180,8 +180,7 @@ int main(int argc, char **argv) {
         float milliseconds;
         cudaEventElapsedTime(&milliseconds, start, stop);
 
-        std::cout   << size
-        << "," 
+        std::cout   
         << ts.tv_sec*1000000 + ts.tv_usec
         // << ","
         // << te.tv_sec*1000000 + te.tv_usec
@@ -189,6 +188,9 @@ int main(int argc, char **argv) {
         << milliseconds * 1000 
         ;
         printf("\n"); 
+
+        cudaDeviceSynchronize();
+
         
         
 
