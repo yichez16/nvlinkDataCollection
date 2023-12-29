@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
 
     cudaDeviceSynchronize();
 
-    for(int i = 0; i < 10000; i++){
+    for(int i = 0; i < 10; i++){
 
         // Start record time
 
@@ -195,11 +195,22 @@ int main(int argc, char **argv) {
         // gettimeofday(&te1, NULL);  
         // cudaDeviceSynchronize();
 
+        auto start = std::chrono::high_resolution_clock::now();
+        auto end = start + std::chrono::microseconds(time2sleep);
+        while (std::chrono::high_resolution_clock::now() < end) {
+            // Busy-wait
+        }
+
+        auto start = std::chrono::high_resolution_clock::now();
+        auto end = start + std::chrono::microseconds(time2sleep*5);
+        while (std::chrono::high_resolution_clock::now() < end) {
+            // Busy-wait
+        }
 
 
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep*5)); // Sleep for 1 millisecond (1000 microseconds)
+        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep*5)); // Sleep for 1 millisecond (1000 microseconds)
 
         // gettimeofday(&te2, NULL);  
 
