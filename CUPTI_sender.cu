@@ -202,7 +202,7 @@ int main(int argc, char **argv) {
         // << "," 
         // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
         // ;
-        printf("\n"); 
+        // printf("\n"); 
 
     }
     gettimeofday(&te, NULL);  
