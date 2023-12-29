@@ -185,7 +185,7 @@ int main(int argc, char **argv) {
         cudaDeviceSynchronize();
         gettimeofday(&te, NULL); 
 
-        std::cout  << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        std::cout  << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec);
         printf("\n"); 
 
         // // kernel execution bit 1
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
         // cudaDeviceSynchronize();
         // gettimeofday(&te1, NULL); 
 
-        // std::cout  << (te1.tv_sec - ts1.tv_sec) * 1000000 + (te1.tv_usec - ts1.tv_usec)
+        // std::cout  << (te1.tv_sec - ts1.tv_sec) * 1000000 + (te1.tv_usec - ts1.tv_usec);
         // printf("\n"); 
 
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
