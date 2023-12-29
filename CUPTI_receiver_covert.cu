@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
     cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
     cudaDeviceSynchronize();
 
-    int blockSize = 1024;
+    int blockSize = 32;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
     
@@ -189,6 +189,7 @@ int main(int argc, char **argv) {
         << milliseconds * 1000 
         ;
         printf("\n"); 
+        
         
 
     }
