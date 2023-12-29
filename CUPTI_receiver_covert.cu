@@ -163,14 +163,14 @@ int main(int argc, char **argv) {
     while(1){
 
         // Record the start event
-        cudaEventRecord(start, local);
+        cudaEventRecord(start, 0);
 
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
 
         // Record the stop event
-        cudaEventRecord(stop, local);
+        cudaEventRecord(stop, 0);
 
         // Wait for the stop event to complete
         cudaEventSynchronize(stop);
