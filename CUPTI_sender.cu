@@ -172,6 +172,8 @@ int main(int argc, char **argv) {
     // synchronization 1000 consecutive "1"
     printf("\n");
     for(int i = 0; i < 10000; i++){
+        cudaDeviceSynchronize();
+
         // Start record time
         gettimeofday(&ts, NULL);  
 
@@ -201,6 +203,9 @@ int main(int argc, char **argv) {
         cudaDeviceSynchronize();
 
         gettimeofday(&te3, NULL);  
+
+        cudaDeviceSynchronize();
+
 
 
 
