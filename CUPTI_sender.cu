@@ -171,6 +171,9 @@ int main(int argc, char **argv) {
     ;
     // synchronization 1000 consecutive "1"
     printf("\n");
+    
+    cudaDeviceSynchronize();
+
     for(int i = 0; i < 10000; i++){
         cudaDeviceSynchronize();
 
@@ -179,7 +182,6 @@ int main(int argc, char **argv) {
 
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        cudaDeviceSynchronize();
 
         std::this_thread::sleep_for(std::chrono::microseconds(10));       
         gettimeofday(&te, NULL);  
@@ -187,20 +189,17 @@ int main(int argc, char **argv) {
 
         
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        cudaDeviceSynchronize();
         std::this_thread::sleep_for(std::chrono::microseconds(10));       
+        gettimeofday(&te1, NULL);  
         cudaDeviceSynchronize();
 
-        gettimeofday(&te1, NULL);  
 
 
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        cudaDeviceSynchronize();
         
         gettimeofday(&te2, NULL);  
 
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        cudaDeviceSynchronize();
 
         gettimeofday(&te3, NULL);  
 
