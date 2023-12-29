@@ -178,37 +178,33 @@ int main(int argc, char **argv) {
 
         // Start record time
 
-        // kernel execution
+        // kernel execution bit 1
+        gettimeofday(&te, NULL);  
         test_nvlink <<<blockSize, gridSize>>>(d_remote, d_local, sizeElement); 
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); 
+        std::this_thread::sleep_for(std::chrono::microseconds(10)); 
         cudaDeviceSynchronize();
+        gettimeofday(&te, NULL); 
 
+        std::cout  << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        printf("\n"); 
+
+        // // kernel execution bit 1
+        // gettimeofday(&ts1, NULL);  
         // test_nvlink <<<blockSize, gridSize>>>(d_remote, d_local, sizeElement); 
-        // // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
+        // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
         // cudaDeviceSynchronize();
+        // gettimeofday(&te1, NULL); 
+
+        // std::cout  << (te1.tv_sec - ts1.tv_sec) * 1000000 + (te1.tv_usec - ts1.tv_usec)
+        // printf("\n"); 
 
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
         // gettimeofday(&te, NULL);  
 
         
-        // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         // std::this_thread::sleep_for(std::chrono::microseconds(1));       
         // gettimeofday(&te1, NULL);  
         // cudaDeviceSynchronize();
-
-        start = std::chrono::high_resolution_clock::now();
-        end = start + std::chrono::microseconds(time2sleep);
-        while (std::chrono::high_resolution_clock::now() < end) {
-            // Busy-wait
-        }
-        cudaDeviceSynchronize();
-
-
-        start = std::chrono::high_resolution_clock::now();
-        end = start + std::chrono::microseconds(time2sleep*5);
-        while (std::chrono::high_resolution_clock::now() < end) {
-            // Busy-wait
-        }
 
 
         // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
