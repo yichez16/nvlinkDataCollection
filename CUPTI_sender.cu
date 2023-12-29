@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
     int *h_local, *h_remote;
     int *d_local, *d_remote;
     
-    struct timeval ts,te, te1;
+    struct timeval ts,te, te1, te2, te3 ;
 
     local = atoi(argv[1]);
     remote = atoi(argv[2]);
@@ -178,38 +178,40 @@ int main(int argc, char **argv) {
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
-        
+               
+        gettimeofday(&te, NULL);  
 
         
-        gettimeofday(&ts, NULL);  
-
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        cudaDeviceSynchronize();
-        
-        gettimeofday(&ts, NULL);  
-
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        cudaDeviceSynchronize();
-
-        gettimeofday(&ts, NULL);  
-
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
 
+        gettimeofday(&te1, NULL);  
 
-        gettimeofday(&te1,NULL);
+
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        cudaDeviceSynchronize();
+        
+        gettimeofday(&te2, NULL);  
+
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        cudaDeviceSynchronize();
+
+        gettimeofday(&te3, NULL);  
+
+
+
         // Print out start and stop time
-        // std::cout   << size
-        // // << "," 
-        // // << ts.tv_sec*1000000 + ts.tv_usec
-        // // << ","
-        // // << te.tv_sec*1000000 + te.tv_usec
-        // << "," 
-        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        // << "," 
-        // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
-        // ;
-        // printf("\n"); 
+        std::cout   << size
+        << "," 
+        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        << "," 
+        << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
+        << "," 
+        << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
+        << "," 
+        << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
+        ;
+        printf("\n"); 
 
     }
     gettimeofday(&te, NULL);  
