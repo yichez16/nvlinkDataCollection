@@ -173,32 +173,35 @@ int main(int argc, char **argv) {
     printf("\n");
     for(int i = 0; i < 10000; i++){
         // Start record time
-        gettimeofday(&ts, NULL);  
+        // gettimeofday(&ts, NULL);  
 
         // kernel execution
-        // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        cudaDeviceSynchronize();
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
         
         // Stop time record
-        gettimeofday(&te,NULL);
+        // gettimeofday(&te,NULL);
         // test_nvlink <<<gridSize, blockSize>>>(d_local, d_local, sizeElement); 
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        cudaDeviceSynchronize();
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         cudaDeviceSynchronize();
 
 
-        gettimeofday(&te1,NULL);
+        // gettimeofday(&te1,NULL);
         // Print out start and stop time
-        std::cout   << size
+        // std::cout   << size
+        // // << "," 
+        // // << ts.tv_sec*1000000 + ts.tv_usec
+        // // << ","
+        // // << te.tv_sec*1000000 + te.tv_usec
         // << "," 
-        // << ts.tv_sec*1000000 + ts.tv_usec
-        // << ","
-        // << te.tv_sec*1000000 + te.tv_usec
-        << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        << "," 
-        << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
-        ;
+        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        // << "," 
+        // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
+        // ;
         printf("\n"); 
 
     }
