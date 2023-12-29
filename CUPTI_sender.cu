@@ -173,24 +173,29 @@ int main(int argc, char **argv) {
     printf("\n");
     for(int i = 0; i < 10000; i++){
         // Start record time
-        // gettimeofday(&ts, NULL);  
+        gettimeofday(&ts, NULL);  
 
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
+        
+        gettimeofday(&ts, NULL);  
+
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
         
-        // Stop time record
-        // gettimeofday(&te,NULL);
-        // test_nvlink <<<gridSize, blockSize>>>(d_local, d_local, sizeElement); 
+        gettimeofday(&ts, NULL);  
+
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         cudaDeviceSynchronize();
+        
+        gettimeofday(&ts, NULL);  
+
         std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         cudaDeviceSynchronize();
 
 
-        // gettimeofday(&te1,NULL);
+        gettimeofday(&te1,NULL);
         // Print out start and stop time
         // std::cout   << size
         // // << "," 
