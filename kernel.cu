@@ -166,6 +166,20 @@ vecAdd_nvlink(int *A, int *B, int *C, int numElements)
 
 }
 
+
+__global__ void sleepKernel(float sleepTime) {
+    // Get the start time
+    unsigned long long start = clock64();
+
+    // Calculate the end time for the desired sleep duration
+    unsigned long long end = start + (sleepTime * (1000000 / clockRate));
+
+    // Busy-wait loop
+    while (clock64() < end) {
+        // Do nothing, just wait
+    }
+}
+
 __global__ void
 test_nvlink(int *src, int *dst, int numElements){
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
