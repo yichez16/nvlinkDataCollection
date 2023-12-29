@@ -200,6 +200,8 @@ int main(int argc, char **argv) {
         while (std::chrono::high_resolution_clock::now() < end) {
             // Busy-wait
         }
+        cudaDeviceSynchronize();
+
 
         start = std::chrono::high_resolution_clock::now();
         end = start + std::chrono::microseconds(time2sleep*5);
