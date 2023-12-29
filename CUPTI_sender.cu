@@ -174,17 +174,16 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     for(int i = 0; i < 10000; i++){
-        cudaDeviceSynchronize();
 
         // Start record time
         gettimeofday(&ts, NULL);  
 
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        cudaDeviceSynchronize();
 
         std::this_thread::sleep_for(std::chrono::microseconds(1));       
         gettimeofday(&te, NULL);  
-        cudaDeviceSynchronize();
 
         
         // test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
