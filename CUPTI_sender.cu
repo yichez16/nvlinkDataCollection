@@ -179,19 +179,21 @@ int main(int argc, char **argv) {
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
         
+
+        
+        gettimeofday(&ts, NULL);  
+
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        cudaDeviceSynchronize();
+        
+        gettimeofday(&ts, NULL);  
+
+        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
+        cudaDeviceSynchronize();
+
         gettimeofday(&ts, NULL);  
 
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
-        cudaDeviceSynchronize();
-        
-        gettimeofday(&ts, NULL);  
-
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        cudaDeviceSynchronize();
-        
-        gettimeofday(&ts, NULL);  
-
-        std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
         cudaDeviceSynchronize();
 
 
