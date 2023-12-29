@@ -180,21 +180,21 @@ int main(int argc, char **argv) {
     for(int i = 0; i < 10000; i++){
 
         // Record the start event
-        // cudaEventRecord(start, 0);
+        cudaEventRecord(start, 0);
 
         // kernel execution
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
         cudaDeviceSynchronize();
 
         // Record the stop event
-        // cudaEventRecord(stop, 0);
+        cudaEventRecord(stop, 0);
 
         // Wait for the stop event to complete
-        // cudaEventSynchronize(stop);
+        cudaEventSynchronize(stop);
 
         // Calculate the elapsed time in milliseconds
-        // float milliseconds = 0;
-        // cudaEventElapsedTime(&milliseconds, start, stop);
+        float milliseconds = 0;
+        cudaEventElapsedTime(&milliseconds, start, stop);
 
         
 
