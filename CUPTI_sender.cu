@@ -176,7 +176,7 @@ int main(int argc, char **argv) {
         gettimeofday(&ts, NULL);  
 
         // kernel execution
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement/2); 
         cudaDeviceSynchronize();
                
         gettimeofday(&te, NULL);  
