@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
     ;
     // synchronization 1000 consecutive "1"
     printf("\n");
-    
+
     cudaDeviceSynchronize();
 
     for(int i = 0; i < 10000; i++){
@@ -203,23 +203,25 @@ int main(int argc, char **argv) {
 
         gettimeofday(&te3, NULL);  
 
+
+
+
+
+        // // Print out start and stop time
+        // std::cout   << size
+        // << "," 
+        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+        // << "," 
+        // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
+        // << "," 
+        // << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
+        // << "," 
+        // << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
+        // ;
+        // printf("\n"); 
+
         cudaDeviceSynchronize();
 
-
-
-
-        // Print out start and stop time
-        std::cout   << size
-        << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        << "," 
-        << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
-        << "," 
-        << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
-        << "," 
-        << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
-        ;
-        printf("\n"); 
 
     }
     gettimeofday(&te, NULL);  
