@@ -43,10 +43,6 @@ int main(int argc, char **argv) {
     int sizeElement;
     int *h_local, *h_remote;
     int *d_local, *d_remote;
-    // Create CUDA events
-    cudaEvent_t start, stop;
-    cudaEventCreate(&start);
-    cudaEventCreate(&stop);
     
     struct timeval ts,te;
 
@@ -160,42 +156,31 @@ int main(int argc, char **argv) {
     // start cupti profiler   
     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
-    while(1){
+    for(int j = 0; j < 10000000000; j++){
+        // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
-        // Record the start event
-        cudaEventRecord(start, 0);
+          
+        // p->start();
+        gettimeofday(&ts,NULL);
+        // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
 
-        // kernel execution
-        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); 
+        test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
+        // p->stop();
         cudaDeviceSynchronize();
 
-        // Record the stop event
-        cudaEventRecord(stop, 0);
-
-        // Wait for the stop event to complete
-        cudaEventSynchronize(stop);
-
-        // Calculate the elapsed time in milliseconds
-        float milliseconds;
-        cudaEventElapsedTime(&milliseconds, start, stop);
+        gettimeofday(&te,NULL);
+        // p->print_event_values(std::cout,ts,te);
+        // p->print_metric_values(std::cout,ts,te);
 
         std::cout   << size
-        << ","
+        << "," 
         << ts.tv_sec*1000000 + ts.tv_usec
         // << ","
         // << te.tv_sec*1000000 + te.tv_usec
         << "," 
-        << milliseconds * 1000 
+        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
         ;
         printf("\n"); 
-
-        gettimeofday(&ts, NULL);  
-
-        std::this_thread::sleep_for(std::chrono::microseconds(1));
-
-        cudaDeviceSynchronize();
-
-        
         
 
     }
