@@ -160,7 +160,8 @@ int main(int argc, char **argv) {
 
     // }
     
-
+    auto start = std::chrono::high_resolution_clock::now();
+    auto end = start + std::chrono::microseconds(10);
     
     gettimeofday(&ts, NULL);  
     std::cout   
@@ -172,9 +173,8 @@ int main(int argc, char **argv) {
     printf("\n");
 
     cudaDeviceSynchronize();
-    auto start = std::chrono::high_resolution_clock::now();
-    auto end = start + std::chrono::microseconds(10);
-    for(int i = 0; i < 10; i++){
+
+    for(int i = 0; i < 1000; i++){
 
         // Start record time
 
