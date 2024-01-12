@@ -154,10 +154,10 @@ int main(int argc, char **argv) {
     // start cupti profiler   
 
     double totalTime = 0;
-    cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
     for(int j = 0; j < 10000; j++){
-  
+        cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
+
         p->start();
         gettimeofday(&ts,NULL);
         
@@ -170,9 +170,10 @@ int main(int argc, char **argv) {
         double elapsedTime = (te.tv_sec - ts.tv_sec) * 1000000.0;
         elapsedTime += (te.tv_usec - ts.tv_usec) ;
         totalTime += elapsedTime;
+        free(p);
+
         
     }
-    free(p);
     double averageTime = totalTime / 10000;
     std::cout << "Average Kernel Execution Time: " << averageTime << " ms" << std::endl;
 
