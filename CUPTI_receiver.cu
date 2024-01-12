@@ -165,7 +165,7 @@ int main(int argc, char **argv) {
         p->stop();
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
-        p->print_metric_values(std::cout,ts,te);
+        // p->print_metric_values(std::cout,ts,te);
 
         double elapsedTime = (te.tv_sec - ts.tv_sec) * 1000000.0;
         elapsedTime += (te.tv_usec - ts.tv_usec) ;
