@@ -50,11 +50,11 @@ int main(int argc, char **argv) {
     remote = atoi(argv[2]);
     profile = atoi(argv[3]);
     char *ctr_num = argv[4];
-    sizeElement = 100000; // Transfer size is 256 bytes = 1 nvlink packet
+    sizeElement = atoi(argv[5]);  // Transfer size is 256 bytes = 1 nvlink packet， 4 Bytes for size of int
     // sizeElement = 1048576; // Transfer size is 4 MB
     // printf("%d\n", sizeElement);
 
-    size_t size = sizeElement * sizeof(int);
+    size_t size = sizeElement * sizeof(int) * 64;
 
     // set up profiler
     cudaSetDevice(profile);
