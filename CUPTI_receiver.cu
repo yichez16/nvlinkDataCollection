@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
         free(p);
     }
     
-    double averageTime = totalTime / numIterations;
+    double averageTime = totalTime / 10000;
     std::cout << "Average Kernel Execution Time: " << averageTime << " ms" << std::endl;
 
 
