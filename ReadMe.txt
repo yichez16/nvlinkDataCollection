@@ -1,1 +1,1 @@
-./CUPTI_receiver 0 1 0 nvlink_total_data_received 1
+1. Nvlink RE: size of data flit/ number of data flit/ size of packet.
