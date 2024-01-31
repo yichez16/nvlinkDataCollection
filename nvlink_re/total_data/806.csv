@@ -1,0 +1,7 @@
+==82602== NVPROF is profiling process 82602, command: ./nvlink_re 0 1 806
+==82602== Profiling application: ./nvlink_re 0 1 806
+==82602== Profiling result:
+==82602== Metric result:
+"Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
+"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_total_data_transmitted (6 instances)","NVLink Total Data Transmitted",,,"256,256,1328,1479,256,1304"
+"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_total_data_received (6 instances)","NVLink Total Data Received",,,"192,192,1519,1805,192,1527"

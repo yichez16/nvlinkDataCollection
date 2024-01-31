@@ -142,9 +142,10 @@ namespace detail {
         auto& pass_data = k_data.m_pass_data;
 
         CUPTI_CALL(cuptiSetEventCollectionMode(cbInfo->context,
-                   CUPTI_EVENT_COLLECTION_MODE_KERNEL));
+                   CUPTI_EVENT_COLLECTION_MODE_CONTINUOUS));
                    //CUPTI_EVENT_COLLECTION_MODE_KERNEL
                    //CUPTI_EVENT_COLLECTION_MODE_CONTINUOUS
+                   ////////////////////////////////Event_collection_mode!!!!!
 
         for (int i = 0; i < pass_data[0].event_groups->numEventGroups; i++) {
           _LOG("  Enabling group %d", i);
@@ -169,7 +170,10 @@ namespace detail {
         _LOG("Current pass for %s: %d", current_kernel_name, current_pass);
 
         CUPTI_CALL(cuptiSetEventCollectionMode(cbInfo->context,
-              CUPTI_EVENT_COLLECTION_MODE_KERNEL));
+              CUPTI_EVENT_COLLECTION_MODE_CONTINUOUS));
+                                 //CUPTI_EVENT_COLLECTION_MODE_KERNEL
+                   //CUPTI_EVENT_COLLECTION_MODE_CONTINUOUS
+                   ////////////////////////////////Event_collection_mode!!!!!
 
         for (int i = 0;
              i < pass_data[current_pass].event_groups->numEventGroups;
@@ -260,6 +264,7 @@ namespace detail {
                        eventName));
             eventName[127] = '\0';
             // //printf("\t%s = %llu (", eventName, (unsigned long long)sum);
+            /////////////////////////////////// Turn aggregated mode off and print out each instance value /////////////////////////////////// 
             printf("Event_%d,", j);
             if (numInstances > 1) {
               for (int k = 0; k < numInstances; k++) {
@@ -269,6 +274,7 @@ namespace detail {
               }
             }
             printf(",");
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
             // printf(")\n");
             // printf("\t%s (normalized) (%llu * %u) / %u = %llu",
             //     eventName, (unsigned long long)sum,

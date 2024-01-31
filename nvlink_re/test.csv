@@ -1,0 +1,4 @@
+==16137== NVPROF is profiling process 16137, command: ./nvlink_re 0 1 100000
+==16137== Profiling application: ./nvlink_re 0 1 100000
+==16137== Profiling result:
+No events/metrics were profiled.

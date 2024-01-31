@@ -1,0 +1,7 @@
+==182621== NVPROF is profiling process 182621, command: ./nvlink_re 0 1 737
+==182621== Profiling application: ./nvlink_re 0 1 737
+==182621== Profiling result:
+==182621== Metric result:
+"Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
+"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_transmit_throughput (6 instances)","NVLink Transmit Throughput",,,"109.311919MB/s,109.311919MB/s,546.224811MB/s,582.556127MB/s,109.311919MB/s,568.187167MB/s"
+"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_receive_throughput (6 instances)","NVLink Receive Throughput",,,"81.983895MB/s,81.983895MB/s,623.502764MB/s,665.631560MB/s,81.983895MB/s,671.269973MB/s"

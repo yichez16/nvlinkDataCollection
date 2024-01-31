@@ -155,7 +155,7 @@ int main(int argc, char **argv) {
 
     double totalTime = 0;
 
-    for(int j = 0; j < 10000; j++){
+    for(int j = 0; j < 100000000; j++){
         cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
         p->start();
@@ -172,6 +172,7 @@ int main(int argc, char **argv) {
         totalTime += elapsedTime;
         free(p);
 
+        cudaDeviceSynchronize();
         
     }
     double averageTime = totalTime / 10000;

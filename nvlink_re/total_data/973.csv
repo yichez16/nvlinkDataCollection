@@ -1,0 +1,7 @@
+==97127== NVPROF is profiling process 97127, command: ./nvlink_re 0 1 973
+==97127== Profiling application: ./nvlink_re 0 1 973
+==97127== Profiling result:
+==97127== Metric result:
+"Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
+"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_total_data_transmitted (6 instances)","NVLink Total Data Transmitted",,,"256,256,1428,1793,256,1626"
+"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_total_data_received (6 instances)","NVLink Total Data Received",,,"192,192,1700,2260,192,1933"
