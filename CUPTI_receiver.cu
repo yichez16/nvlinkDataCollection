@@ -155,7 +155,8 @@ int main(int argc, char **argv) {
 
     double totalTime = 0;
 
-    for(int j = 0; j < 100000000; j++){
+    // for(int j = 0; j < 10000000000; j++){
+    while(1){
         cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
         p->start();
