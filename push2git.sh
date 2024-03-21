@@ -1,1 +1,1 @@
-git add . && git commit -m "update" && git push origin feature-branch:gcp
+git add . && git commit -m "update" && git push -u origin gcp
