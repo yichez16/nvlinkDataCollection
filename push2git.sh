@@ -1,1 +1,2 @@
-git add . && git commit -m "update" && git push -u origin gcp
+git add . && git commit -m "update" && git pull --rebase origin gcp
+
