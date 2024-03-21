@@ -29,12 +29,30 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <x86intrin.h> // For __rdtsc()
+#include <cstdlib> // For std::stoull
 
 
+
+void generateAndSaveRandomBits(const std::string& filename, std::vector<int>& bits) {
+    std::ofstream outFile(filename);
+    srand(time(NULL)); // Seed the random number generator.
+    for (int i = 0; i < 100; ++i) {
+        int bit = rand() % 2; // Generate a random bit, 0 or 1.
+        outFile << bit;
+        bits.push_back(bit);
+    }
+    outFile.close();
+}
 
 
  
 int main(int argc, char **argv) {
+
+    if (argc < 5) {
+        std::cerr << "Usage: " << argv[0] << " <local_gpu_id> <remote_gpu_id> <size_of_data_transfer> <sleep_time_us>\n";
+        return 1;
+    }
 
     using namespace std;
     int local = 0; 
@@ -44,16 +62,23 @@ int main(int argc, char **argv) {
     int *h_local, *h_remote;
     int *d_local, *d_remote;
     
-    struct timeval ts,te, te1, te2, te3 ;
+    struct timeval ts,te, te1, te2, te3;
 
     local = atoi(argv[1]);
     remote = atoi(argv[2]);
     sizeElement = atoi(argv[3]);
     time2sleep = atoi(argv[4]);
+    uint64_t targetTSC = std::stoull(argv[5]);
+
 
     // printf("%d\n", sizeElement);
 
     size_t size = sizeElement * sizeof(int);
+
+    // generate random bits
+    std::vector<int> bits;
+    generateAndSaveRandomBits("input.txt", bits);
+
 
     // set up profiler
     cudaSetDevice(local);
@@ -131,146 +156,42 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     
-    int blockSize = 1;
+    int blockSize = 32;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
+    blockSize = 1; 
+    gridSize = 1;
 
 
-    std::this_thread::sleep_for(std::chrono::seconds(2));   // wait for synchronization
+    // std::this_thread::sleep_for(std::chrono::seconds(10));   // wait for synchronization
 
-    // synchronization: trojan send data through nvlink and let spy know ready to send
+    unsigned long long tsc = __rdtsc();
+    std::cout << "Current TSC: " << tsc << std::endl;
 
-    // for(int j = 0; j < 1; j++){
-    //     cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
-
-            
-    //     p->start();
-    //     gettimeofday(&ts,NULL);
-    //     // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
-
-    //     test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 100000); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-    //     p->stop();
-    //     cudaDeviceSynchronize();
-
-    //     gettimeofday(&te,NULL);
-    //     // p->print_event_values(std::cout,ts,te);
-    //     p->print_metric_values(std::cout,ts,te);
-
-    //     printf("\n"); 
-    //     free(p);
-
-    // }
-    
-    auto start = std::chrono::high_resolution_clock::now();
-    auto end = start + std::chrono::microseconds(10);
-    
-    gettimeofday(&ts, NULL);  
-    std::cout   
-    << ts.tv_sec*1000000 + ts.tv_usec
-    // << ","
-    // << te.tv_sec*1000000 + te.tv_usec
-    ;
-    // synchronization 1000 consecutive "1"
-    printf("\n");
-
-    cudaDeviceSynchronize();
-
-    for(int i = 0; i < 10000; i++){
-
-        // Start record time
-
-        // kernel execution bit 1
-        gettimeofday(&te, NULL);  
-        test_nvlink <<<blockSize, gridSize>>>(d_remote, d_local, sizeElement); 
-        std::this_thread::sleep_for(std::chrono::microseconds(10)); 
-        cudaDeviceSynchronize();
-        gettimeofday(&te, NULL); 
-
-        std::cout  << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec);
-        printf("\n"); 
-
-        // // kernel execution bit 1
-        // gettimeofday(&ts1, NULL);  
-        // test_nvlink <<<blockSize, gridSize>>>(d_remote, d_local, sizeElement); 
-        // std::this_thread::sleep_for(std::chrono::microseconds(10)); 
-        // cudaDeviceSynchronize();
-        // gettimeofday(&te1, NULL); 
-
-        // std::cout  << (te1.tv_sec - ts1.tv_sec) * 1000000 + (te1.tv_usec - ts1.tv_usec);
-        // printf("\n"); 
-
-        // std::this_thread::sleep_for(std::chrono::microseconds(1));       
-        // gettimeofday(&te, NULL);  
-
-        
-        // std::this_thread::sleep_for(std::chrono::microseconds(1));       
-        // gettimeofday(&te1, NULL);  
-        // cudaDeviceSynchronize();
-
-
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-        
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep*5)); // Sleep for 1 millisecond (1000 microseconds)
-
-        // gettimeofday(&te2, NULL);  
-
-        // std::this_thread::sleep_for(std::chrono::microseconds(time2sleep)); // Sleep for 1 millisecond (1000 microseconds)
-
-        // gettimeofday(&te3, NULL);  
-
-
-
-
-
-        // // Print out start and stop time
-        // std::cout   << size
-        // << "," 
-        // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        // << "," 
-        // << (te1.tv_sec - te.tv_sec) * 1000000 + (te1.tv_usec - te.tv_usec)
-        // << "," 
-        // << (te2.tv_sec - te1.tv_sec) * 1000000 + (te2.tv_usec - te1.tv_usec)
-        // << "," 
-        // << (te3.tv_sec - te2.tv_sec) * 1000000 + (te3.tv_usec - te2.tv_usec)
-        // ;
-        // printf("\n"); 
-
-        cudaDeviceSynchronize();
-
-
+    while (__rdtsc() < targetTSC) {
+        // Busy wait or sleep briefly to reduce CPU usage
+        std::this_thread::sleep_for(std::chrono::microseconds(1)); 
     }
-    gettimeofday(&te, NULL);  
-    std::cout   
-    << te.tv_sec*1000000 + te.tv_usec
-    // << ","
-    // << te.tv_sec*1000000 + te.tv_usec
-    ;
-    printf("\n"); 
 
 
-    // // Emd of communication
-    // for(int j = 0; j < 1; j++){
-    //     cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
+    for (int bit : bits) {
+        auto start = std::chrono::high_resolution_clock::now(); // Start timing
 
-            
-    //     p->start();
-    //     gettimeofday(&ts,NULL);
-    //     cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+        if (bit == 1) {
+            // Run the CUDA kernel.
+            test_nvlink<<<gridSize, blockSize>>>(d_remote, d_local, sizeElement);
+            // cudaMemcpyPeer(d_local, local, d_remote, remote, size);
+            cudaDeviceSynchronize();
+        } else {
+            // Sleep for the specified time.
+            std::this_thread::sleep_for(std::chrono::microseconds(time2sleep));
+            cudaDeviceSynchronize();
+        }
+        auto end = std::chrono::high_resolution_clock::now(); // End timing
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count(); // Calculate duration
 
-    //     test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, 100000); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-    //     p->stop();
-    //     cudaDeviceSynchronize();
+        std::cout << "Iteration time: " << duration << " microseconds" << std::endl;
+    }   
 
-    //     gettimeofday(&te,NULL);
-    //     // p->print_event_values(std::cout,ts,te);
-    //     p->print_metric_values(std::cout,ts,te);
-
-    //     printf("\n"); 
-    //     free(p);
-
-    // }    
-
-
- 
 
 
     // Copy back to host memory 

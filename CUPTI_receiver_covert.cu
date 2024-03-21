@@ -29,7 +29,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-
+#include <x86intrin.h> // For __rdtsc()
+#include <cstdlib> // For std::stoull
 
 
 
@@ -49,12 +50,14 @@ int main(int argc, char **argv) {
     local = atoi(argv[1]);
     remote = atoi(argv[2]);
     profile = atoi(argv[3]);
-    char *ctr_num = argv[4];
-    sizeElement = atoi(argv[5]); // Transfer size is 256 bytes = 1 nvlink packet
+    // char *ctr_num = argv[4];
+    sizeElement = atoi(argv[4]); // Transfer size is 256 bytes = 1 nvlink packet
+    uint64_t targetTSC = std::stoull(argv[5]);
+
     // sizeElement = 1048576; // Transfer size is 4 MB
     // printf("%d\n", sizeElement);
 
-    size_t size = sizeElement * sizeof(int);
+    size_t size = sizeElement * sizeof(int) ;
 
     // set up profiler
     cudaSetDevice(profile);
@@ -74,7 +77,7 @@ int main(int argc, char **argv) {
                
 	};
 	vector<string> metric_names {
-    ctr_num
+    // ctr_num
 	// "l2_read_transactions",// works
 	//"nvlink_data_receive_efficiency",
 	// "nvlink_data_transmission_efficiency",
@@ -83,7 +86,7 @@ int main(int argc, char **argv) {
 	//"nvlink_receive_throughput",
 	// "nvlink_total_data_received",// works
 	//"pcie_total_data_received",
-	// "nvlink_total_data_transmitted",// works
+	"nvlink_total_data_transmitted",// works
 	//  "nvlink_total_nratom_data_transmitted" , // works
 	// "nvlink_total_ratom_data_transmitted" ,
 	//  "nvlink_total_response_data_received" ,// works
@@ -133,8 +136,6 @@ int main(int argc, char **argv) {
     cudaMalloc((void**)&d_remote, size);
 
     // make sure nvlink connection exists between src and det device.
-    cudaSetDevice(remote); // Set local device to be used for GPU executions.
-    cudaDeviceEnablePeerAccess(local, 0);  // Enables direct access to memory allocations on a peer device.
     cudaSetDevice(local); // Set local device to be used for GPU executions.
     cudaDeviceEnablePeerAccess(remote, 0);  // Enables direct access to memory allocations on a peer device.
 
@@ -147,8 +148,9 @@ int main(int argc, char **argv) {
     cudaDeviceSynchronize();
 
     int blockSize = 1024;
-    int gridSize = (sizeElement + blockSize - 1) / blockSize;
-
+    int gridSize = (sizeElement + blockSize - 1) / blockSize;;
+    blockSize = 1024;
+    gridSize = 80;
     
     // synchronization: spy sigbal back to trojan by sending same size of data 
     // and let trojan know it is ready to receive
@@ -156,35 +158,66 @@ int main(int argc, char **argv) {
     // start cupti profiler   
     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
-    for(int j = 0; j < 10000000000; j++){
-        // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
+    // for(int j = 0; j < 10000000000; j++){
+    //     // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
 
           
-        // p->start();
+    //     // p->start();
+    //     gettimeofday(&ts,NULL);
+    //     // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
+
+    //     test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
+    //     // p->stop();
+    //     cudaDeviceSynchronize();
+
+    //     gettimeofday(&te,NULL);
+    //     // p->print_event_values(std::cout,ts,te);
+    //     // p->print_metric_values(std::cout,ts,te);
+
+    //     std::cout   << size
+    //     << "," 
+    //     << ts.tv_sec*1000000 + ts.tv_usec
+    //     // << ","
+    //     // << te.tv_sec*1000000 + te.tv_usec
+    //     << "," 
+    //     << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+    //     ;
+    //     printf("\n"); 
+        
+
+    // }
+    // free(p);
+
+    unsigned long long tsc = __rdtsc();
+    // std::cout << "Current TSC: " << tsc << std::endl;
+
+    
+    while (__rdtsc() < targetTSC) {
+        // Busy wait or sleep briefly to reduce CPU usage
+        std::this_thread::sleep_for(std::chrono::microseconds(1)); 
+    }
+
+    for(int j = 0; j < 2; j++){
+        // auto start = std::chrono::high_resolution_clock::now(); // Start timing
+        cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
+        p->start();
         gettimeofday(&ts,NULL);
-        // cudaMemcpyPeer(d_local, local, d_remote, remote, size); // copy data from remote to local
-
         test_nvlink <<<gridSize, blockSize>>>(d_remote, d_local, sizeElement); // 56 SMs, 4*32 =  128 threads  (src, det, numElements)  force to transfer data from remote to local.
-        // p->stop();
-        cudaDeviceSynchronize();
-
+        // cudaMemcpyPeer(d_local, local, d_remote, remote, size);
+        p->stop();
         gettimeofday(&te,NULL);
         // p->print_event_values(std::cout,ts,te);
-        // p->print_metric_values(std::cout,ts,te);
+        p->print_metric_values(std::cout,ts,te);
+        // auto end = std::chrono::high_resolution_clock::now(); // End timing
+        // auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count(); // Calculate duration
 
-        std::cout   << size
-        << "," 
-        << ts.tv_sec*1000000 + ts.tv_usec
-        // << ","
-        // << te.tv_sec*1000000 + te.tv_usec
-        << "," 
-        << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-        ;
-        printf("\n"); 
+        // std::cout  << duration << std::endl;
+        
+        free(p);
+        cudaDeviceSynchronize();
         
 
     }
-    // free(p);
 
 
     // Copy back to host memory 
@@ -192,19 +225,19 @@ int main(int argc, char **argv) {
     cudaMemcpy(h_local, d_local, size, cudaMemcpyDeviceToHost); 
     cudaDeviceSynchronize();
    
-    double mb = sizeElement * sizeof(int) / (double)1e6;
-    printf("Size of data transfer (MB): %f\n", mb);
-    printf("Vector V_local (original value = 1): %d\n",h_local[sizeElement-1]);
-    printf("Vector V_remote (original value = 100): %d\n",h_remote[sizeElement-1]);
+    // double mb = sizeElement * sizeof(int) / (double)1e6;
+    // printf("Size of data transfer (MB): %f\n", mb);
+    // printf("Vector V_local (original value = 1): %d\n",h_local[sizeElement-1]);
+    // printf("Vector V_remote (original value = 100): %d\n",h_remote[sizeElement-1]);
 
 
-    std::cout   << size
-    << "," 
-    << ts.tv_sec*1000000 + ts.tv_usec
-    << "," 
-    << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
-    ;
-    printf("\n");  
+    // std::cout   << size
+    // << "," 
+    // << ts.tv_sec*1000000 + ts.tv_usec
+    // << "," 
+    // << (te.tv_sec - ts.tv_sec) * 1000000 + (te.tv_usec - ts.tv_usec)
+    // ;
+    // printf("\n");  
 
     cudaFree(d_local);
     cudaFree(d_remote);

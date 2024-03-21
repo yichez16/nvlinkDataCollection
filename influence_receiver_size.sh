@@ -1,1 +1,0 @@
-./CUPTI_receiver 0 1 0 nvlink_total_data_received 1

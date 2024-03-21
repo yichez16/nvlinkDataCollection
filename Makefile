@@ -1,4 +1,4 @@
-all:  CUPTI_receiver CUPTI_sender  conv_100 CUPTI_receiver_covert
+all:   CUPTI_sender   CUPTI_receiver_covert 
 
 CUPTI_PATH=/usr/local/cuda-9.1/extras/CUPTI
 INCLUDES = -I ./ -I /usr/local/cuda-9.1/extras/CUPTI/include 

@@ -1,7 +1,0 @@
-==27050== NVPROF is profiling process 27050, command: ./nvlink_re 0 1 181
-==27050== Profiling application: ./nvlink_re 0 1 181
-==27050== Profiling result:
-==27050== Metric result:
-"Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
-"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_total_data_transmitted (6 instances)","NVLink Total Data Transmitted",,,"256,256,256,816,256,544"
-"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_total_data_received (6 instances)","NVLink Total Data Received",,,"192,192,192,844,192,544"

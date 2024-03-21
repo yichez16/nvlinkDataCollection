@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
     // sizeElement = 1048576; // Transfer size is 4 MB
     // printf("%d\n", sizeElement);
 
-    size_t size = sizeElement * sizeof(int) * 64;
+    size_t size = sizeElement * sizeof(int);
 
     // set up profiler
     cudaSetDevice(profile);
@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
     cudaMemcpy(d_remote, h_remote, size, cudaMemcpyHostToDevice);
     cudaDeviceSynchronize();
 
-    int blockSize = 1;
+    int blockSize = 80;
     int gridSize = (sizeElement + blockSize - 1) / blockSize;
 
     

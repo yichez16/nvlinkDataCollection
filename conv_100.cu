@@ -17,7 +17,7 @@
 #define A(i,j) A[(i)*cols+(j)]  // row-major layout
 #define C(i,j) C[(i)*cols+(j)]  // row-major layout
 #define PROFILE_ALL_EVENTS_METRICS 0
-int counter1 = 2000000000;
+int counter1 = 100;
 
 __global__ void convolution(int *A, int *C)
 {
@@ -212,19 +212,19 @@ DRIVER_API_CALL(cuDeviceGet(&device, profile));
 
 for(int j=0;j<counter1;j++)
 {
-  cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
-  struct timeval ts,te;
-  p->start();
-  gettimeofday(&ts,NULL);
+  // cupti_profiler::profiler *p= new cupti_profiler::profiler(event_names, metric_names, context);
+  // struct timeval ts,te;
+  // p->start();
+  // gettimeofday(&ts,NULL);
   
   compute();
-  p->stop();
-  gettimeofday(&te,NULL);
+  // p->stop();
+  // gettimeofday(&te,NULL);
 
-  p->print_event_values(std::cout,ts,te);
-  p->print_metric_values(std::cout,ts,te);
+  // p->print_event_values(std::cout,ts,te);
+  // p->print_metric_values(std::cout,ts,te);
 
-  free(p);
+  // free(p);
 }
 
 

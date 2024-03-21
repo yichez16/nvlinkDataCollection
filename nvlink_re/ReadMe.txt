@@ -1,3 +1,0 @@
-1. Nvlink RE: size of data flit/ number of data flit/ size of packet.
-
-nvprof  --profile-from-start off --devices 0 --aggregate-mode off --csv --log-file log1.csv --event-collection-mode continuous -m nvlink_total_data_transmitted,nvlink_total_data_received,nvlink_transmit_throughput,nvlink_receive_throughput,nvlink_overhead_data_transmitted,nvlink_overhead_data_received,nvlink_total_response_data_received,nvlink_user_response_data_received,nvlink_total_write_data_transmitted,nvlink_user_data_transmitted,nvlink_user_data_received,nvlink_user_write_data_transmitted ./p2p

@@ -1,0 +1,160 @@
+==287810== NVPROF is profiling process 287810, command: ./CUPTI_sender 0 1 102400000 10
+Current TSC: 581317798038136
+Iteration time: 5672 microseconds
+Iteration time: 76 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5652 microseconds
+Iteration time: 72 microseconds
+Iteration time: 71 microseconds
+Iteration time: 71 microseconds
+Iteration time: 88 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 5649 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 72 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 5664 microseconds
+Iteration time: 5688 microseconds
+Iteration time: 5666 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 75 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 90 microseconds
+Iteration time: 55 microseconds
+Iteration time: 72 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 72 microseconds
+Iteration time: 71 microseconds
+Iteration time: 70 microseconds
+Iteration time: 71 microseconds
+Iteration time: 71 microseconds
+Iteration time: 70 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 73 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 5652 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 72 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 5652 microseconds
+Iteration time: 77 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 74 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 73 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5652 microseconds
+Iteration time: 5653 microseconds
+Iteration time: 74 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 72 microseconds
+Iteration time: 72 microseconds
+Iteration time: 5652 microseconds
+Iteration time: 5650 microseconds
+Iteration time: 72 microseconds
+Iteration time: 71 microseconds
+Iteration time: 70 microseconds
+Iteration time: 71 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 73 microseconds
+Iteration time: 5681 microseconds
+Iteration time: 87 microseconds
+Iteration time: 5674 microseconds
+Iteration time: 86 microseconds
+Iteration time: 5659 microseconds
+Iteration time: 86 microseconds
+Iteration time: 5656 microseconds
+Iteration time: 5665 microseconds
+Iteration time: 5666 microseconds
+Iteration time: 5651 microseconds
+Iteration time: 5660 microseconds
+Iteration time: 85 microseconds
+Iteration time: 5679 microseconds
+Iteration time: 82 microseconds
+Iteration time: 5675 microseconds
+Iteration time: 5655 microseconds
+Iteration time: 5653 microseconds
+==287810== Profiling application: ./CUPTI_sender 0 1 102400000 10
+==287810== Profiling result:
+"Start","Duration","Grid X","Grid Y","Grid Z","Block X","Block Y","Block Z","Registers Per Thread","Static SMem","Dynamic SMem","Size","Throughput","SrcMemType","DstMemType","Device","Context","Stream","Src Dev","Src Ctx","Dst Dev","Dst Ctx","Name","Correlation_ID"
+s,ms,,,,,,,,B,B,MB,GB/s,,,,,,,,,,,
+2.043270,86.937515,,,,,,,,,,390.625000,4.387861,"Pageable","Device","Tesla V100-SXM2-16GB (0)","2","16",,,,,"[CUDA memcpy HtoD]",222
+2.130471,86.257619,,,,,,,,,,390.625000,4.422447,"Pageable","Device","Tesla V100-SXM2-16GB (1)","3","29",,,,,"[CUDA memcpy HtoD]",224
+2.216838,5.630762,,,,,,,,,,390.625000,67.747443,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",226
+2.222673,5.630347,,,,,,,,,,390.625000,67.752436,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",230
+2.228731,5.630250,,,,,,,,,,390.625000,67.753604,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",237
+2.234391,5.630378,,,,,,,,,,390.625000,67.752063,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",239
+2.240049,5.630282,,,,,,,,,,390.625000,67.753218,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",241
+2.245787,5.630282,,,,,,,,,,390.625000,67.753218,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",244
+2.251446,5.630250,,,,,,,,,,390.625000,67.753604,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",246
+2.257107,5.630218,,,,,,,,,,390.625000,67.753989,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",248
+2.262917,5.630410,,,,,,,,,,390.625000,67.751678,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",252
+2.268577,5.630026,,,,,,,,,,390.625000,67.756299,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",254
+2.274309,5.630058,,,,,,,,,,390.625000,67.755914,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",256
+2.280008,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",258
+2.285675,5.629962,,,,,,,,,,390.625000,67.757070,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",260
+2.291502,5.629962,,,,,,,,,,390.625000,67.757070,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",264
+2.297472,5.630026,,,,,,,,,,390.625000,67.756299,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",270
+2.303132,5.630154,,,,,,,,,,390.625000,67.754759,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",272
+2.308869,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",275
+2.314990,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",283
+2.320649,5.630154,,,,,,,,,,390.625000,67.754759,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",285
+2.326386,5.629962,,,,,,,,,,390.625000,67.757070,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",288
+2.332123,5.630122,,,,,,,,,,390.625000,67.755144,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",291
+2.337862,5.630026,,,,,,,,,,390.625000,67.756299,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",294
+2.343522,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",296
+2.349184,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",298
+2.354995,5.629962,,,,,,,,,,390.625000,67.757070,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",302
+2.360655,5.629995,,,,,,,,,,390.625000,67.756672,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",304
+2.366401,5.630122,,,,,,,,,,390.625000,67.755144,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",307
+2.372143,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",310
+2.377809,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",312
+2.383547,5.630090,,,,,,,,,,390.625000,67.755529,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",315
+2.389369,5.630218,,,,,,,,,,390.625000,67.753989,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",319
+2.395190,5.629962,,,,,,,,,,390.625000,67.757070,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",323
+2.400929,5.630251,,,,,,,,,,390.625000,67.753592,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",326
+2.406594,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",328
+2.412415,5.629994,,,,,,,,,,390.625000,67.756684,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",332
+2.418233,5.630443,,,,,,,,,,390.625000,67.751281,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",336
+2.423894,5.629930,,,,,,,,,,390.625000,67.757455,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",338
+2.429864,5.629899,,,,,,,,,,390.625000,67.757828,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",344
+2.435620,5.630186,,,,,,,,,,390.625000,67.754374,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",347
+2.441451,5.629898,,,,,,,,,,390.625000,67.757840,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",350
+2.447220,5.629962,,,,,,,,,,390.625000,67.757070,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",353
+2.452982,5.629930,,,,,,,,,,390.625000,67.757455,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",356
+2.458655,5.629930,,,,,,,,,,390.625000,67.757455,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",358
+2.464354,5.630058,,,,,,,,,,390.625000,67.755914,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",360
+2.470018,5.629930,,,,,,,,,,390.625000,67.757455,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",362
+2.475678,5.629898,,,,,,,,,,390.625000,67.757840,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",364
+2.481478,5.630090,,,,,,,,,,390.625000,67.755529,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",367
+2.487275,5.629898,,,,,,,,,,390.625000,67.757840,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",370
+2.492943,5.630058,,,,,,,,,,390.625000,67.755914,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",372
+2.498608,5.629963,,,,,,,,,,390.625000,67.757057,"Device","Device","Tesla V100-SXM2-16GB (1)","3","29","Tesla V100-SXM2-16GB (1)","3","Tesla V100-SXM2-16GB (0)","2","[CUDA memcpy PtoP]",374
+2.504281,87.201423,,,,,,,,,,390.625000,4.374581,"Device","Pageable","Tesla V100-SXM2-16GB (1)","3","29",,,,,"[CUDA memcpy DtoH]",376
+2.591838,86.970124,,,,,,,,,,390.625000,4.386216,"Device","Pageable","Tesla V100-SXM2-16GB (0)","2","16",,,,,"[CUDA memcpy DtoH]",377

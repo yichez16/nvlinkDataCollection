@@ -1,7 +1,0 @@
-==194718== NVPROF is profiling process 194718, command: ./nvlink_re 0 1 881
-==194718== Profiling application: ./nvlink_re 0 1 881
-==194718== Profiling result:
-==194718== Metric result:
-"Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
-"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_transmit_throughput (6 instances)","NVLink Transmit Throughput",,,"109.368703MB/s,109.368703MB/s,563.206768MB/s,676.380760MB/s,109.368703MB/s,672.009768MB/s"
-"Tesla V100-SXM2-16GB (0)","test_nvlink(int*, int*, int)",100,"nvlink_receive_throughput (6 instances)","NVLink Receive Throughput",,,"82.026484MB/s,82.026484MB/s,665.799378MB/s,805.317924MB/s,82.026484MB/s,785.745781MB/s"
